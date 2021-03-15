@@ -1,0 +1,3 @@
+This folder should contain everything regarding what the client sees
+Can also be called Klient/Client
+Should generally be structured in two folders, HTML and JavaScript (Do contact Lærke if complains)

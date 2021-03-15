@@ -1,0 +1,3 @@
+This folder should contain everything regarding the server and API (server, routes, controllers)
+This does not include the functions for contacting the SQL database (should be gained by importing the functions from the Database folder)
+

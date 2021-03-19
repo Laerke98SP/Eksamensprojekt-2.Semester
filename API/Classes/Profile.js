@@ -13,7 +13,7 @@ module.exports = class Profile extends User{
     }
 
     viewMatches(){
-        
+        // Should this just be an API endpoint?
     }
 
     viewUsers(){

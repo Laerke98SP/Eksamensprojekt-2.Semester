@@ -1,6 +1,6 @@
-const User = require('./User')
+import { User } from './User.js';
 
-module.exports = class Profile extends User{
+export class Profile extends User{
     constructor(id, mail, password, firstName, lastName, dob, gender, description, interest){
         // Not private since the user should be able to change it (may change to private later)
         super(id, mail, password);

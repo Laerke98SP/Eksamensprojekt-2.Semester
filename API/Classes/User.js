@@ -1,5 +1,5 @@
 
-module.exports = class User{
+export class User{
     constructor(id, mail, password){
         this._id = id;
         this._mail = mail;

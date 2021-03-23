@@ -1,5 +1,5 @@
 
-module.exports = class Matching{
+export class Matching{
     constructor(profileId1, profileId2){
         this.profileId1 = profileId1;
         this.profileId2 = profileId2;

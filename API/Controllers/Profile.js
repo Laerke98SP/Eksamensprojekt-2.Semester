@@ -1,46 +1,44 @@
-const { v4: uuidv4 } = require('uuid');
-const Profile = require('../Classes/Profile')
+import { v4 as uuidv4 } from 'uuid'
+import { Profile } from '../Classes/Profile.js';
 
-// var id = uuidv4(): how to call it
-
-
+// temporary solution untill we get connected with the database
 let data = []
 
 
-const getProfiles = ( req, res ) => {
-    // do we need this?
+export const getProfiles = ( req, res ) => {
+    // do we need to send all profiles?
     res.send(data)
 }
 
-const getProfile = ( req, res ) => {
+export const getProfile = ( req, res ) => {
     const { id } = req.params;
 
-    for (i in data){
+    for (let i = 0; i < data.length; i++){
         if (data[i].id = id){
-            let userProfile = Profile(data[i].id, data[i].mail, data[i].password, data[i].firstName, data[i].lastName, data[i].dob, data[i].gender, data[i].description, data[i].interest)
-            // userProfile.calculageAge()
+            let userProfile = new Profile(data[i].id, data[i].mail, data[i].password, data[i].firstName, data[i].lastName, data[i].dob, data[i].gender, data[i].description, data[i].interest)
+            // when responding, we will call all the methods that is relevant (ex userProfile.calculateAge())
             res.send(userProfile)
+            break
         }
     }
 }
 
-const postProfile = ( req, res ) => {
-    const { profileInfo } = req.body;
-    let id = uuidv4();
+export const postProfile = ( req, res ) => {
+    const profileInfo = req.body;
 
-    let usersProfile = { ...id, profileInfo }
+    const usersProfile = { ...profileInfo, id: uuidv4()}
 
     //let usersProfile = Profile(id, profileInfo.mail, profileInfo.password, profileInfo.firstName, profileInfo.lastName, profileInfo.dob, profileInfo.gender, profileInfo.description, profileInfo.interest);
     // is it nessecary to create the class here, or should it only be done when getting the user
 
     data.push(usersProfile);
-    res.send(id);
+    res.send(usersProfile.id);
 }
 
-const updateProfile = ( req, res ) => {
+export const updateProfile = ( req, res ) => {
 
 }
 
-const deleteProfile = ( req, res ) => {
+export const deleteProfile = ( req, res ) => {
 
 }

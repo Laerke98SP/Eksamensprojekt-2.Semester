@@ -1,6 +1,6 @@
-const User = require('./User')
+import { User } from './User.js';
 
-module.exports = class Admin extends User{
+export class Admin extends User{
     constructor(id, mail, password){
         super(id, mail, password)
     }

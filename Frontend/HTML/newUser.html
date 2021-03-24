@@ -11,16 +11,67 @@
 
 <body>
 <h1 id="Headline">Create a new Account</h1>
-<form>
-    <div class="createUser">
-        <label for="createUser">Do you wanna find love? Create a user here: </label>
-        <a href="/createUser">
-        <input type="button" value="New user" id="gocreate">
-        </a>
-    </div>
-  
-    </form>
+    <form action="/submit" method="post">
+        <div class="input">
+        <label for= "email"> Enter your email: </label><br><br>
+            <input placeholder= "Type in email" type= "email" id="email" required autofocus><br><br>
+            <p id = message1></p>
+          <div class="input">
+        <label for= "Username>"> Username: </label><br>   
+        <input placeholder= "Username" type= "Username" id="Username" required autofocus><br><br>
+      </div>
+        <div class="input">
+        <label for= "password>"> Type in password: </label><br>
+             <input placeholder= "Type in password" type= "Password" id="password" name="Password":></input><br><br>
+             <p id = message2></p>
+          <div class="input">
+        <label for="fname" >First name: </label><br>
+               <input placeholder= "Type in firstname" type= "firstname" id="fname" name="fname" required><br><br>
+              </div>
+              <div class="input">
+        <label for= "lname"> Last name:</label><br>
+              <input placeholder= "Type in lastname" type= "lastname" id="lname" name="lname" required><br><br>
+            </div>
+            <div class="input">
+        <label for="Birthday">Birthday:</label><br>
+               <input placeholder= "Type in birthday" type= "birthday" id="birthday" name="birthday" required><br><br>
+              </div>
+              <div class="input">  
+        <label for="CPR">CPR:</label><br>
+               <input placeholder= "Type in cpr" type= "text" id ="cpr" name="cpr" required><br><br>
+              </div>
+
+              <label for="gender">Choose gender:</label> <br>
+              <select name="gender" id="gender">
+                <option value=  disabled selected></option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="other">Other</option>
+              </select>
+              <br>
+              <br>
+              <br>
+              <button onclick="validering()" type="submit" id="submit">Sign Up</button> 
+              
+              <br> <br>
+             
+
+</table>    
+          
+</form> 
 
 </body>
 
 </html>
+
+
+
+<!-- <form>
+    <div class="createUser">
+    <label for="createUser">Do you wanna find love? Create a user here: </label>
+    <a href="/createUser">
+    <input type="button" value="New user" id="gocreate">
+    </a>
+</div>
+
+</form>---> 

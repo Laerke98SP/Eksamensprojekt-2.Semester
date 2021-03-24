@@ -12,20 +12,18 @@ export const getProfiles = ( req, res ) => {
 
 export const getProfile = ( req, res ) => {
     const { id } = req.params;
-
     for (let i = 0; i < data.length; i++){
         if (data[i].id = id){
             let userProfile = new Profile(data[i].id, data[i].mail, data[i].password, data[i].firstName, data[i].lastName, data[i].dob, data[i].gender, data[i].description, data[i].interest)
             // when responding, we will call all the methods that is relevant (ex userProfile.calculateAge())
             res.send(userProfile)
-            break
+            break;
         }
     }
 }
 
 export const postProfile = ( req, res ) => {
     const profileInfo = req.body;
-
     const usersProfile = { ...profileInfo, id: uuidv4()}
 
     //let usersProfile = Profile(id, profileInfo.mail, profileInfo.password, profileInfo.firstName, profileInfo.lastName, profileInfo.dob, profileInfo.gender, profileInfo.description, profileInfo.interest);
@@ -40,5 +38,5 @@ export const updateProfile = ( req, res ) => {
 }
 
 export const deleteProfile = ( req, res ) => {
-
+    
 }

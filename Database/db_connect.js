@@ -29,11 +29,10 @@ connection.on('connect', function(err){ // .ON function og kalder en callback fu
 // kalder funktionen connect og console logger connected , som viser vi er på databasen
 connection.connect();
 
-
 // funktion til at eksekvere statement til sql, bruger Request klassen.
 function executeSQL(){
     // All SQL queries are executed using the new Request() function
-    request = new Request("SELECT * FROM Profile", function(err){ // Input til request klassen skal være SQL
+    request = new Request('"SELECT * FROM Profile"', function(err){ // Input til request klassen skal være SQL
         if(err){
             console.log(err) // Hvis fejl hvis i konsollen
         }
@@ -52,3 +51,6 @@ function executeSQL(){
     })
     return response;
 };
+
+execureSQL();
+

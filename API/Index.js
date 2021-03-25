@@ -1,5 +1,5 @@
 import express from 'express';
-import profileRoutes from './Routers/Profile.js'
+import profileRoutes from './Routers/Profile.js';
 import fs from 'fs';
 
 const app = express();

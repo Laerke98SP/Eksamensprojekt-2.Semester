@@ -1,11 +1,13 @@
 import express from 'express';
 import profileRoutes from './Routers/Profile.js'
+import fs from 'fs';
 
 const app = express();
 const PORT = 4000;
 
 //bodyparser no longer works, we are using express.json() instead
 app.use(express.json());
+app.use(express.static('../Frontend')); 
 
 //as we go further more endpoints will be added
 app.use('/profile', profileRoutes);
@@ -14,16 +16,26 @@ app.use('/profile', profileRoutes);
 app.listen( PORT, () => console.log(`Listening to port ${PORT}. Access at: http://localhost:${PORT}`) );
 
 
-//connecting pages with html
-import path from 'path';
-const __dirname = path.resolve();
-//app.use(express.static(__dirname), '../Frontend/HTML');
-//app.use(express.static(__dirname), '../Frontend/Stylesheet');
 
+
+// 01. Create paths
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../Frontend/HTML/frontpage.html'));
-    //res.sendFile(path.join(__dirname, '../Frontend/HTML/frontpage.css'));
-}); //virker men ikke med CSS??????
+    fs.readFile('../Frontend/HTML/frontpage.html', 'utf8', function(err, text){
+        res.send(text); // tilføj noget hvis error
+    }); 
+}); 
+
+app.get('/newUser', (req, res) => {
+    fs.readFile('../Frontend/HTML/newUser.html', 'utf8', function(err, text){
+        res.send(text); // tilføj noget hvis error
+    }); 
+}); 
+
+app.get('/login', (req, res) => {
+    fs.readFile('../Frontend/HTML/login.html', 'utf8', function(err, text){
+        res.send(text); // tilføj noget hvis error
+    }); 
+}); 
 
 /*
 OLD VERSION

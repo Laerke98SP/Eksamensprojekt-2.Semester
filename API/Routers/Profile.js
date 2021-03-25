@@ -5,7 +5,6 @@ import { getProfiles, getProfile, postProfile, deleteProfile, updateProfile } fr
 
 const router = express.Router();
 
-
 router.get("/", getProfiles);
 router.post("/", postProfile);
 router.get("/:id", getProfile);

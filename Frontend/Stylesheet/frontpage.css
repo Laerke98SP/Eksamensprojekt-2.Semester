@@ -1,10 +1,10 @@
 body {
     height: 900px;
       font-family: Arial, Helvetica, sans-serif;
-      background-color: #ffb2d7;
+      background-color: #ff009e;
       color: white;
       text-align: center;
-      background-image: linear-gradient( #ff009e, #ffb2d7,  #cbb2ff);
+      background-image: linear-gradient( #cbb2ff, white);
   }
 
 @font-face{
@@ -28,7 +28,7 @@ body {
   
   
   #gocreate {
-    background-color: #cbb2ff;
+    background-color: #ff009e;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -42,7 +42,7 @@ body {
   }
   
   #gologin {
-      background-color: #cbb2ff;
+      background-color: #ff009e;
       color: white;
       padding: 14px 20px;
       margin: 8px 0;

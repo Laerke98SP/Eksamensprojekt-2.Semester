@@ -1,0 +1,85 @@
+/* change the style in this one in relation to "newUser" */
+
+body {
+    height: 900px;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #ffb2d7;
+      color: white;
+      text-align: center;
+      background-image: linear-gradient( #ff009e, #ffb2d7,  #cbb2ff);
+  }
+
+@font-face{
+    font-family: Love;
+    src: url("eksamen/Frontend/Font/Calligraffitti-Regular.ttf");
+  }
+
+ .h1{
+      font-family: Love;
+  }
+
+  form {
+      border: 3px solid #f1f1f1;
+        /* text-align: center; */
+        background-color: #ffb2d7;
+        padding: 16px;
+        color: black;
+        margin-left: 25%;
+        margin-right: 25%;
+  }
+  
+  #error1 {
+    line-height:2px;
+  }
+
+  #error2 {
+    line-height:2px;
+  }
+
+  #gocreate {
+    background-color: #cbb2ff;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  #gocreate:hover {
+    opacity: 0.8;
+  }
+  
+  #gologin {
+      background-color: #cbb2ff;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    #gologin:hover {
+      opacity: 0.8;
+    }
+  
+  
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 600px) {
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      height: 900px;
+      color: white;
+      text-align: center;
+      background-image: linear-gradient(#2d2d9e, #66ccff);
+  }
+  
+      form {
+          width: auto;
+          margin-left: 20%;
+          margin-right: 20%;
+      }
+  
+    }
+  

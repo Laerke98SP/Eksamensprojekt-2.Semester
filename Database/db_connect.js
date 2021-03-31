@@ -4,6 +4,7 @@
 
 // VIGTIGT! Lav jeres config fil om til js i stedet for json. Den skal inkludere "export default" i toppen
 import config from './config.js'; 
+import mysql from 'mysql'
 
 // Impoterer klasserne var tideous
 import { Connection, Request } from 'tedious'; 
@@ -20,7 +21,7 @@ connection.on('connect', function(err){ // .ON function og kalder en callback fu
         console.log(err)
     } else {
         console.log("connected"); // Console logger connected
-        const response = executeSQL(); // ved connectionen act på vores SQL statement
+        const response = executeSQL('Jen@msn.com', 'Guess'); // ved connectionen act på vores SQL statement
         console.log(response); // Giver os et tomt objekt i console 
     }
 });
@@ -29,9 +30,10 @@ connection.on('connect', function(err){ // .ON function og kalder en callback fu
 connection.connect();
 
 // funktion til at eksekvere statement til sql, bruger Request klassen.
-function executeSQL(){
+function executeSQL(mail, password){
     // All SQL queries are executed using the new Request() function
-    var request = new Request("SELECT * FROM Profile", function(err){ // Input til request klassen skal være SQL
+    console.log('working')
+    var request = new Request('SELECT * FROM [dbo].[Profile] WHERE Mail = ' + mysql.escape(mail) + ' AND Password = ' + mysql.escape(password), function(err){ // Input til request klassen skal være SQL
         if(err){
             console.log(err) // Hvis fejl hvis i konsollen
         }
@@ -48,7 +50,13 @@ function executeSQL(){
         });
         counter += 1; // stiger counter
     })
-    return response;
+
+    if (response = {}){
+        return 'Wrong password or email'
+    } else {
+        return response;
+    }
+    
 };
 
 //execureSQL();

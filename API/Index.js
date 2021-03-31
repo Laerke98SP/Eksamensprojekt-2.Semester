@@ -19,6 +19,7 @@ app.listen( PORT, () => console.log(`Listening to port ${PORT}. Access at: http:
 
 
 // 01. Create paths
+// should they be in another folder? are they taking up too mutch space?
 app.get('/', (req, res) => {
     fs.readFile('../Frontend/HTML/frontpage.html', 'utf8', function(err, text){
         res.send(text); // tilføj noget hvis error

@@ -32,8 +32,12 @@ connection.connect();
 // funktion til at eksekvere statement til sql, bruger Request klassen.
 function executeSQL(mail, password){
     // All SQL queries are executed using the new Request() function
-    console.log('working')
+    console.log('working') 
+
+    //https://portswigger.net/web-security/sql-injection
     var request = new Request('SELECT * FROM [dbo].[Profile] WHERE Mail = ' + mysql.escape(mail) + ' AND Password = ' + mysql.escape(password), function(err){ // Input til request klassen skal være SQL
+        //var request = new Request('SELECT * FROM [dbo].[Profile] WHERE Mail = "' + mail + '" \' AND Password = ' + mysql.escape(password), function(err){
+        
         if(err){
             console.log(err) // Hvis fejl hvis i konsollen
         }

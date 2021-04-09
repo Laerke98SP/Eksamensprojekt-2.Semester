@@ -2,18 +2,18 @@ let password = document.getElementById("password");
 let error1 = document.getElementById("error1");
 let error2 = document.getElementById("error2");
 
-password.addEventListener("keyup", function passwordValidation() { //kører funktionen hver gang en tast trykkes 
-    if(password.value.length < 10) {
-        error1.innerHTML = "<span style='color:red'>Password must be at least 10 characters</span>"; //beskeden forsvinder, når kravet er opfyldt
-    } else {
-        error1.innerHTML = "<span style='color:green'>✓</span>";
-    };
-    if(!password.value.match(/[A-Z]/)) {
-        error2.innerHTML = "<span style='color:red'>Password must contain at least one capital letter</span>"; //beskeden forsvinder, når kravet er opfyldt
-    } else {
-        error2.innerHTML = "<span style='color:green'>✓</span>";
-    }
-});
+// password.addEventListener("keyup", function passwordValidation() { //kører funktionen hver gang en tast trykkes 
+//     if(password.value.length < 10) {
+//         error1.innerHTML = "<span style='color:red'>Password must be at least 10 characters</span>"; //beskeden forsvinder, når kravet er opfyldt
+//     } else {
+//         error1.innerHTML = "<span style='color:green'>✓</span>";
+//     };
+//     if(!password.value.match(/[A-Z]/)) {
+//         error2.innerHTML = "<span style='color:red'>Password must contain at least one capital letter</span>"; //beskeden forsvinder, når kravet er opfyldt
+//     } else {
+//         error2.innerHTML = "<span style='color:green'>✓</span>";
+//     }
+// });
 
 function newUser(){
     let mail = document.getElementById("mail").value;

@@ -32,7 +32,7 @@ connection.connect();
 // funktion til at eksekvere statement til sql, bruger Request klassen.
 function executeSQL(){
     // All SQL queries are executed using the new Request() function
-    request = new Request('"SELECT * FROM Profile"', function(err){ // Input til request klassen skal være SQL
+    request = new Request("SELECT * FROM Profile", function(err){ // Input til request klassen skal være SQL
         if(err){
             console.log(err) // Hvis fejl hvis i konsollen
         }
@@ -52,5 +52,5 @@ function executeSQL(){
     return response;
 };
 
-execureSQL();
+//execureSQL();
 

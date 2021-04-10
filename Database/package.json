@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "db_connect.js",
-  "type": "module",
   "dependencies": {
     "mysql": "^2.18.1",
     "tedious": "^11.0.6"

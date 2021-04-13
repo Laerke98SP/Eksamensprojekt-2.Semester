@@ -1,4 +1,11 @@
 const db = require('../shared/db');
+const express = require('express');
+
+const app = express();
+
+// app.use(express.static('../Frontend')); 
+app.use('/Frontend', express.static('Frontend'))
+app.get('/frontpage.html');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.')
@@ -25,17 +32,27 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
-        let name = req.query.name;
-        let user = await db.select(name)
+        let email = req.query.email;
+        let password = req.query.password;
+        console.log(email);
+        console.log(password);
+        let user = await db.select(email, password)
+        console.log("Executed to line 31 in azure function")
+        //console.log(user); //+ user.value);
+        // for(i in user.value){
+        //     console.log(`${i} : ${user[i].value}`);
+        //     //console.log("test");
+        // };
         context.res = {
             body: user
         };
+        console.log("also send the context to client side")
     } catch(error){
         context.res = {
-            status: 400,
+            status: 404,
             body: `No user - ${error.message}`
         }
-    }
+    } 
 }
 
 async function post(context, req){

@@ -1,2 +1,0 @@
-All functions for contacting the database, should be made in this folder
-Every function should be exported, so it is possible to use them from the API

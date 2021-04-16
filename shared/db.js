@@ -1,4 +1,4 @@
-const { Connection, Request, TYPES} = require('tedious');
+const { Connection, Request, TYPES } = require('tedious');
 const config = require('./config.json')
 
 var connection = new Connection(config)

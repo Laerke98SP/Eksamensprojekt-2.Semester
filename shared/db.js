@@ -105,4 +105,45 @@ function select(email, password){
         connection.execSql(request)
     })
 };
-module.exports.select = select;
+
+
+function selectAll(email){
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT firstName, dob, gender, description FROM [user] WHERE email != @email';
+        console.log("Now we have ran sql query for potential matches")
+        const request = new Request(sql, (err, rowcount) => {
+            if(rowcount == 0) {
+                reject(
+                    {message: 'There are no users to get'}  
+                )
+            }
+            else if (err){
+                reject(err)
+                console.log(err + " error comming from db.js")
+            } 
+            else {
+                console.log(" everything went fine in db.js");
+            }
+        });
+        // column name, data type, paramname
+        request.addParameter('email', TYPES.VarChar, email)
+        
+        //A row resulting from execution of the SQL statement.
+        // column consist of meta data and value
+        request.on('row', (columns) => {
+            resolve(columns)//'user arrived '+ columns)
+            for(i = 0; i< columns.length; i++){
+                console.log(columns[i].value)
+            };
+            //testing output in debug console
+            // for( i in columns){
+            //     console.log(Object.values(columns[i]))
+            // };
+             console.log( "testing in DB.js");
+        });
+        //Execute the SQL represented by request.
+        connection.execSql(request)
+    })
+};
+
+module.exports.selectAll = selectAll;

@@ -1,11 +1,11 @@
 const db = require('../shared/db');
-const express = require('express');
+// const express = require('express');
 
-const app = express();
+// const app = express();
 
-// app.use(express.static('../Frontend')); 
-app.use('/Frontend', express.static('Frontend'))
-app.get('/frontpage.html');
+// // app.use(express.static('../Frontend')); 
+// app.use('/Frontend', express.static('Frontend'))
+// app.get('/frontpage.html');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.')
@@ -60,7 +60,10 @@ async function post(context, req){
         let payload = req.body;
         await db.insert(payload)
         context.res = {
-            body: {status: 'Success'}
+            status: 200,
+            body: {
+                status: 'Success'
+            }
         }
     } catch(error){
         context.res = {

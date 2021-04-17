@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dating App</title>
-        <link href="../Frontend/css/frontpage.css" rel="stylesheet">
+        <link href="./css/user.css" rel="stylesheet">
     </head>
     <body>
         <h1 id="Headline">We believe in love, do you?</h1>
@@ -21,36 +21,52 @@
                    <th>Lastname:</th>
                    <th>Age:</th>
                    <th>gender:</th>
-                   <th>Description:</th>
-                   <th>min age:</th>
-                   <th>max age:</th>
-                   <th>gender preference</th>
                </tr>
-               
            </table>
-    </div><br>
-        
+           <br>
+           <div id="description">
+
+            <p> Description:</p>
+
+           </div>
+           <br>
+           <table id="info">
+               <p>Preference in partner:</p>
+                <tr>
+                    <th>Min age:</th>
+                    <th>Max age:</th>
+                    <th>Gender preference</th>
+                </tr>
+           </table>
+    </div><br><br>
+
+    <div class="love">
+        <a href="./users.html">
+        <button id="match">Find love</button>
+        </a>
+    </div>
+    <br>
     <!-----------After creating a user they will automatically be logged in-->
-        <div class="changes">
-            <input id="delete" type="reset" value="Delete"> 
+    <div class="changes">
+        <input id="delete" type="reset" value="Delete"> 
            
-            <a href="/">
-                <input id="submitlogout" type="reset" value="logout"> 
-            </a>
-            <a href="/cbs_fullstack_example/Frontend/editUser.html">
-                <input id="edit" type="button" value="Edit user">
-            </a>
-        </div>
+        <a href="http://127.0.0.1:5501/Frontend/frontpage.html">
+            <input id="submitlogout" type="reset" value="logout"> 
+        </a>
+        <a href="./editUser.html">
+            <input id="edit" type="button" value="Edit user">
+        </a>
+    </div>
     
     <!---------------REturn to  main page-------------------->
-        <br>
-        <a href="/cbs_fullstack_example/Frontend/frontpage.html">
-            <input id="return" type="button" value="Return to homepage">
-        </a>
+    <br>
+    <a href="./frontpage.html">
+        <input id="return" type="button" value="Return to homepage">
+    </a>
  
     <footer>
         Denne hjemmeside er lavet af alex
     </footer>
-    <script src="./js/index.js"></script>
+    <script src="./js/user.js"></script>
     </body>
 </html>

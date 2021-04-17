@@ -1,14 +1,14 @@
 {
-    "server": "XXX.database.windows.net",
+    "server": "datingsppserver.database.windows.net",
     "authentication": {
         "type": "default",
         "options": {
-            "userName": "XXXX",
-            "password": "XXXX"
+            "userName": "Alexandra",
+            "password": "Maria1809"
         }
     },
     "options": {
         "encrypt": true,
-        "database": "XXXX"
+        "database": "Tinderapp"
     }
 }

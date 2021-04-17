@@ -1,58 +1,65 @@
-// Defining variables
-var getButton = document.getElementById("getUsers")
-// var email = document.getElementById("email").value
-// var password = document.getElementById("password").value
+// ---------------- DEFINING LOGIN BUTTON ------------------- //
+var getButton = document.getElementById("getUser")
 
-// Login 
+
+// ---------------- LOGIN ACTION WHEN CLICK ON BUTTON ---------// 
 getButton.addEventListener("click", function(){
+    // ------------- DEFINING INPUT VARIABLES -----------------//
     var email = document.getElementById("email").value
     var password = document.getElementById("password").value
+
+    //-------------- SAVE INPUT IN LOCALSTORAGE ---------------//
     localStorage.setItem('mail', email);
     localStorage.setItem('kodeord', password);
+
+    //-------------- CALL LOGING FUNCTION ---------------------//
     login(email, password);
 });
     
+
+// ----------------- ACTION FOR LOGIN FUNCTION -----------------//
 function login(email, password){
+    // ---------- RETRIEVE IN DB A PERSON WITH FOLLOWING MAIL AND PASSWORD ---------//
     fetch(`http://localhost:7071/api/user?email=${email}&password=${password}`)
     .then(
         function(response){
+            // ------------- 404 RESPONSE CODE MEANS DOESNT EXIST ---------//
             if( response.status == 404){
                 console.log( "Brugeren eksistere ikke")
-                    //alert("Prøv igen med en anden bruger");
+                //alert("Prøv igen med en anden bruger");
             }
+            // --------------- IF NOT 200 RESONSE CODE & NOT 404 SOMETHING ELSE WENT WRONG --//
             else if (response.status !== 200){
                 console.log("Noget gik galt i script.js client side. " + response.status);
                 console.log(response);
                 return;
             } else {    
+                // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
                 response.json().then(function (data) {
-                    // for(i of data){
-                    //     let inc = 1;
-                        
-                    //     console.log(` ${i.value}`);
-                    //     //console.log(i);
-                    //     inc++;
-                        
-                    //     //console.log("test");
-                    // };
                     for(i = 1; i< data.length; i++){
                         console.log(data[i].value)
+                        console.log(i);
 
-                        //03. Så sættes resten af brugeroplysninger i localstorage så de kan hentes og bruges i profilen
-                        localStorage.setItem('fornavn', data[i].value);
-                        localStorage.setItem('efternavn', data[i].lastName);
-                        localStorage.setItem('dob', data[i].dob);
-                        localStorage.setItem('køn', data[i].gender);
-                        localStorage.setItem('beskrivelse', data[i].description);
-                        localStorage.setItem('min', data[i].ageMin);
-                        localStorage.setItem('max', data[i].ageMax);
-                        localStorage.setItem('kønPr', data[i].genderPref);
-                    // console.log(data);
-
+                        //------------ RETRIEVING THE REST OF USER INFO FROM DB-----------// 
+                        localStorage.setItem('fornavn', data[3].value);
+                        localStorage.setItem('efternavn', data[4].value);
+                        localStorage.setItem('dob', data[5].value);
+                        localStorage.setItem('køn', data[6].value);
+                        localStorage.setItem('beskrivelse', data[7].value);
+                        localStorage.setItem('min', data[8].value);
+                        localStorage.setItem('max', data[9].value);
+                        localStorage.setItem('kønPr', data[10].value);
                     };
+
+                    // TEST statement
                     console.log( "it should work if you reach here script.js client side")
+
+                    // TEST statement
+                    console.log(data[3].value)
+
+                    // ------------- IF EVERYTHING SUCCEEDED - PASS YOU TO YOUR PROFILE -------//
                     alert("You will be directed to your profile")
-                    window.location.href = "http://127.0.0.1:5500/cbs_fullstack_example/Frontend/user.html"; 
+                    window.location.href = "./user.html"; 
                 })
                 .catch(function (err){
                     console.log(err + " Testing err");

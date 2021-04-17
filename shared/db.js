@@ -26,14 +26,19 @@ module.exports.startDb = startDb;
 // POST REQ - for create user function
 function insert(payload){
     return new Promise((resolve, reject) => {
-        const sql = `INSERT INTO [user] (email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref)
-        VALUES ('@email, @password, @firstName, @lastName, @dob, @gender, @description, @ageMin, @ageMax, @genderPref);`
+        const sql = `INSERT INTO Tinderapp.dbo.[user] (email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref)
+        VALUES (@email, @password, @firstName, @lastName, @dob, @gender, @description, @ageMin, @ageMax, @genderPref);`
+
+        
+        console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {
             if (err){
                 reject(err)
                 console.log(err)
             }
         });
+
+        console.log("Testing the params now");
         request.addParameter('email', TYPES.VarChar, payload.email)
         request.addParameter('password', TYPES.VarChar, payload.password)
         request.addParameter('firstName', TYPES.VarChar, payload.firstName)
@@ -41,9 +46,11 @@ function insert(payload){
         request.addParameter('dob', TYPES.Date, payload.dob)
         request.addParameter('gender', TYPES.VarChar, payload.gender)
         request.addParameter('description', TYPES.VarChar, payload.description)
-        request.addParameter('ageMin', TYPES.INT, payload.min)
-        request.addParameter('ageMax', TYPES.INT, payload.max)
-        request.addParameter('genderPref', TYPES.INT, payload.gendPref)
+        request.addParameter('ageMin', TYPES.Int, payload.ageMin)
+        request.addParameter('ageMax', TYPES.Int, payload.ageMax)
+        request.addParameter('genderPref', TYPES.Int, payload.genderPref)
+       
+        console.log("Checking if the parameters exist " + payload.email);
 
         request.on('requestCompleted', (row) => {
             console.log('User inserted', row);

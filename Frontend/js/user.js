@@ -14,7 +14,8 @@ const deleteBtn = document.querySelector('#delete'); // en Variabel for slet kna
 const likebtn = document.querySelector('#like'); // en variabel for like knappen
 const viewMatch = document.querySelector('#viewMatch'); // en variabel for like knappen
 var table = document.getElementById("table"); // en variabel for tabellen
-
+var info = document.getElementById("description"); // en variabel for tabellen
+var pref = document.getElementById("info"); // en variabel for tabellen
 // ------------------ Opretter klassen Profile--------------------
 class User {
     constructor(email, code, fname, lname, bdate, gen, descr, min, max, gendPref){
@@ -36,18 +37,24 @@ class User {
 const user = new User(mail, password, firstname, lastname, dob, gender, description, ageMin, ageMax, genderPref);
 let newUser = [user]; // indsætte instansen profile i et array
 
+console.log(newUser)
+
     //Det omdannes til array således vi kan loope igennem det og indsætte i tabel i HTML------------
-for(i in newUser){
+for(let i = 0; i< newUser.length; i++){
 table.innerHTML += 
-    "<tr><td>" + newUser[i]+ 
-    "<tr><td>" + newUser[i].password+ 
-    "</td><td>" + newUser[i].firstname +
-    "</td><td>" + newUser[i].lastname + 
-    "</td><td>" + newUser[i].dob +
-    "</td><td>" + newUser[i].gender +
-    "</td><td>" + newUser[i].description +
-    "</td><td>" + newUser[i].ageMin +
-    "</td><td>" + newUser[i].ageMax +
-    "</td><td>" + newUser[i].genderPref +
+    "<tr><td>" + newUser[i].email+ 
+    "</td><td>" + newUser[i].code+ 
+    "</td><td>" + newUser[i].fname +
+    "</td><td>" + newUser[i].lname + 
+    "</td><td>" + newUser[i].bdate +
+    "</td><td>" + newUser[i].gen +
+    "</td></tr>";
+    info.innerHTML += newUser[i].descr;
+
+    pref.innerHTML +=
+    "<tr><td>" + newUser[i].min +
+    "</td><td>" + newUser[i].max +
+    "</td><td>" + newUser[i].gendPref +
     "</td></tr>";
 };
+

@@ -5,54 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dating App</title>
     
-    <link href="../Frontend/css/basic.css" rel="stylesheet">
+    <link href="./css/user.css" rel="stylesheet">
     
 </head>
 <body>
-    <h1>Welcome to the worlds greatest Dating app</h1>
-    <p id="todo">Opportunities are endless</p>
-    <!--------Getting localstorage from example of localstorage week 42-->
-    <div class="InfoDiv">
-           <table id="table">
-               <tr>
-                   <th>Username:</th>
-                   <th>Firstname:</th>
-                   <th>Lastname:</th>
-                   <th>Age:</th>
-                   <th>Description:</th>
-                   <th>Password</th>
-               </tr>
-               
-           </table>
-    </div><br>
-    <input id="submitEdit" type="submit" value="submit">
+    <h1 id="Headline">We believe in love, do you?</h1>
+    <p id="todo">Sign in here</p>
+<!--------Getting localstorage from example of localstorage week 42-->
+<p id="todo">Opportunities are endless</p>
+<!--------Getting localstorage from example of localstorage week 42-->
+<div class="InfoDiv">
+       <table id="table">
+           <tr>
+               <th>Username:</th>
+               <th>Password</th>
+               <th>Firstname:</th>
+               <th>Lastname:</th>
+               <th>Age:</th>
+               <th>gender:</th>
+           </tr>
+       </table>
+       <br>
+       <div id="description">
 
-    <div class="actions">
-        <div id="match"><h3> Matches</h3></div>
+        <p> Description:</p>
 
-        <div id="like"><h3>Likes</h3></div>
+       </div>
+       <br>
+       <table id="info">
+           <p>Preference in partner:</p>
+            <tr>
+                <th>Min age:</th>
+                <th>Max age:</th>
+                <th>Gender preference</th>
+            </tr>
+       </table>
+</div><br><br>
 
+<button id="submitChanges">Submit changes</button>
+<div class="love">
+    <a href="./users.html"> 
+    <button id="match">Find love</button>
+    </a>
+</div>
+<br>
+<!-----------After creating a user they will automatically be logged in-->
+<div class="changes">
+    <input id="delete" type="reset" value="Delete"> 
+       
+    <a href="./frontpage.html">
+        <input id="submitlogout" type="reset" value="logout"> 
+    </a>
+    <a href="./user.html">
+        <input id="edit" type="button" value="Back to profile">
+    </a>
+</div>
 
-    </div>
-        
-    <!-----------After creating a user they will automatically be logged in-->
-        <div class="changes">
-            <input id="delete" type="reset" value="Delete"> 
-           
-            <a href="/">
-                <input id="submitlogout" type="reset" value="logout"> 
-            </a>
-        </div>
-    
-    <!---------------REturn to  main page-------------------->
-        <br>
-        <a href="/profile">
-            <input id="return" type="button" value="Return to profile">
-        </a>
- 
-    <footer>
-        Denne hjemmeside er lavet af alex
-    </footer>
-    <script src="./js/edituser.js"></script>
+<!---------------REturn to  main page-------------------->
+<br>
+<a href="/frontpage.html">
+    <input id="return" type="button" value="Return to homepage">
+</a>
+
+<footer>
+    Denne hjemmeside er lavet af alex
+</footer>
+<script src="./js/editUser.js"></script>
 </body>
 </html>

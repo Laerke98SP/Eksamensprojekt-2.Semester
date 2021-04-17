@@ -1,3 +1,5 @@
+const { userVote } = require("../../shared/db");
+
 // ---------------- DEFINING BUTTONS ------------------- //
 const like = document.getElementById("like");
 const dislike = document.getElementById("dislike");
@@ -40,6 +42,50 @@ function displayPotentialMatch(data){
         
     };   
 };
+
+like.addEventListener('click', function(){
+
+    userVote();
+})
+
+function userVote(){
+        // ---------------- INPUT FOR FETCH REQUEST ----------//
+        const option = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset-UTF-8'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+                firstName: firstName,
+                lastName:lastName,
+                dob: dob,
+                gender: gender,
+                description: description,
+                ageMin: ageMin,
+                ageMax: ageMax,
+                genderPref: genderPref
+            })
+        };
+        fetch("http://localhost:7071/api/users", option)   
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+                // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
+                console.log("process Succeeded")
+                console.log(data)
+                console.log("you have voted");
+            
+        
+        }).catch((err) =>{
+            console.log(err)
+            console.log("Something went wroooong")
+        })
+    };
+    
+}
 
 function displayMatch(data){
     console.log("skal vise antal match")

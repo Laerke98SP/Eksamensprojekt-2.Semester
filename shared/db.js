@@ -105,7 +105,7 @@ function select(email, password){
         connection.execSql(request)
     })
 };
-
+module.exports.select = select;
 
 function selectAll(email){
     return new Promise((resolve, reject) => {
@@ -145,5 +145,36 @@ function selectAll(email){
         connection.execSql(request)
     })
 };
-
 module.exports.selectAll = selectAll;
+
+// POST REQ - for create user function
+function userVote(payload){
+    return new Promise((resolve, reject) => {
+        const sql = `INSERT INTO userEdge (userID2, userID1, vote) VALUES (@userID2, @userID1, @vote);`
+
+        
+        console.log("Sending SQL query to DB");
+        const request = new Request(sql, (err) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+        });
+
+        console.log("Testing the params now");
+        request.addParameter('userID2', TYPES.Int, payload.userID2)
+        request.addParameter('userID1', TYPES.Int, payload.userID1)
+        request.addParameter('vote', TYPES.Int, payload.vote)
+  
+       
+        console.log("Checking if the parameters exist " + payload.userID2);
+
+        request.on('requestCompleted', (row) => {
+            console.log('User inserted', row);
+            resolve('user inserted', row)
+        });
+        connection.execSql(request)
+
+    });
+}
+module.exports.userVote = userVote;

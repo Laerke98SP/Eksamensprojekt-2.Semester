@@ -46,7 +46,7 @@ async function get(context, req){
 async function post(context, req){
     try{
         let payload = req.body;
-        await db.insert(payload)
+        await db.userVote(payload)
         context.res = {
             status: 200,
             body: {

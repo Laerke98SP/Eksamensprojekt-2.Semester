@@ -21,7 +21,10 @@ module.exports = async function (context, req) {
             break;
         case 'POST':
             await post(context, req);
-            break
+            break;
+        case 'PATCH':
+            await patch(context, req);
+            break;
         default:
             context.res = {
                 body: "Please get or post"
@@ -38,11 +41,7 @@ async function get(context, req){
         console.log(password);
         let user = await db.select(email, password)
         console.log("Executed to line 31 in azure function")
-        //console.log(user); //+ user.value);
-        // for(i in user.value){
-        //     console.log(`${i} : ${user[i].value}`);
-        //     //console.log("test");
-        // };
+        
         context.res = {
             body: user
         };
@@ -73,3 +72,21 @@ async function post(context, req){
     }
 }
 
+
+async function patch(context, req){
+    try{
+        let payload = req.body;
+        await db.updateUser(payload)
+        context.res = {
+            status: 200,
+            body: {
+                status: 'Success'
+            }
+        }
+    } catch(error){
+        context.res = {
+            status: 400,
+            body: error.message
+        }
+    }
+}

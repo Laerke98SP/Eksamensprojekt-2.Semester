@@ -59,3 +59,102 @@ function selectAdmin(email, password){
 };
 module.exports.selectAdmin = selectAdmin;
 
+
+function insertAdmin(payload){
+    return new Promise((resolve, reject) => {
+        const sql = `INSERT INTO [admin] (email, password)
+        VALUES (@email, @password);`
+
+        
+        console.log("Sending SQL query to DB");
+        const request = new Request(sql, (err) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+        });
+
+        console.log("Testing the params now");
+        request.addParameter('email', TYPES.VarChar, payload.email);
+        request.addParameter('password', TYPES.VarChar, payload.password);
+       
+        console.log("Checking if the parameters exist " + payload.email);
+
+        request.on('requestCompleted', (row) => {
+            console.log('User inserted', row);
+            resolve('user inserted', row)
+        });
+        connection.execSql(request)
+
+    });
+}
+module.exports.insertAdmin = insertAdmin;
+
+
+function updateUserProfile(payload){
+    return new Promise((resolve, reject) => {
+        const sql = `UPDATE [user]
+        SET password = @password, firstName = @firstName, lastName = @lastName, dob = @dob, gender = @gender, description = @description, ageMin = @ageMin, ageMax = @ageMax, genderPref = @genderPref
+        WHERE email = @email;`
+
+        
+        console.log("Sending SQL query to DB");
+        const request = new Request(sql, (err) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+        });
+
+        console.log("Testing the params now");
+        request.addParameter('email', TYPES.VarChar, payload.email)
+        request.addParameter('password', TYPES.VarChar, payload.password)
+        request.addParameter('firstName', TYPES.VarChar, payload.firstName)
+        request.addParameter('lastName', TYPES.VarChar, payload.lastName)
+        request.addParameter('dob', TYPES.Date, payload.dob)
+        request.addParameter('gender', TYPES.VarChar, payload.gender)
+        request.addParameter('description', TYPES.VarChar, payload.description)
+        request.addParameter('ageMin', TYPES.Int, payload.ageMin)
+        request.addParameter('ageMax', TYPES.Int, payload.ageMax)
+        request.addParameter('genderPref', TYPES.Int, payload.genderPref)
+       
+        console.log("Checking if the parameters exist " + payload.email);
+
+        request.on('requestCompleted', (row) => {
+            console.log('User inserted', row);
+            resolve('user inserted', row)
+        });
+        connection.execSql(request)
+
+    });
+}
+module.exports.updateUserProfile = updateUserProfile;
+
+
+function deleteAdmin(email){
+    return new Promise((resolve, reject) => {
+        const sql = `DELETE FROM [user] WHERE email = @email;`
+
+        
+        console.log("Sending SQL query to DB");
+        const request = new Request(sql, (err) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+        });
+
+        console.log("Testing the params now");
+        request.addParameter('email', TYPES.VarChar, email);
+       
+        console.log("Checking if the parameters exist " + email);
+
+        request.on('requestCompleted', (row) => {
+            console.log('User inserted', row);
+            resolve('user inserted', row)
+        });
+        connection.execSql(request)
+
+    });
+}
+module.exports.deleteAdmin = deleteAdmin;

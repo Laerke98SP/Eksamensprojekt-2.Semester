@@ -1,4 +1,4 @@
-const db = require('../shared/dbInspector');
+const db = require('../Storage/dbInspector.js');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.')

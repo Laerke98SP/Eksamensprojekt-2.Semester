@@ -8,7 +8,7 @@ body {
   }
 
 
-  table {
+table {
         border: 3px solid #f1f1f1;
         /* text-align: center; */
         background-color: #ffb2d7;
@@ -19,7 +19,7 @@ body {
         margin-right: auto; 
   }
 
-#description {
+#desc {
       border-color: white;
       border: solid;
       padding-bottom: 10px;
@@ -61,7 +61,7 @@ body {
       opacity: 0.40;
 }
     
-#delete, #submitlogout, #edit {
+#delete, #submitLogout, #edit {
       background-color: #cbb2ff;
       color: white;
       padding: 14px 20px;
@@ -71,7 +71,7 @@ body {
       width: 155px;
     }
     
-#match:hover, #delete:hover, #submitlogout:hover, #edit:hover {
+#match:hover, #delete:hover, #submitLogout:hover, #edit:hover {
       opacity: 0.40;
 }
 

@@ -95,8 +95,4 @@ appsettings.json
 local.settings.json
 
 # Database configuration file
-<<<<<<< HEAD:.gitignore
-=======
-Storage/config.json
->>>>>>> 3fa1aafe383fdea9bf1a61305bf4ee906e2fb881:API/.gitignore
 .config.json

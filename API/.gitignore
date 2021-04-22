@@ -96,3 +96,4 @@ local.settings.json
 
 # Database configuration file
 Storage/config.json
+.config.json

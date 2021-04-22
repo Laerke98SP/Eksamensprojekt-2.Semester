@@ -1,4 +1,4 @@
-const db = require('../shared/dbUser');
+const db = require('../Storage/dbUser.js');
 
 
 module.exports = async function (context, req) {

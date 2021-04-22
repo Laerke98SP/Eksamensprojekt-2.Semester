@@ -1,0 +1,14 @@
+{
+    "server": "dating-application-server.database.windows.net",
+    "authentication": {
+        "type": "default",
+        "options": {
+            "userName": "Laura",
+            "password": "s"
+        }
+    },
+    "options": {
+        "encrypt": true,
+        "database": "dating-application-database"
+    }
+}

@@ -93,3 +93,6 @@ bin
 obj
 appsettings.json
 local.settings.json
+
+# Database configuration file
+Storage/config.json

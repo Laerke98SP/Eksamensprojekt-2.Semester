@@ -1,0 +1,14 @@
+{ 
+    "server": "cbs-project-server.database.windows.net", 
+    "authentication": {
+        "type": "default",
+        "options": {
+            "userName": "Laerke", 
+            "password": "1HelloWorld1" 
+        }
+    },
+    "options": {
+        "encrypt": true,
+        "database": "Dating database"
+    }
+}

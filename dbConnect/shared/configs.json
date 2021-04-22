@@ -1,6 +1,5 @@
 {
     "server": "XXX.database.windows.net",
-
     "authentication": {
         "type": "default",
         "options": {
@@ -13,5 +12,3 @@
         "database": "XXXX"
     }
 }
-
-

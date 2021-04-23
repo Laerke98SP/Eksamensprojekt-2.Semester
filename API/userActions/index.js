@@ -1,5 +1,4 @@
-const db = require('../shared/dbUser');
-
+const db = require('../dbConnect/dbUser');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.')

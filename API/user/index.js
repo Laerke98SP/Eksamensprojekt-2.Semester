@@ -1,4 +1,5 @@
-const db = require('../../dbConnect/dbUser');
+const db = require('../dbConnect/dbUser');
+
 // const express = require('express');
 
 // const app = express();

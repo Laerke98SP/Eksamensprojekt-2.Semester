@@ -1,4 +1,4 @@
-const db = require('../dbConnect/dbStatistics');
+const db = require('../../dbConnect/dbStatistics');
 
 
 module.exports = async function (context, req) {

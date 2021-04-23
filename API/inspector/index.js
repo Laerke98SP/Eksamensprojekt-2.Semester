@@ -1,4 +1,4 @@
-const db = require('../dbConnect/dbInspector');
+const db = require('../../dbConnect/dbInspector');
 
 
 module.exports = async function (context, req) {

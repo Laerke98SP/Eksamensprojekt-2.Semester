@@ -1,5 +1,5 @@
 {
-    "azureFunctions.deploySubpath": "dbConnect",
+    "azureFunctions.deploySubpath": "API",
     "azureFunctions.postDeployTask": "npm install",
     "azureFunctions.projectLanguage": "JavaScript",
     "azureFunctions.projectRuntime": "~3",

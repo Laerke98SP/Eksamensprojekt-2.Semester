@@ -1,4 +1,4 @@
-const db = require('../shared/dbUser');
+const db = require('../../dbConnect/dbUser');
 // const express = require('express');
 
 // const app = express();

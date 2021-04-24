@@ -218,3 +218,32 @@ function updateUser(payload){
     });
 }
 module.exports.updateUser = updateUser;
+
+
+function deleteUser(email){
+    return new Promise((resolve, reject) => {
+        const sql = `DELETE FROM [user] WHERE email = @email;`
+
+        
+        console.log("Sending SQL query to DB");
+        const request = new Request(sql, (err) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+        });
+
+        console.log("Testing the params now");
+        request.addParameter('email', TYPES.VarChar, email);
+       
+        console.log("Checking if the parameters exist " + email);
+
+        request.on('requestCompleted', (row) => {
+            console.log('User inserted', row);
+            resolve('user inserted', row)
+        });
+        connection.execSql(request)
+
+    });
+}
+module.exports.deleteUser = deleteUser;

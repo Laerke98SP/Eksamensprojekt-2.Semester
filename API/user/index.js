@@ -26,6 +26,9 @@ module.exports = async function (context, req) {
         case 'PATCH':
             await patch(context, req);
             break;
+        case 'DELETE':
+            await deleteUser(context, req);
+            break;
         default:
             context.res = {
                 body: "Please get or post"
@@ -90,4 +93,24 @@ async function patch(context, req){
             body: error.message
         }
     }
+}
+
+
+async function deleteUser(context, req){
+    try{
+        let email = req.query.email;
+        console.log(email);
+        let user = await db.deleteUser(email);
+        console.log("Executed to line 31 in azure function");
+        
+        context.res = {
+            body: user
+        };
+        console.log("also send the context to client side");
+    } catch(error){
+        context.res = {
+            status: 404,
+            body: `No user - ${error.message}`
+        }
+    } 
 }

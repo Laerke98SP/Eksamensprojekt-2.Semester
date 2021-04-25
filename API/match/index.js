@@ -1,4 +1,4 @@
-const db = require('../../dbConnect/dbMatch');
+const db = require('../../Storage/dbMatch');
 
 
 module.exports = async function (context, req) {

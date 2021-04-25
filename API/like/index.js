@@ -1,4 +1,4 @@
-const db = require('../../dbConnect/dbUser');
+const db = require('../../Storage/dbLike');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.')
@@ -26,14 +26,14 @@ module.exports = async function (context, req) {
 async function get(context, req){
     try{
         let email = req.query.email;
-        console.log(email);
+        //console.log(email);
         let users = await db.selectAll(email)
-        console.log("Executed to line 32 in azure function")
+        //console.log("Executed to line 32 in azure function")
         
         context.res = {
             body: users
         };
-        console.log("also send the context to client side")
+        //console.log("also send the context to client side")
     } catch(error){
         context.res = {
             status: 404,

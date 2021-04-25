@@ -1,5 +1,6 @@
 const db = require('../../Storage/dbLike');
 
+// Connection to DB
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.')
 
@@ -23,6 +24,7 @@ module.exports = async function (context, req) {
     }
 }
 
+// Show potential matches
 async function get(context, req){
     try{
         let email = req.query.email;
@@ -43,6 +45,7 @@ async function get(context, req){
 }
 
 
+//  Like or dislike User
 async function post(context, req){
     try{
         let payload = req.body;

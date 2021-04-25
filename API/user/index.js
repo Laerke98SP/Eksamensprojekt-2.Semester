@@ -1,13 +1,6 @@
 const db = require('../../Storage/dbUser');
 
-// const express = require('express');
-
-// const app = express();
-
-// // app.use(express.static('../Frontend')); 
-// app.use('/Frontend', express.static('Frontend'))
-// app.get('/frontpage.html');
-
+// Connection to DB
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.')
 
@@ -37,6 +30,7 @@ module.exports = async function (context, req) {
     }
 }
 
+// Login function
 async function get(context, req){
     try{
         let email = req.query.email;
@@ -58,6 +52,7 @@ async function get(context, req){
     } 
 }
 
+// Create user function
 async function post(context, req){
     try{
         let payload = req.body;
@@ -77,6 +72,7 @@ async function post(context, req){
 }
 
 
+// Update user function
 async function patch(context, req){
     try{
         let payload = req.body;
@@ -95,7 +91,7 @@ async function patch(context, req){
     }
 }
 
-
+// delete user function
 async function deleteUser(context, req){
     try{
         let email = req.query.email;

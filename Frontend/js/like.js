@@ -1,4 +1,4 @@
-const { userVote } = require("../../shared/db");
+
 
 // ---------------- DEFINING BUTTONS ------------------- //
 const like = document.getElementById("like");
@@ -10,7 +10,9 @@ const seeMatch = document.getElementById("Seematch");
 
 let email = localStorage.getItem('mail');
 
-fetch(`http://localhost:7071/api/users?email=${email}`)
+
+
+fetch(`http://localhost:7071/api/like?email=${email}`)
 .then(function(response){
     return response.json(); // returnere et promise
 })
@@ -29,23 +31,29 @@ fetch(`http://localhost:7071/api/users?email=${email}`)
 
 function displayPotentialMatch(data){
    
-    for(let i = 0; i< data.length; i++){       
+        table.innerHTML += 
+            "<tr><td>" + data[1].value+ 
+            "</td><td>" + data[2].value+ 
+            "</td><td>" + data[3].value +
+            "</td><td>" + data[4].value + 
+            "</td><td>" + data[5].value +
+            "</td><td>" + data[6].value +
+            "</td></tr>";
+
+        description.innerHTML += data[7].value;
         
-            let div = document.createElement("div");
-            seeUsers.innerHTML = "Name: " + data[i].value + "<br>" + 
-            " Age: " + data[i].value + "<br>" + 
-            " Gender " + data[i].value + "<br>" + 
-            " Description: " + data[i].value;
-            seeUsers.appendChild(div)
-            break;
-            
-        
-    };   
+        info.innerHTML +=
+            "<tr><td>" + data[8].value +
+            "</td><td>" + data[9].value +
+            "</td><td>" + data[10].value +
+            "</td></tr>";
+        console.log(Object.values(data));
+    
 };
 
 like.addEventListener('click', function(){
-
-    userVote();
+    displayPotentialMatch();
+   //userVote();
 })
 
 function userVote(){
@@ -85,8 +93,8 @@ function userVote(){
         })
     };
     
-}
 
-function displayMatch(data){
-    console.log("skal vise antal match")
-}
+
+// function displayMatch(data){
+//     console.log("skal vise antal match")
+// }

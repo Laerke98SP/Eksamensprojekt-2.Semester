@@ -11,11 +11,11 @@ let ageMin = localStorage.getItem('min');
 let ageMax = localStorage.getItem('max');
 let genderPref = localStorage.getItem('kønPr');
 const deleteBtn = document.querySelector('#delete'); // en Variabel for slet knappen
-const likebtn = document.querySelector('#like'); // en variabel for like knappen
-const viewMatch = document.querySelector('#viewMatch'); // en variabel for like knappen
+
 var table = document.getElementById("table"); // en variabel for tabellen
-var info = document.getElementById("description"); // en variabel for tabellen
-var pref = document.getElementById("info"); // en variabel for tabellen
+var info = document.getElementById("description"); // en variabel for beskrivelses divv
+var pref = document.getElementById("info"); // en variabel for info div
+
 // ------------------ Opretter klassen Profile--------------------
 class User {
     constructor(email, code, fname, lname, bdate, gen, descr, min, max, gendPref){
@@ -56,5 +56,6 @@ table.innerHTML +=
     "</td><td>" + newUser[i].max +
     "</td><td>" + newUser[i].gendPref +
     "</td></tr>";
+    console.log(newUser[i].gen);
 };
 

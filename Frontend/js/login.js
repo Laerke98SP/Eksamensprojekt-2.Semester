@@ -4,15 +4,15 @@ var getButton = document.getElementById("getUser")
 
 // ---------------- LOGIN ACTION WHEN CLICK ON BUTTON ---------// 
 getButton.addEventListener("click", function(){
-    // ------------- DEFINING INPUT VARIABLES -----------------//
+    //  01. DEFINING INPUT VARIABLES 
     var email = document.getElementById("email").value
     var password = document.getElementById("password").value
 
-    //-------------- SAVE INPUT IN LOCALSTORAGE ---------------//
+    // 02. SAVE INPUT IN LOCALSTORAGE 
     localStorage.setItem('mail', email);
     localStorage.setItem('kodeord', password);
 
-    //-------------- CALL LOGING FUNCTION ---------------------//
+    // 03. CALL LOGING FUNCTION 
     login(email, password);
 });
     
@@ -23,10 +23,10 @@ function login(email, password){
     fetch(`http://localhost:7071/api/user?email=${email}&password=${password}`)
     .then(
         function(response){
-            // ------------- 404 RESPONSE CODE MEANS DOESNT EXIST ---------//
-            if( response.status == 404){
-                console.log( "Brugeren eksistere ikke")
-                //alert("Prøv igen med en anden bruger");
+            
+            // ------------  403 RESPONSE FOR KLIENT TYPING SOMETHING WRONG---------//
+            if( response.status == 403) {
+                alert( "Kodeord eller brugernavn er forkert - har du ikke en bruger opret gerne en");
             }
             // --------------- IF NOT 200 RESONSE CODE & NOT 404 SOMETHING ELSE WENT WRONG --//
             else if (response.status !== 200){

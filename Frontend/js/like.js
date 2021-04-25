@@ -7,6 +7,7 @@ const dislike = document.getElementById("dislike");
 // ---------- SHOW DIV CONTAINERS FOR INNERHTML -------- //
 const seeUsers = document.getElementById("likes")
 const seeMatch = document.getElementById("Seematch");
+const users = document.getElementsByClassName("InfoDiv");
 
 let email = localStorage.getItem('mail');
 
@@ -18,7 +19,7 @@ fetch(`http://localhost:7071/api/like?email=${email}`)
 })
 .then(function(data){ 
     console.log(data);
-    displayPotentialMatch(data); //Kunne Kalde funktionen displayData, med parametrene: storage( alle brugerne i DB & 0 der bruges som counter)
+    //displayPotentialMatch(data); //Kunne Kalde funktionen displayData, med parametrene: storage( alle brugerne i DB & 0 der bruges som counter)
     //checkIfMatch(data); // kalder funktionen check om de matcher  
     
 })
@@ -31,23 +32,24 @@ fetch(`http://localhost:7071/api/like?email=${email}`)
 
 function displayPotentialMatch(data){
    
-        table.innerHTML += 
-            "<tr><td>" + data[1].value+ 
-            "</td><td>" + data[2].value+ 
-            "</td><td>" + data[3].value +
-            "</td><td>" + data[4].value + 
-            "</td><td>" + data[5].value +
-            "</td><td>" + data[6].value +
-            "</td></tr>";
+        // table.innerHTML += 
+        //     "<tr><td>" + data[1].value+ 
+        //     "</td><td>" + data[2].value+ 
+        //     "</td><td>" + data[3].value +
+        //     "</td><td>" + data[4].value + 
+        //     "</td><td>" + data[5].value +
+        //     "</td><td>" + data[6].value +
+        //     "</td></tr>";
+        users.innerHTML += data;
 
-        description.innerHTML += data[7].value;
+        // description.innerHTML += data[7].value;
         
-        info.innerHTML +=
-            "<tr><td>" + data[8].value +
-            "</td><td>" + data[9].value +
-            "</td><td>" + data[10].value +
-            "</td></tr>";
-        console.log(Object.values(data));
+        // info.innerHTML +=
+        //     "<tr><td>" + data[8].value +
+        //     "</td><td>" + data[9].value +
+        //     "</td><td>" + data[10].value +
+        //     "</td></tr>";
+        // console.log(Object.values(data));
     
 };
 

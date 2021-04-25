@@ -7,7 +7,7 @@ module.exports = async function (context, req) {
     try {
         await db.startDb(); //start db connection
     } catch (error) {
-        console.log("Error connecting to the database", error.message)
+        console.log("Error connecting to the database from like API", error.message)
     }
     switch (req.method) {
         case 'GET': 

@@ -3,6 +3,7 @@ const config = require('./config.json')
 
 var connection = new Connection(config)
 
+
 function startDb(){
     return new Promise((resolve, reject) => {
         connection.on('connect', (err) => {

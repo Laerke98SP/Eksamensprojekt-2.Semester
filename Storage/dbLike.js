@@ -24,9 +24,10 @@ module.exports.sqlConnection = connection;
 module.exports.startDb = startDb;
 
 function selectAll(email){
+    console.log("checking if first line in DB function works")
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM [user] WHERE email != @email';
-        //console.log("Now we have ran sql query for potential matches")
+        console.log("Now we have ran sql query for potential matches")
         const request = new Request(sql, (err, rowcount) => {
             if(rowcount == 0) {
                 reject(
@@ -38,30 +39,47 @@ function selectAll(email){
                 console.log(err + " error comming from db.js")
             } 
             else {
-                console.log(" everything went fine in db.js");
+                console.log(" everything went fine in db.js " + rowcount);
             }
         });
         // column name, data type, paramname
         request.addParameter('email', TYPES.VarChar, email)
         
         //A row resulting from execution of the SQL statement.
-        // column consist of meta data and value
-        request.on('rows', (columns) => {
-            resolve(columns)//'user arrived '+ columns)
-            //for(i = 0; i< columns.length; i++){
-            //     console.log(columns[i].value)
-            // };
-            // //testing output in debug console
-            // // for( i in columns){
-            // //     console.log(Object.values(columns[i]))
-            // // };
-            // console.log( "USERS: " + columns[i].value);
-           // console.log("test " + Object.values(columns[i]))
+        // column consist of meta data and value        
+        request.on('row', (columns) => {
+            // test in console
+            let result = "";
+            let count = 1;
+            for( i of columns){
+                result += i.value;
+                count++;
+                if(result == ""){
+                    console.log("no info")
+                } 
+                // count++
+                 
+            }; console.log({result});
+        
+            resolve({result})
+            // for( i of columns){
+            //     console.log(i.value);
+                
+            // }resolve(i.value + 'another test');
+           
+            // resolving columns for API
+            //console.log({columns})
+            //resolve({columns});
+
+
             
+
+           // Måske prøv at lave en klasse aleX den kan sende som json til front end
         });
+        console.log(request)
         //Execute the SQL represented by request.
-        connection.execSql(request)
-    })
+        connection.execSql(request) // A Request Object represent the request
+    });
 };
 module.exports.selectAll = selectAll;
 

@@ -26,15 +26,17 @@ module.exports = async function (context, req) {
 
 // Show potential matches
 async function get(context, req){
+    console.log("checking if first line in like API function works")
     try{
         let email = req.query.email;
         //console.log(email);
         let users = await db.selectAll(email)
-        //console.log("Executed to line 32 in azure function")
-        
+        console.log("Executed to line 32 in azure function")
+        console.log(users);
         context.res = {
-            body: users
+            body: users 
         };
+        //console.log(users + " testing what users are");
         //console.log("also send the context to client side")
     } catch(error){
         context.res = {

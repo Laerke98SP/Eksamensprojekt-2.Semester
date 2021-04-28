@@ -7,7 +7,7 @@ const dislike = document.getElementById("dislike");
 // ---------- SHOW DIV CONTAINERS FOR INNERHTML -------- //
 const seeUsers = document.getElementById("likes")
 const seeMatch = document.getElementById("Seematch");
-const users = document.getElementsByClassName("InfoDiv");
+const users = document.getElementsByClassName("notification");
 
 let email = localStorage.getItem('mail');
 
@@ -19,6 +19,7 @@ fetch(`http://localhost:7071/api/like?email=${email}`)
 })
 .then(function(data){ 
     console.log(data);
+    users.innerHTML += data;
     //displayPotentialMatch(data); //Kunne Kalde funktionen displayData, med parametrene: storage( alle brugerne i DB & 0 der bruges som counter)
     //checkIfMatch(data); // kalder funktionen check om de matcher  
     

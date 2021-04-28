@@ -171,7 +171,7 @@ function userVote(payload){
 
         request.on('requestCompleted', (row) => {
             console.log('User inserted', row);
-            resolve('user inserted', row)
+            resolve('user inserted', row);
         });
         connection.execSql(request)
 

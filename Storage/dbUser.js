@@ -17,7 +17,7 @@ function startDb(){
             }
         })
         connection.connect();
-    })
+    });
 }
 
 module.exports.sqlConnection = connection;

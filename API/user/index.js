@@ -27,7 +27,7 @@ module.exports = async function (context, req) {
                 body: "Please get or post"
             };
             break
-    }
+    };
 }
 
 // Login function

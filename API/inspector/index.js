@@ -28,7 +28,7 @@ module.exports = async function (context, req) {
             };
             break
     }
-}
+};
 
 async function get(context, req){
     try{

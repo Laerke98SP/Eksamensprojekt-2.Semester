@@ -21,7 +21,6 @@ createUser.addEventListener('click', function(){
 
     // TESTING STATEMENT //
     console.log("Testing add eventlistener in frontend");
-
     //-------------- SAVE INPUT IN LOCALSTORAGE ---------------//
     localStorage.setItem('brugernavn', username);
     localStorage.setItem('kodeord', code);

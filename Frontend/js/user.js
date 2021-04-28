@@ -32,7 +32,6 @@ class User {
     }
 }; 
 
-
     //Opretter en instans af klassen Profile - med oplysninger fra local storage
 const user = new User(mail, password, firstname, lastname, dob, gender, description, ageMin, ageMax, genderPref);
 let newUser = [user]; // indsætte instansen profile i et array

@@ -12,7 +12,6 @@ const users = document.getElementsByClassName("notification");
 let email = localStorage.getItem('mail');
 
 
-
 fetch(`http://localhost:7071/api/like?email=${email}`)
 .then(function(response){
     return response.json(); // returnere et promise

@@ -19,7 +19,6 @@ var table = document.getElementById("table");
 var info = document.getElementById("description"); 
 var pref = document.getElementById("info"); 
 
-
 // ------------------ CREATE CLASS USER -------------------- //
 class User {
     constructor(email, code, fname, lname, bdate, gen, descr, min, max, gendPref){

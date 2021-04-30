@@ -22,7 +22,7 @@ module.exports = async function (context, req) {
             };
             break
     }
-}
+};
 
 // Show potential matches
 async function get(context, req){

@@ -65,5 +65,5 @@ function login(email, password){
                     console.log(err + " Testing err");
                 });
             };
-        })
+        });
 };

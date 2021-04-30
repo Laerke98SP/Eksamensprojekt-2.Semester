@@ -14,7 +14,7 @@ function startDb(){
                 console.log("Connected")
                 resolve();
             }
-        })
+        });
         connection.connect();
     })
 }

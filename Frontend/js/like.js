@@ -13,10 +13,7 @@ const info = document.getElementById("info");
 let email = localStorage.getItem('mail');
 
 
-<<<<<<< HEAD
 // retrieving one user at the time // IT DOESNT CHANGE USER
-=======
->>>>>>> 386d370f8b8ee2e2e824b490e03db4648a2091fe
 fetch(`http://localhost:7071/api/like?email=${email}`)
 .then(function(response){
     return response.json(); // returnere et promise

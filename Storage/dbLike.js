@@ -24,10 +24,10 @@ module.exports.sqlConnection = connection;
 module.exports.startDb = startDb;
 
 function selectAll(email){
-    console.log("checking if first line in DB function works")
+    //console.log("checking if first line in DB function works")
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM [user] WHERE email != @email';
-        console.log("Now we have ran sql query for potential matches")
+        const sql = 'SELECT * FROM [user] WHERE email != @email' ;
+        //console.log("Now we have ran sql query for potential matches")
         const request = new Request(sql, (err, rowcount) => {
             if(rowcount == 0) {
                 reject(
@@ -48,35 +48,10 @@ function selectAll(email){
         //A row resulting from execution of the SQL statement.
         // column consist of meta data and value        
         request.on('row', (columns) => {
-            // test in console
-            let result = "";
-            let count = 1;
-            for( i of columns){
-                result += i.value;
-                count++;
-                if(result == ""){
-                    console.log("no info")
-                } 
-                // count++
-                 
-            }; console.log({result});
-        
-            resolve({result})
-            // for( i of columns){
-            //     console.log(i.value);
-                
-            // }resolve(i.value + 'another test');
+            resolve(columns)
            
-            // resolving columns for API
-            //console.log({columns})
-            //resolve({columns});
-
-
-            
-
-           // Måske prøv at lave en klasse aleX den kan sende som json til front end
         });
-        console.log(request)
+        
         //Execute the SQL represented by request.
         connection.execSql(request) // A Request Object represent the request
     });
@@ -86,10 +61,13 @@ module.exports.selectAll = selectAll;
 
 function userVote(payload){
     return new Promise((resolve, reject) => {
-        const sql = `INSERT INTO userEdge (userID2, userID1, vote) VALUES (@userID2, @userID1, @vote);`
+        const sql = `INSERT INTO  userEdge (userID2, userID1, vote)
+        SELECT votedOn.id, voter.id, vote = @vote
+        FROM [user] as votedOn, [user] as voter
+            WHERE  voter.email = @voter AND votedOn.email = @votedOn `
 
         
-        console.log("Sending SQL query to DB");
+        //console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {
             if (err){
                 reject(err)
@@ -97,16 +75,16 @@ function userVote(payload){
             }
         });
 
-        console.log("Testing the params now");
-        request.addParameter('userID2', TYPES.Int, payload.userID2)
-        request.addParameter('userID1', TYPES.Int, payload.userID1)
+        //console.log("Testing the params now");
+        request.addParameter('votedOn', TYPES.VarChar, payload.votedOn)
+        request.addParameter('voter', TYPES.VarChar, payload.voter)
         request.addParameter('vote', TYPES.Int, payload.vote)
   
        
-        console.log("Checking if the parameters exist " + payload.userID2);
+        //console.log("Checking if the parameters exist " + payload.votedOn);
 
         request.on('requestCompleted', (row) => {
-            console.log('User inserted', row);
+            //console.log('User inserted', row);
             resolve('user inserted', row)
         });
         connection.execSql(request)

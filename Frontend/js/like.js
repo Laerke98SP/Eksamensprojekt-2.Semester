@@ -5,22 +5,23 @@ const like = document.getElementById("like");
 const dislike = document.getElementById("dislike");
 
 // ---------- SHOW DIV CONTAINERS FOR INNERHTML -------- //
-const seeUsers = document.getElementById("likes")
-const seeMatch = document.getElementById("Seematch");
-const users = document.getElementsByClassName("notification");
+const table = document.getElementById("table")
+const descr = document.getElementById("description");
+const info = document.getElementById("info");
 
+// ----------------- The logged in users mail -----------//
 let email = localStorage.getItem('mail');
 
 
-
+// retrieving one user at the time // IT DOESNT CHANGE USER
 fetch(`http://localhost:7071/api/like?email=${email}`)
 .then(function(response){
     return response.json(); // returnere et promise
 })
 .then(function(data){ 
     console.log(data);
-    users.innerHTML += data;
-    //displayPotentialMatch(data); //Kunne Kalde funktionen displayData, med parametrene: storage( alle brugerne i DB & 0 der bruges som counter)
+    //users.innerHTML += data;
+    displayPotentialMatch(data); //Kunne Kalde funktionen displayData, med parametrene: storage( alle brugerne i DB & 0 der bruges som counter)
     //checkIfMatch(data); // kalder funktionen check om de matcher  
     
 })
@@ -32,34 +33,40 @@ fetch(`http://localhost:7071/api/like?email=${email}`)
 });
 
 function displayPotentialMatch(data){
-   
-        // table.innerHTML += 
-        //     "<tr><td>" + data[1].value+ 
-        //     "</td><td>" + data[2].value+ 
-        //     "</td><td>" + data[3].value +
-        //     "</td><td>" + data[4].value + 
-        //     "</td><td>" + data[5].value +
-        //     "</td><td>" + data[6].value +
-        //     "</td></tr>";
-        users.innerHTML += data;
-
-        // description.innerHTML += data[7].value;
         
-        // info.innerHTML +=
-        //     "<tr><td>" + data[8].value +
-        //     "</td><td>" + data[9].value +
-        //     "</td><td>" + data[10].value +
-        //     "</td></tr>";
-        // console.log(Object.values(data));
+        table.innerHTML += 
+            "<tr><td>" + data[1].value+ 
+            "</td><td>" + data[2].value+ 
+            "</td><td>" + data[3].value +
+            "</td><td>" + data[4].value + 
+            "</td><td>" + data[5].value +
+            "</td><td>" + data[6].value +
+            "</td></tr>";
+        
+        localStorage.setItem('votedOn', data[1].value);
+
+        descr.innerHTML += data[7].value;
+        
+        info.innerHTML +=
+            "<tr><td>" + data[8].value +
+            "</td><td>" + data[9].value +
+            "</td><td>" + data[10].value +
+            "</td></tr>";
+        
     
 };
 
+
+
+
 like.addEventListener('click', function(){
-    displayPotentialMatch();
-   //userVote();
+    let votedOn = localStorage.getItem('votedOn');
+    let voter = localStorage.getItem('mail');
+    let vote = 2;
+   userVote(votedOn, voter, vote);
 })
 
-function userVote(){
+function userVote(votedOn, voter, vote){
         // ---------------- INPUT FOR FETCH REQUEST ----------//
         const option = {
             method: 'POST',
@@ -67,19 +74,12 @@ function userVote(){
                 'Content-Type': 'application/json; charset-UTF-8'
             },
             body: JSON.stringify({
-                email: email,
-                password: password,
-                firstName: firstName,
-                lastName:lastName,
-                dob: dob,
-                gender: gender,
-                description: description,
-                ageMin: ageMin,
-                ageMax: ageMax,
-                genderPref: genderPref
+                votedOn: votedOn,
+                voter: voter,
+                vote: vote
             })
         };
-        fetch("http://localhost:7071/api/users", option)   
+        fetch("http://localhost:7071/api/like", option)   
         .then((response) => {
             return response.json()
         })
@@ -95,9 +95,11 @@ function userVote(){
             console.log("Something went wroooong")
         })
     };
+
+
     
 
 
-// function displayMatch(data){
-//     console.log("skal vise antal match")
-// }
+function displayMatch(data){
+    console.log("skal vise antal match")
+}

@@ -56,6 +56,7 @@ async function post(context, req){
             status: 200,
             body: {
                 status: 'Success'
+    
             }
         }
     } catch(error){

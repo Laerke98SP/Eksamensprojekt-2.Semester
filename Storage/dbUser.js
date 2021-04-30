@@ -109,8 +109,8 @@ function select(email, password){
             // for( i in columns){
             //     console.log(Object.values(columns[i]))
             // };
-            console.log(columns + " logging columns");
-             console.log( "row");
+            // console.log(columns + " logging columns");
+            //  console.log( "row");
         });
         //Execute the SQL represented by request.
         connection.execSql(request)

@@ -1,4 +1,4 @@
-const db = require('../../Storage/dbMatch');
+const db = require('../../Storage/dbStatistics');
 
 
 module.exports = async function (context, req) {
@@ -10,11 +10,8 @@ module.exports = async function (context, req) {
         console.log("Error connecting to the database", error.message)
     }
     switch (req.method) {
-        case 'GET': 
+        case 'GET':
             await get(context, req);
-            break;
-        case 'POST':
-            await post(context, req);
             break;
         default:
             context.res = {
@@ -26,37 +23,17 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
-        let email = req.query.email;
-        console.log(email);
-        let user = await db.insertMatch(email)
+        let matches = await db.countMatches()
         console.log("Executed to line 31 in azure function")
-        
+
         context.res = {
-            body: user
+            body: matches
         };
         console.log("also send the context to client side")
     } catch(error){
         context.res = {
             status: 404,
-            body: `No user - ${error.message}`
+            body: `No admin - ${error.message}`
         }
     } 
-}
-
-async function post(context, req){
-    try{
-        let payload = req.body;
-        await db.insertMatch(payload)
-        context.res = {
-            status: 200,
-            body: {
-                status: 'Success'
-            }
-        }
-    } catch(error){
-        context.res = {
-            status: 400,
-            body: error.message
-        }
-    }
 }

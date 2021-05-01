@@ -1,61 +1,60 @@
 // ----------- localstorage for PROFILE page-------------
+// Henter oplysningerne igennem id eller class fra HTML siden
+let mail = localStorage.getItem('mail');
+let password = localStorage.getItem('kodeord');
+let firstname = localStorage.getItem('fornavn');
+let lastname = localStorage.getItem('efternavn');
+let dob = localStorage.getItem('dob');
+let gender = localStorage.getItem('køn');
+let description= localStorage.getItem('beskrivelse');
+let ageMin = localStorage.getItem('min');
+let ageMax = localStorage.getItem('max');
+let genderPref = localStorage.getItem('kønPr');
+const deleteBtn = document.querySelector('#delete'); // en Variabel for slet knappen
+
+var table = document.getElementById("table"); // en variabel for tabellen
+var info = document.getElementById("description"); // en variabel for beskrivelses divv
+var pref = document.getElementById("info"); // en variabel for info div
+
 // ------------------ Opretter klassen Profile--------------------
 class User {
-    constructor(email, password, firstName, lastName, dob, gender, desc, ageMin, ageMax, genderPref){
+    constructor(email, code, fname, lname, bdate, gen, descr, min, max, gendPref){
         this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.gender = gender;
-        this.desc = desc;
-        this.ageMin = ageMin;
-        this.ageMax = ageMax;
-        this.genderPref = genderPref;
+        this.code = code;
+        this.fname = fname;
+        this.lname = lname;
+        this.bdate = bdate;
+        this.gen = gen;
+        this.descr = descr;
+        this.min = min;
+        this.max = max;
+        this.gendPref = gendPref;
     }
 }; 
 
-// Henter oplysningerne igennem id eller class fra HTML siden
-let email = localStorage.getItem('Email');
-let password = localStorage.getItem('Password');
-let firstname = localStorage.getItem('Fornavn');
-let lastname = localStorage.getItem('Efternavn');
-let dob = localStorage.getItem('Fødselsdato');
-let gender = localStorage.getItem('Køn');
-let desc = localStorage.getItem('Beskrivelse');
-let ageMin = localStorage.getItem('Minimumsalder');
-let ageMax = localStorage.getItem('Maximumsalder');
-let genderPref = localStorage.getItem('Kønspræference');
-const deleteBtn = document.querySelector('#delete'); // en Variabel for slet knappen
-const likebtn = document.querySelector('#like'); // en variabel for like knappen
-const viewMatch = document.querySelector('#viewMatch'); // en variabel for like knappen
-var potential = document.getElementById("potential"); // en variabel for tabellen
-var potentialDesc = document.getElementById("desc"); // en variabel for tabellen
-var potentialPref = document.getElementById("pref"); // en variabel for tabellen
-
-//Opretter en instans af klassen Profile - med oplysninger fra local storage
-const user = new User(email, password, firstName, lastName, dob, gender, desc, ageMin, ageMax, genderPref);
+    //Opretter en instans af klassen Profile - med oplysninger fra local storage
+const user = new User(mail, password, firstname, lastname, dob, gender, description, ageMin, ageMax, genderPref);
 let newUser = [user]; // indsætte instansen profile i et array
 
-console.log(newUser);
+console.log(newUser)
 
     //Det omdannes til array således vi kan loope igennem det og indsætte i tabel i HTML------------
 for(let i = 0; i< newUser.length; i++){
-    potential.innerHTML += 
-    "<tr><td>" + newUser[i].email + 
-    "</td><td>" + newUser[i].password + 
-    "</td><td>" + newUser[i].firstName +
-    "</td><td>" + newUser[i].lastName + 
-    "</td><td>" + newUser[i].dob +
-    "</td><td>" + newUser[i].gender +
+table.innerHTML += 
+    "<tr><td>" + newUser[i].email+ 
+    "</td><td>" + newUser[i].code+ 
+    "</td><td>" + newUser[i].fname +
+    "</td><td>" + newUser[i].lname + 
+    "</td><td>" + newUser[i].bdate +
+    "</td><td>" + newUser[i].gen +
     "</td></tr>";
-    
-    potentialDesc.innerHTML += newUser[i].desc;
+    info.innerHTML += newUser[i].descr;
 
-    potentialPref.innerHTML += 
-    "<tr><td>" + newUser[i].ageMin +
-    "</td><td>" + newUser[i].ageMax +
-    "</td><td>" + newUser[i].genderPref +
+    pref.innerHTML +=
+    "<tr><td>" + newUser[i].min +
+    "</td><td>" + newUser[i].max +
+    "</td><td>" + newUser[i].gendPref +
     "</td></tr>";
+    console.log(newUser[i].gen);
 };
 

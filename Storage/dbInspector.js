@@ -14,9 +14,9 @@ function startDb(){
                 console.log("Connected")
                 resolve();
             }
-        });
+        })
         connection.connect();
-    })
+    });
 }
 
 module.exports.sqlConnection = connection;

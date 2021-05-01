@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>  
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dating App</title>
+        <link href="../css/user.css" rel="stylesheet">
+        <script src="../js/editUser.js" defer></script>
+    </head>
+    <body>
+        <!-- Navigation Bar --> 
+        <ul>
+            <li><a class="active" href="./frontpage.html">Home</a></li>
+            <li><a href="./user.html">My profile</a></li>
+            <li><a href="./editUser.html">Edit User</a></li>
+            <li><a href="./like.html">Find Match</a></li>
+            <li><a href="./match.html">See Match</a></li>
+
+        </ul>
+        <br><br><br>
+
+        <!-- Div for notification -->
+        <div> <p id="notification">hej</p></div>
+
+
+        <!-- Content for page -->
+        <div>
+            <h1>Make love great again</h1>
+            <h3>We believe in love, do you?</h2>
+            <h2>On this page you can see your profile</h2>
+
+            <p>Some text some text some text some text..</p>
+            <p>Some text some text some text some text..</p>
+        </div>
+        <!--------Getting localstorage from example of localstorage week 42-->
+    <div class="InfoDiv">
+        <table id="table">
+            <tr>
+                <th>Username:</th>
+                <th>Password</th>
+                <th>Firstname:</th>
+                <th>Lastname:</th>
+                <th>Age:</th>
+                <th>gender:</th>
+            </tr>
+        </table>
+        <br>
+        <div id="description">
+
+         <p> Description:</p>
+
+        </div>
+        <br>
+        <table id="info">
+            <p>Preference in partner:</p>
+             <tr>
+                 <th>Min age:</th>
+                 <th>Max age:</th>
+                 <th>Gender preference</th>
+             </tr>
+        </table>
+ </div><br><br>
+  
+       <!-- Buttons for logout or delete user -->
+        <div class="changes">
+            <input id="delete" type="reset" value="Delete"> 
+            <a href="./frontpage.html">
+                <input id="submitlogout" type="reset" value="logout"> 
+            </a>
+            <input id="edit" type="button" value="Edit user">
+        </div>
+
+    </body>
+</html>

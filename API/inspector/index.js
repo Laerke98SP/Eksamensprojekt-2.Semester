@@ -1,4 +1,5 @@
-const db = require('../Storage/dbInspector.js');
+const db = require('../../Storage/dbInspector');
+
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.')
@@ -12,16 +13,22 @@ module.exports = async function (context, req) {
         case 'GET':
             await get(context, req);
             break;
-        // case 'POST':
-        //     await post(context, req);
-        //     break
+        case 'POST':
+            await post(context, req);
+            break;
+        case 'PATCH':
+            await patch(context, req);
+            break
+        case 'DELETE':
+            await erase(context, req);
+            break
         default:
             context.res = {
                 body: "Please get or post"
             };
             break
     }
-}
+};
 
 async function get(context, req){
     try{
@@ -44,21 +51,59 @@ async function get(context, req){
     } 
 }
 
-// async function post(context, req){
-//     try{
-//         let payload = req.body;
-//         await db.insert(payload)
-//         context.res = {
-//             status: 200,
-//             body: {
-//                 status: 'Success'
-//             }
-//         }
-//     } catch(error){
-//         context.res = {
-//             status: 400,
-//             body: error.message
-//         }
-//     }
-// }
+async function post(context, req){
+    try{
+        let payload = req.body;
+        await db.insertAdmin(payload)
+        context.res = {
+            status: 200,
+            body: {
+                status: 'Success'
+            }
+        }
+    } catch(error){
+        context.res = {
+            status: 400,
+            body: error.message
+        }
+    }
+}
+
+async function patch(context, req){
+    // this is the admin changing another users profile
+    try{
+        let payload = req.body;
+        await db.updateUserProfile(payload)
+        context.res = {
+            status: 200,
+            body: {
+                status: 'Success'
+            }
+        }
+    } catch(error){
+        context.res = {
+            status: 400,
+            body: error.message
+        }
+    }
+}
+
+async function erase(context, req){
+    // named erase since delete is a reserved word
+    try{
+        let email = req.query.email;
+        await db.deleteAdmin(email)
+        context.res = {
+            status: 200,
+            body: {
+                status: 'Success'
+            }
+        }
+    } catch(error){
+        context.res = {
+            status: 400,
+            body: error.message
+        }
+    }
+}
 

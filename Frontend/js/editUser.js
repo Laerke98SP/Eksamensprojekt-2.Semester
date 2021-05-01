@@ -12,13 +12,12 @@ let genderPref = localStorage.getItem('kønPr');
 
 // ---------------- DEFINING BUTTONS ------------------- //
 const deleteBtn = document.querySelector('#delete'); // en Variabel for slet knappen
-const acceptEditBtn = document.querySelector('#submitChanges'); // en variabel for at ændre bruger knappen
+const editBtn = document.querySelector('#edit'); // en variabel for at ændre bruger knappen
 
 // ---------------- DEFINING TABLE OR DIVS FOR INNERHTML --------//
 var table = document.getElementById("table"); 
 var info = document.getElementById("description"); 
 var pref = document.getElementById("info"); 
-
 
 // ------------------ CREATE CLASS USER -------------------- //
 class User {
@@ -130,7 +129,7 @@ function deleteUser(){
 
 
     // -------------------- 02. Ved klik på submit ændringer---------------------------
-acceptEditBtn.addEventListener('click', function(){
+editBtn.addEventListener('click', function(){
     
     //Henter værdierne der er blevet indtastet i redigeringsfelterne
     let fName = document.getElementById('fname').value

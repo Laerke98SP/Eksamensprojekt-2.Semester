@@ -16,6 +16,9 @@ module.exports = async function (context, req) {
         case 'POST':
             await post(context, req);
             break;
+        case 'DELETE':
+            await deleteMatch(context, req);
+            break;
         default:
             context.res = {
                 body: "Please get or post"
@@ -28,7 +31,7 @@ async function get(context, req){
     try{
         let email = req.query.email;
         console.log(email);
-        let user = await db.insertMatch(email)
+        let user = await db.getMatches(email)
         console.log("Executed to line 31 in azure function")
         
         context.res = {
@@ -47,6 +50,25 @@ async function post(context, req){
     try{
         let payload = req.body;
         await db.insertMatch(payload)
+        context.res = {
+            status: 200,
+            body: {
+                status: 'Success'
+            }
+        }
+    } catch(error){
+        context.res = {
+            status: 400,
+            body: error.message
+        }
+    }
+}
+
+async function deleteMatch(context, req){
+    try{
+        let email = req.query.email;
+        await db.deleteMatch(email)
+        console.log('testing')
         context.res = {
             status: 200,
             body: {

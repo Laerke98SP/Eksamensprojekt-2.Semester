@@ -53,7 +53,7 @@ function insertMatch(payload){
 }
 module.exports.insertMatch = insertMatch;
 
-function getMatches(userID){
+function getMatches(email){
     return new Promise((resolve, reject) => {
         const sql = 'SELECT match.userID1, match.userID2 FROM match WHERE (SELECT id FROM [user] WHERE [user].email = @email) = match.userID1 OR (SELECT id FROM [user] WHERE [user].email = @email) = match.userID2;';
         console.log("Now we have ran sql query")
@@ -74,7 +74,7 @@ function getMatches(userID){
         });       
         
         console.log("Testing the params now");
-        request.addParameter('userID1', TYPES.Int, payload.userID);
+        request.addParameter('email', TYPES.Char, payload.email);
         
         //A row resulting from execution of the SQL statement.
         // column consist of meta data and value
@@ -87,3 +87,60 @@ function getMatches(userID){
     })
 };
 module.exports.getMatches = getMatches;
+
+
+function deleteMatch(email){
+    return new Promise((resolve, reject) => {
+        const sql = `DELETE m FROM match as m INNER JOIN [user] as u ON u.id = m.userID1 OR u.id = m.userID2 WHERE u.email = @email;`
+
+        console.log("Sending SQL query to DB");
+        const request = new Request(sql, (err) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+        });
+
+        console.log("Testing the params now");
+        request.addParameter('email', TYPES.VarChar, email);
+       
+        console.log("Checking if the parameters exist " + email);
+
+        request.on('requestCompleted', (row) => {
+            console.log('User inserted', row);
+            resolve('user inserted', row)
+        });
+        connection.execSql(request)
+
+    });
+}
+module.exports.deleteMatch = deleteMatch;
+
+
+
+function deleteAllMatches(email){
+    return new Promise((resolve, reject) => {
+        const sql = `DELETE m FROM match as m INNER JOIN [user] as u ON u.id = m.userID1 OR u.id = m.userID2 WHERE u.email = @email;`
+
+        console.log("Sending SQL query to DB");
+        const request = new Request(sql, (err) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+        });
+
+        console.log("Testing the params now");
+        request.addParameter('email', TYPES.VarChar, email);
+       
+        console.log("Checking if the parameters exist " + email);
+
+        request.on('requestCompleted', (row) => {
+            console.log('User inserted', row);
+            resolve('user inserted', row)
+        });
+        connection.execSql(request)
+
+    });
+}
+module.exports.deleteAllMatches = deleteAllMatches;

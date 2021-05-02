@@ -44,7 +44,7 @@ function insert(payload){
         request.addParameter('password', TYPES.VarChar, payload.password)
         request.addParameter('firstName', TYPES.VarChar, payload.firstName)
         request.addParameter('lastName', TYPES.VarChar, payload.lastName)
-        request.addParameter('dob', TYPES.Date, payload.dob)
+        request.addParameter('dob', TYPES.VarChar, payload.dob)
         request.addParameter('gender', TYPES.VarChar, payload.gender)
         request.addParameter('description', TYPES.VarChar, payload.description)
         request.addParameter('ageMin', TYPES.Int, payload.ageMin)
@@ -73,7 +73,7 @@ function select(email, password){
             console.log(rowcount)
             if (rowcount == 0) {
                 reject(
-                    {message: 'We couldnt log you in'}  
+                    { message: 'We couldnt log you in'}  
                 )
             }
             else if (err){

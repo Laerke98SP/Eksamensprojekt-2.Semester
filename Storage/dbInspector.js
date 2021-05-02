@@ -30,7 +30,7 @@ function selectAdmin(email, password){
         const request = new Request(sql, (err, rowcount) => {
             if(rowcount == 0) {
                 reject(
-                    {message: 'User does not exist '}  
+                    { message: 'User does not exist '}  
                 )
             }
             else if (err){
@@ -51,7 +51,7 @@ function selectAdmin(email, password){
         // column consist of meta data and value
         request.on('row', (columns) => {
             resolve(columns)
-             console.log( "testing loop in DB.js");
+             
         });
         //Execute the SQL represented by request.
         connection.execSql(request)

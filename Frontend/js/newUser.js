@@ -2,47 +2,44 @@
 var createUser = document.getElementById("getUser");
 
   // ------------- DEFINING INPUT VARIABLES -----------------//
-  var username = document.getElementById("email").value
-  var code = document.getElementById("password").value
-  var firstN = document.getElementById("firstName").value
-  var lastN = document.getElementById("lastName").value
-  var dateOfBirth = document.getElementById("dob").value
-  var gend = document.getElementById("gender").value
-  var descr = document.getElementById("description").value
-  var min = document.getElementById("min").value
-  var max = document.getElementById("max").value
-  var gendPref = document.getElementById("gendPref").value
+  var username = document.getElementById("email")
+  var code = document.getElementById("password")
+  var firstN = document.getElementById("firstName")
+  var lastN = document.getElementById("lastName")
+  var dateOfBirth = document.getElementById("dob")
+  var gend = document.getElementById("gender")
+  var descr = document.getElementById("description")
+  var min = document.getElementById("min")
+  var max = document.getElementById("max")
+  var gendPref = document.getElementById("gendPref")
 
-// TEST STATEMENT //
-console.log("test in first line in frontend");
+//   var dance = document.getElementById("dance")
+//   var football = document.getElementById("football")
+//   var technology = document.getElementById("technology")
+//   var hiking = document.getElementById("hiking")
+
+
 
 
 // ---------------- CREATEUSER ACTION WHEN CLICK ON BUTTON ---------// 
 createUser.addEventListener('click', function(){
-  
+    
+     //-------------- SAVE INPUT IN LOCALSTORAGE ---------------//
+    localStorage.setItem('mail', username.value);
+    localStorage.setItem('kodeord', code.value);
+    localStorage.setItem('fornavn', firstN.value);
+    localStorage.setItem('efternavn', lastN.value);
+    localStorage.setItem('dob', dateOfBirth.value);
+    localStorage.setItem('køn', gend.value);
+    localStorage.setItem('beskrivelse', descr.value);
+    localStorage.setItem('min', min.value);
+    localStorage.setItem('max', max.value);
+    localStorage.setItem('kønPr', gendPref.value);
     // TESTING STATEMENT //
-    console.log("Testing add eventlistener in frontend");
-    //-------------- SAVE INPUT IN LOCALSTORAGE ---------------//
-    localStorage.setItem('brugernavn', username);
-    localStorage.setItem('kodeord', code);
-    localStorage.setItem('fornavn', firstN);
-    localStorage.setItem('efternavn', lastN);
-    localStorage.setItem('fødselsdato', dateOfBirth);
-    localStorage.setItem('køn', gend);
-    localStorage.setItem('beskrivelse', descr);
-    localStorage.setItem('min', min);
-    localStorage.setItem('max', max);
-    localStorage.setItem('kønpræf', gendPref);
-
-    // TEST STATEMENTS //
-    console.log(lastN);
-    console.log(min);
+    console.log(username);
 
     //-------------- CALL CREATEUSER FUNCTION ---------------------//
     saveUser()
-
-    // TEST STATEMENT //
-    console.log("Done executing submit button")
 });
 
 
@@ -50,19 +47,21 @@ createUser.addEventListener('click', function(){
 function saveUser(){
 
     // ------- GET VALUE OF LOCALSTORAGE ITEMS ----------//
-    let email = localStorage.getItem('brugernavn');
+    let email = localStorage.getItem('mail');
     let password = localStorage.getItem('kodeord');
     let firstName = localStorage.getItem('fornavn');
     let lastName = localStorage.getItem('efternavn');
-    let dob = localStorage.getItem('fødselsdato');
+    let dob = localStorage.getItem('dob');
     let gender = localStorage.getItem('køn');
     let description = localStorage.getItem('beskrivelse');
     let ageMin = localStorage.getItem('min');
     let ageMax = localStorage.getItem('max');
-    let genderPref = localStorage.getItem('kønpræf');
+    let genderPref = localStorage.getItem('kønPr');
+
+   
 
     // TEST STATEMENT //
-    console.log(ageMin);
+    console.log(email);
 
     // ---------------- INPUT FOR FETCH REQUEST ----------//
     const option = {

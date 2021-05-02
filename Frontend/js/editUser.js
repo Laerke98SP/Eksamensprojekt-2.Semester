@@ -41,49 +41,59 @@ class User {
    //Opretter en instans af klassen Profile - med oplysninger fra local storage
    const user = new User(mail, password, firstname, lastname, dob, gender, description, ageMin, ageMax, genderPref);
    let newUser = [user]; // indsætte instansen profile i et array
+ 
+   
 
 function showEdit(){
-    
- 
-    //Det omdannes til array således vi kan loope igennem det og indsætte i tabel i HTML------------
+    let mail = document.getElementById('mail');
+    let password = document.getElementById('password');
+    let fname = document.getElementById('firstname');
+    let lname = document.getElementById('lastname');
+    let age = document.getElementById('age');
+    let gender = document.getElementById('gender');
+    let decr = document.getElementById('desc');
+    let min = document.getElementById('min');
+    let max = document.getElementById('max');
+    let pref = document.getElementById('pref');
+    //----- Al data indsættes i tabel------------
     for(let i = 0; i< newUser.length; i++){
-        table.innerHTML += 
-            "<tr><td>" + newUser[i].email+ 
-            "</td><td>" + newUser[i].code+ 
-            "</td><td>" + newUser[i].fname +
-            "</td><td>" + newUser[i].lname + 
-            "</td><td>" + newUser[i].bdate +
-            "</td><td>" + newUser[i].gen +
-            "</td></tr>";
+            mail.innerHTML = newUser[i].email;
+            password.defaultValue = newUser[i].code 
+            fname.defaultValue = newUser[i].fname 
+            lname.defaultValue = newUser[i].lname 
+            age.defaultValue = newUser[i].bdate
+            gender.defaultValue = newUser[i].gen 
 
-            info.innerHTML += newUser[i].descr;
+            decr.defaultValue = newUser[i].descr;
         
-            pref.innerHTML +=
-            "<tr><td>" + newUser[i].min +
-            "</td><td>" + newUser[i].max +
-            "</td><td>" + newUser[i].gendPref +
-            "</td></tr>";
+            
+            min.defaultValue = newUser[i].min;
+            max.defaultValue = newUser[i].max;
+            pref.defaultValue = newUser[i].gendPref;
+        
         };
+
+   
     
-    // --------------------- Opretter felter som kan redigeres i -------------------
-    for(i in newUser){ // Looper igennem 
-        table.innerHTML += // Tilføjer i html filen redigerings felterne
-            "<tr><td><input id='mail'>" + 
-            "</td><td><input id='kodeord'>"  +
-            "</td><td><input id='fornavn'>" + 
-            "</td><td><input id='efternavn'>" + 
-            "</td><td><input id='dob'>" + 
-            "</td><td><input id='køn'>" + 
-            "</td></tr>"
+    // ---- Opretter felter som kan redigeres i --------
+    // for(i in newUser){ // Looper igennem 
+    //     password.innerHTML  += // Tilføjer i html filen redigerings felterne
+    //         "<tr><td>" + 
+    //         "</td><td><input id='kodeord'>"  +
+    //         "</td><td><input id='fornavn'>" + 
+    //         "</td><td><input id='efternavn'>" + 
+    //         "</td><td><input id='dob'>" + 
+    //         "</td><td><input id='køn'>" + 
+    //         "</td></tr>"
 
-        info.innerHTML += "<input id='descr'>"
+    //     info.innerHTML += "<input id='descr'>"
 
-        pref.innerHTML +=
-            "<tr><td><input id='min'>" + 
-            "</td><td><input id='max'>" + 
-            "</td><td><input id='kønPr'>" + 
-            "</td></tr>"
-    };
+    //     pref.innerHTML +=
+    //         "<tr><td><input id='min'>" + 
+    //         "</td><td><input id='max'>" + 
+    //         "</td><td><input id='kønPr'>" + 
+    //         "</td></tr>"
+    // };
 };
 
 
@@ -161,59 +171,35 @@ function deleteUser(){
     // -------------------- 02. Ved klik på submit ændringer---------------------------
 edit.addEventListener('click', function(){
     
-    //Henter værdierne der er blevet indtastet i redigeringsfelterne
-    let password = document.getElementById('kodeord').value
-    let firstName = document.getElementById('fornavn').value
-    let lastName = document.getElementById('efternavn').value
-    let dob = document.getElementById('dob').value
-    let gender = document.getElementById('køn').value
-    let descr = document.getElementById('descr').value
-    let min = document.getElementById('min').value
-    let max = document.getElementById('max').value
-    let genderPref = document.getElementById('kønPr').value
+    // //Henter værdierne der er blevet indtastet i redigeringsfelterne
+    // let psw = document.getElementById('kodeord').value
+    // let firstName = document.getElementById('fornavn').value
+    // let lastName = document.getElementById('efternavn').value
+    // let date = document.getElementById('dob').value
+    // let gend = document.getElementById('køn').value
+    // let descr = document.getElementById('descr').value
+    // let min = document.getElementById('min').value
+    // let max = document.getElementById('max').value
+    // let gendPref = document.getElementById('kønPr').value
+
 
    
-
     // Opretter ny instans af Profile klassen
-    let updUser = new User(mail, password, firstName, lastName, dob, gender, descr, min, max, genderPref);
+    let updUser = new User(mail, psw, firstName, lastName, date, gend, descr, min, max, gendPref);
     let update = [updUser]; //indsætter denne i arr
 
+    console.log(update)
     //Kalder funktionen edit(user)
-    editUser(update);
+     editUser(update);
     
 })
 
     //--------------------- 03. Funktionen edit(user) -------------------------
 function editUser(user){
     //Hvis email/brugernavn eksistere - lav gammel info om til opdateret info
-    if(localStorage.getItem('mail')){
-        if(password) {
-            newUser.password = user.password;
-        }
-        if(firstname) {
-            newUser.firstname = user.firstName;
-        };
-        if(lastname) {
-            newUser.lastname = user.lastName;
-        };
-        if(dob) {
-            newUser.dob = user.dob;
-        };
-        if(gender){
-            newUser.gender = user.gender;
-        };
-        if(description) {
-            newUser.description = user.descr;
-        };
-        if(ageMin) {
-            newUser.ageMin = user.min;
-        };
-        if(ageMax) {
-            newUser.ageMax = user.max;
-        };
-        if(genderPref) {
-            newUser.genderPref = user.genderPref;
-        };
+    
+            
+    
         // Tester hvordan bruger ser ud nu
         //console.log("After update " + newUser);
         
@@ -240,4 +226,4 @@ function editUser(user){
             console.log("error");
         }); // Kunne indsætte window.location.href her - efter en finally blok
     }   
-}
+

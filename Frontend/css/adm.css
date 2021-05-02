@@ -1,0 +1,120 @@
+ 
+body {
+    height: 900px;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: blue;
+      color: white;
+      text-align: center;
+      background-image: linear-gradient( #b2beff, white);
+  }
+  
+  
+  form {
+        border: 3px solid #f1f1f1;
+        /* text-align: center; */
+        background-color: #64a4ec;
+        padding: 16px;
+        color: black;
+        width: auto;
+        margin-left: 20%;
+        margin-right: 20%; 
+  }
+  
+    /* For navigation bar */
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #939ce9;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+      
+      li {
+        float: left;
+      }
+      
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      
+      li a:hover:not(.active) {
+        background-color: #111;
+      }
+      
+      .active {
+        background-color: #00020e;
+      }
+
+/* Buttons */
+      #logout {
+        background-color: red;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 250px;
+      }
+  
+  /* divs */
+
+  #countUsers, #countMatches {
+    border: solid white;
+    padding: 5px;
+    margin: 5px;
+    color: black;
+  }
+  #gocreate {
+    background-color: #0077ff;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  #gocreate:hover {
+    opacity: 0.40;
+  }
+  
+  #gologin, #getUser{
+      background-color: #0026ff;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+  #gologin:hover, #getUser:hover {
+      opacity: 0.40;
+    }
+  
+
+  
+  
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 600px) {
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      height: 900px;
+      color: white;
+      text-align: center;
+      background-image: linear-gradient( #b2beff, white);
+  }
+  
+      form {
+          width: auto;
+          margin-left: 20%;
+          margin-right: 20%;
+      }
+    }

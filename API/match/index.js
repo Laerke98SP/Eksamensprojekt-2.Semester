@@ -66,9 +66,9 @@ async function post(context, req){
 
 async function deleteMatch(context, req){
     try{
-        let email = req.query.email;
-        await db.deleteMatch(email)
-        console.log('testing')
+        let payload = req.body;
+        await db.deleteMatch(payload);
+        console.log('testing');
         context.res = {
             status: 200,
             body: {

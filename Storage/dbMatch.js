@@ -25,8 +25,9 @@ module.exports.startDb = startDb;
 
 function insertMatch(payload){
     return new Promise((resolve, reject) => {
-        const sql = `INSERT INTO [match] (userID2, userID1)
-        VALUES (@userID2, @userID1);`
+        const sql = `INSERT INTO match (userID2, userID1)
+                    VALUES ((SELECT id FROM [user] WHERE [user].email =  @email1), 
+                    (SELECT id FROM [user] WHERE [user].email = @email2))`
 
         
         console.log("Sending SQL query to DB");
@@ -38,8 +39,8 @@ function insertMatch(payload){
         });
 
         console.log("Testing the params now");
-        request.addParameter('userID2', TYPES.Int, payload.userID2);
-        request.addParameter('userID1', TYPES.Int, payload.userID1);
+        request.addParameter('email1', TYPES.VarChar, payload.email1);
+        request.addParameter('email2', TYPES.VarChar, payload.email2);
        
         console.log("Checking if the parameters exist " + payload.userID1);
 
@@ -55,7 +56,13 @@ module.exports.insertMatch = insertMatch;
 
 function getMatches(email){
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT match.userID1, match.userID2 FROM match WHERE (SELECT id FROM [user] WHERE [user].email = @email) = match.userID1 OR (SELECT id FROM [user] WHERE [user].email = @email) = match.userID2;';
+        const sql =`SELECT match.userID1, match.userID2 
+                    FROM match WHERE (SELECT id FROM [user] 
+                    WHERE [user].email = @email) = match.userID1 
+                    OR 
+                    (SELECT id FROM [user] 
+                    WHERE [user].email = @email) = match.userID2;`;
+        
         console.log("Now we have ran sql query")
 
         const request = new Request(sql, (err, rowcount) => {
@@ -74,14 +81,15 @@ function getMatches(email){
         });       
         
         console.log("Testing the params now");
-        request.addParameter('email', TYPES.Char, payload.email);
-        
+        request.addParameter('email', TYPES.Char, email);
+
         //A row resulting from execution of the SQL statement.
         // column consist of meta data and value
         request.on('row', (columns) => {
+            // console.log(columns)
             resolve(columns)
-             console.log( "testing loop in DB.js");
-        });
+        })
+
         //Execute the SQL represented by request.
         connection.execSql(request)
     })
@@ -89,9 +97,15 @@ function getMatches(email){
 module.exports.getMatches = getMatches;
 
 
-function deleteMatch(email){
+function deleteMatch(payload){
     return new Promise((resolve, reject) => {
-        const sql = `DELETE m FROM match as m INNER JOIN [user] as u ON u.id = m.userID1 OR u.id = m.userID2 WHERE u.email = @email;`
+        const sql = `DELETE
+                    FROM match
+                    OUTPUT deleted.*
+                    WHERE match.userID1 = (SELECT id FROM [user] WHERE [user].email = @email1)
+                    AND match.userID2 = (SELECT id FROM [user] WHERE [user].email = @email2)
+                    OR match.userID1 = (SELECT id FROM [user] WHERE [user].email = @email2)
+                    AND match.userID2 = (SELECT id FROM [user] WHERE [user].email = @email1)`
 
         console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {
@@ -102,13 +116,13 @@ function deleteMatch(email){
         });
 
         console.log("Testing the params now");
-        request.addParameter('email', TYPES.VarChar, email);
+        request.addParameter('email1', TYPES.VarChar, payload.email1);
+        request.addParameter('email2', TYPES.VarChar, payload.email2);
        
-        console.log("Checking if the parameters exist " + email);
+        console.log("Checking if the parameters exist");
 
         request.on('requestCompleted', (row) => {
-            console.log('User inserted', row);
-            resolve('user inserted', row)
+            resolve(row)
         });
         connection.execSql(request)
 

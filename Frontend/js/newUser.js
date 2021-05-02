@@ -1,24 +1,25 @@
 // ---------------- DEFINING CREATEUSER BUTTON ------------------- //
 var createUser = document.getElementById("getUser");
 
+  // ------------- DEFINING INPUT VARIABLES -----------------//
+  var username = document.getElementById("email").value
+  var code = document.getElementById("password").value
+  var firstN = document.getElementById("firstName").value
+  var lastN = document.getElementById("lastName").value
+  var dateOfBirth = document.getElementById("dob").value
+  var gend = document.getElementById("gender").value
+  var descr = document.getElementById("description").value
+  var min = document.getElementById("min").value
+  var max = document.getElementById("max").value
+  var gendPref = document.getElementById("gendPref").value
+
 // TEST STATEMENT //
 console.log("test in first line in frontend");
 
 
 // ---------------- CREATEUSER ACTION WHEN CLICK ON BUTTON ---------// 
 createUser.addEventListener('click', function(){
-    // ------------- DEFINING INPUT VARIABLES -----------------//
-    var username = document.getElementById("email").value
-    var code = document.getElementById("password").value
-    var firstN = document.getElementById("firstName").value
-    var lastN = document.getElementById("lastName").value
-    var dateOfBirth = document.getElementById("dob").value
-    var gend = document.getElementById("gender").value
-    var descr = document.getElementById("description").value
-    var min = document.getElementById("min").value
-    var max = document.getElementById("max").value
-    var gendPref = document.getElementById("gendPref").value
-
+  
     // TESTING STATEMENT //
     console.log("Testing add eventlistener in frontend");
     //-------------- SAVE INPUT IN LOCALSTORAGE ---------------//
@@ -38,7 +39,7 @@ createUser.addEventListener('click', function(){
     console.log(min);
 
     //-------------- CALL CREATEUSER FUNCTION ---------------------//
-    saveUser();
+    saveUser()
 
     // TEST STATEMENT //
     console.log("Done executing submit button")

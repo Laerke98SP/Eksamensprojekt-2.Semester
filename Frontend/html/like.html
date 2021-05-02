@@ -7,7 +7,7 @@
         <link href="../css/user.css" rel="stylesheet">
         <script src="../js/like.js" defer></script>
     </head>
-    <body>
+    <body onload="showPotentials()">
         <!-- Navigation Bar -->
         <ul>
             <li><a class="active" href="./frontpage.html">Home</a></li>
@@ -20,7 +20,7 @@
         <br><br><br>
 
         <!-- Div for notification -->
-        <div> <p id="notification">hej</p></div>
+        <div> <p id="notification"></p></div>
 
 
 
@@ -29,8 +29,8 @@
             <h1>Make love great again</h1>
             <h3>Here you can find potential partners</h2>
         </div>
-        <!--------Getting localstorage from example of localstorage week 42-->
-    <div class="InfoDiv">
+
+        <!-------- Displaying user information -->
         <table id="table">
             <tr>
                 <th>Username:</th>
@@ -40,11 +40,19 @@
                 <th>Age:</th>
                 <th>gender:</th>
             </tr>
+            <tr>
+                <td id="username"></td>
+                <td id="password"></td>
+                <td id="firstname"></td>
+                <td id="lastname"></td>
+                <td id="age"></td>
+                <td id="gender"></td>
+            </tr>
         </table>
         <br>
-        <div id="description">
-
-         <p> Description:</p>
+        <p> Description:</p>
+        <div>
+            <p id="description"></p>
 
         </div>
         <br>
@@ -55,8 +63,13 @@
                  <th>Max age:</th>
                  <th>Gender preference</th>
              </tr>
+            <tr>
+                <td id="minage"></td>
+                <td id="maxage"></td>
+                <td id="pref"></td>
+            </tr>
         </table>
- <!-- </div><br><br> -->
+        <br><br>
 
         <!-- Buttons for like or dislike -->
         <div class="love">
@@ -64,6 +77,6 @@
             <button id="like">Like</button>
         </div>
         <br><br>
-
+        
     </body>
 </html>

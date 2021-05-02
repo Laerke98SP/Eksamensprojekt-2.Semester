@@ -6,6 +6,15 @@ const dislike = document.getElementById("dislike");
 
 // ---------- SHOW DIV CONTAINERS FOR INNERHTML -------- //
 const table = document.getElementById("table")
+const username = document.getElementById("username")
+const password = document.getElementById("password")
+const firstname = document.getElementById("firstname")
+const lastname = document.getElementById("lastname")
+const age = document.getElementById("age")
+const gender = document.getElementById("gender")
+const minage = document.getElementById("minage")
+const maxage = document.getElementById("maxage")
+const pref = document.getElementById("pref")
 const descr = document.getElementById("description");
 const info = document.getElementById("info");
 
@@ -13,47 +22,44 @@ const info = document.getElementById("info");
 let email = localStorage.getItem('mail');
 
 
-// retrieving one user at the time // IT DOESNT CHANGE USER
-fetch(`http://localhost:7071/api/like?email=${email}`)
-.then(function(response){
+function showPotentials(){
+    // retrieving one user at the time // IT DOESNT CHANGE USER
+    fetch(`http://localhost:7071/api/like?email=${email}`)
+    .then(function(response){
     return response.json(); // returnere et promise
-})
-.then(function(data){ 
-    console.log(data);
-    //users.innerHTML += data;
-    displayPotentialMatch(data); //Kunne Kalde funktionen displayData, med parametrene: storage( alle brugerne i DB & 0 der bruges som counter)
-    //checkIfMatch(data); // kalder funktionen check om de matcher  
+    })
+    .then(function(data){ 
+        console.log(data);
+        //users.innerHTML += data;
+        displayPotentialMatch(data); //Kunne Kalde funktionen displayData, med parametrene: storage( alle brugerne i DB & 0 der bruges som counter)
+        //checkIfMatch(data); // kalder funktionen check om de matcher  
     
-})
-.catch(function(err){
-    //Hvis der opstår en fejl fanges den her
-    console.log(err);
-}).finally((data) => {
+    })
+        .catch(function(err){
+        //Hvis der opstår en fejl fanges den her
+        console.log(err);
+    }).finally((data) => {
     //displayMatch(data); // viser antal matches skal vises uanset om der er fejl eller ikke / ved fejl viser den blot 0 matches
-});
+    });
+};
 
 function displayPotentialMatch(data){
         
-        table.innerHTML += 
-            "<tr><td>" + data[1].value+ 
-            "</td><td>" + data[2].value+ 
-            "</td><td>" + data[3].value +
-            "</td><td>" + data[4].value + 
-            "</td><td>" + data[5].value +
-            "</td><td>" + data[6].value +
-            "</td></tr>";
+
+        username.innerHTML = data[1].value 
+        password.innerHTML = data[2].value 
+        firstname.innerHTML = data[3].value 
+        lastname.innerHTML = data[4].value  
+        age.innerHTML = data[5].value 
+        gender.innerHTML = data[6].value 
         
         localStorage.setItem('votedOn', data[1].value);
 
-        descr.innerHTML += data[7].value;
-        
-        info.innerHTML +=
-            "<tr><td>" + data[8].value +
-            "</td><td>" + data[9].value +
-            "</td><td>" + data[10].value +
-            "</td></tr>";
-        
+        descr.innerHTML = data[7].value;
     
+        minage.innerHTML = data[8].value 
+        maxage.innerHTML = data[9].value 
+        pref.innerHTML = data[10].value       
 };
 
 
@@ -62,8 +68,47 @@ function displayPotentialMatch(data){
 like.addEventListener('click', function(){
     let votedOn = localStorage.getItem('votedOn');
     let voter = localStorage.getItem('mail');
-    let vote = 2;
+    let vote = 1;
    userVote(votedOn, voter, vote);
+   fetch(`http://localhost:7071/api/like?email=${email}`)
+    .then(function(response){
+        return response.json(); // returnere et promise
+    })
+    .then(function(data){ 
+        console.log(data);
+        //users.innerHTML += data;
+        displayPotentialMatch(data); //Kunne Kalde funktionen displayData, med parametrene: storage( alle brugerne i DB & 0 der bruges som counter)
+        //checkIfMatch(data); // kalder funktionen check om de matcher  
+    })
+    .catch(function(err){
+        //Hvis der opstår en fejl fanges den her
+        console.log(err);
+    }).finally((data) => {
+       
+    });
+})
+
+dislike.addEventListener('click', function(){
+    let votedOn = localStorage.getItem('votedOn');
+    let voter = localStorage.getItem('mail');
+    let vote = 0;
+   userVote(votedOn, voter, vote);
+   fetch(`http://localhost:7071/api/like?email=${email}`)
+    .then(function(response){
+        return response.json(); // returnere et promise
+    })
+    .then(function(data){ 
+        console.log(data);
+        //users.innerHTML += data;
+        displayPotentialMatch(data); //Kunne Kalde funktionen displayData, med parametrene: storage( alle brugerne i DB & 0 der bruges som counter)
+        //checkIfMatch(data); // kalder funktionen check om de matcher  
+    })
+    .catch(function(err){
+        //Hvis der opstår en fejl fanges den her
+        console.log(err);
+    }).finally((data) => {
+       
+    });
 })
 
 function userVote(votedOn, voter, vote){
@@ -99,7 +144,3 @@ function userVote(votedOn, voter, vote){
 
     
 
-
-function displayMatch(data){
-    console.log("skal vise antal match")
-}

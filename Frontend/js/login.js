@@ -25,7 +25,7 @@ function login(email, password){
         function(response){
             
             // ------------  403 RESPONSE FOR KLIENT TYPING SOMETHING WRONG---------//
-            if( response.status == 403) {
+            if( response.status == 404) {
                 alert( "Kodeord eller brugernavn er forkert - har du ikke en bruger opret gerne en");
             }
             // --------------- IF NOT 200 RESONSE CODE & NOT 404 SOMETHING ELSE WENT WRONG --//
@@ -40,7 +40,9 @@ function login(email, password){
                         console.log(data[i].value)
                         console.log(i);
 
-                        //------------ RETRIEVING THE REST OF USER INFO FROM DB-----------// 
+                        //------------ RETRIEVING THE REST OF USER INFO FROM DB-----------//
+                        localStorage.setItem('email', data[1].value);
+                        localStorage.setItem('password', data[2].value);
                         localStorage.setItem('fornavn', data[3].value);
                         localStorage.setItem('efternavn', data[4].value);
                         localStorage.setItem('dob', data[5].value);

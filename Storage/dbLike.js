@@ -26,7 +26,13 @@ module.exports.startDb = startDb;
 function selectAll(email){
     //console.log("checking if first line in DB function works")
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM [user] WHERE email != @email' ;
+        const sql = `SELECT * FROM [user]
+        WHERE [user].id NOT IN (SELECT userEdge.userID2
+        FROM [user]
+        INNER JOIN userEdge
+        ON [user].id = userEdge.userID1
+        WHERE [user].email = @email)
+        AND (SELECT id FROM [user] WHERE [user].email = @email ) <> [user].id;` ;
         //console.log("Now we have ran sql query for potential matches")
         const request = new Request(sql, (err, rowcount) => {
             if(rowcount == 0) {
@@ -48,7 +54,18 @@ function selectAll(email){
         //A row resulting from execution of the SQL statement.
         // column consist of meta data and value        
         request.on('row', (columns) => {
+            //console.log(columns)
             resolve(columns)
+           
+            // for ( let i = 0; i < columns.length; i++){
+            //     result = ""
+            //     result += columns[i].value
+
+            //     // console.log(columns[i]);
+            //     // resolve(columns[i].value)
+            // }
+            //console.log(result)
+            
            
         });
         

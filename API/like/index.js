@@ -33,6 +33,12 @@ async function get(context, req){
         let users = await db.selectAll(email)
         console.log("Executed to line 32 in azure function")
         console.log(users);
+
+        // for ( let i = 0; i < users.length; i++){
+        //     console.log(users[i])
+        // }
+
+
         context.res = {
             body: users 
         };

@@ -55,7 +55,7 @@ function insert(payload){
 
         request.on('requestCompleted', (row) => {
             console.log('User inserted', row);
-            resolve('user inserted', row)
+            resolve('user inserted')
         });
         connection.execSql(request)
 
@@ -70,15 +70,8 @@ function select(email, password){
         const sql = 'SELECT * FROM [user] WHERE email = @email AND password = @password;';
         console.log("Now we have ran sql query")
         const request = new Request(sql, (err, rowcount) => {
-            if('email = @email'){
-                reject(
-                    {message: 'username doesnt exist'}
-                )
-            }  else if('password !== @password'){
-                reject(
-                    {message: 'Wrong password'}
-                )
-            } else if (rowcount == 0) {
+            console.log(rowcount)
+            if (rowcount == 0) {
                 reject(
                     {message: 'We couldnt log you in'}  
                 )
@@ -101,16 +94,8 @@ function select(email, password){
         //A row resulting from execution of the SQL statement.
         // column consist of meta data and value
         request.on('row', (columns) => {
-            resolve(columns)//'user arrived '+ columns)
-            // for(i = 1; i< columns.length; i++){
-            //     console.log(columns[i].value)
-            // };
-            // testing output in debug console
-            // for( i in columns){
-            //     console.log(Object.values(columns[i]))
-            // };
-            // console.log(columns + " logging columns");
-            //  console.log( "row");
+            resolve(columns)
+            
         });
         //Execute the SQL represented by request.
         connection.execSql(request)
@@ -157,5 +142,41 @@ function updateUser(payload){
         connection.execSql(request)
 
     });
-}
+};
 module.exports.updateUser = updateUser;
+
+// DELETE REQ - for delete user function
+function deleteUser(email){
+    return new Promise((resolve, reject) => {
+        const sql = `delete from userEdge
+        where EXISTS
+        (SELECT *
+            from userEdge as vote, [user] as  u
+            WHERE  u.email = @email
+            AND u.id = vote.userID2 or u.id = vote.userID1);
+        DELETE FROM [user] WHERE [user].email = @email;`
+
+        
+        console.log("Sending SQL query to DB");
+        const request = new Request(sql, (err) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+        });
+
+        console.log("Testing the params now");
+        request.addParameter('email', TYPES.VarChar, email)
+       
+       
+        console.log("Checking if the parameters exist " + email);
+
+        request.on('requestCompleted', (row) => {
+            console.log('User deleted', row);
+            resolve('user deleted')
+        });
+        connection.execSql(request)
+
+    });
+}
+module.exports.deleteUser = deleteUser;

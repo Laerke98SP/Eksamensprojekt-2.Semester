@@ -1,4 +1,6 @@
-// ------- GET VALUE OF LOCALSTORAGE ITEMS ----------//
+// -----------  DEFINING VARIABLES ------------- //
+
+// 01. Variables for localstorage
 let mail = localStorage.getItem('mail');
 let password = localStorage.getItem('kodeord');
 let firstname = localStorage.getItem('fornavn');
@@ -10,11 +12,11 @@ let ageMin = localStorage.getItem('min');
 let ageMax = localStorage.getItem('max');
 let genderPref = localStorage.getItem('kønPr');
 
-// ---------------- DEFINING BUTTONS ------------------- //
-const deleteBtn = document.querySelector('#delete'); // en Variabel for slet knappen
-const editBtn = document.querySelector('#edit'); // en variabel for at ændre bruger knappen
+// 02. Variables for buttons
+const logout = document.getElementById("logout")
+const deleteBtn = document.getElementById('delete');
 
-// ---------------- DEFINING TABLE OR DIVS FOR INNERHTML --------//
+// 03. Variables to display user in
 var table = document.getElementById("table"); 
 var info = document.getElementById("description"); 
 var pref = document.getElementById("info"); 
@@ -35,9 +37,9 @@ class User {
     }
 }; 
 
-    //Opretter en instans af klassen Profile - med oplysninger fra local storage
-    const user = new User(mail, password, firstname, lastname, dob, gender, description, ageMin, ageMax, genderPref);
-    let newUser = [user]; // indsætte instansen profile i et array
+//Opretter en instans af klassen Profile - med oplysninger fra local storage
+const user = new User(mail, password, firstname, lastname, dob, gender, description, ageMin, ageMax, genderPref);
+let newUser = [user]; // indsætte instansen profile i et array
     
     //Det omdannes til array således vi kan loope igennem det og indsætte i tabel i HTML------------
     for(let i = 0; i< newUser.length; i++){
@@ -80,48 +82,71 @@ for(i in newUser){ // Looper igennem
 
 };
 
-        
 
-// -------------------- SLET BRUGER ---------------------
+// ----------- LOG OUT FUNCITON ------------- //
+logout.addEventListener('click', function(){
+    // ---------- Remove values from localstorage ----------------------
+    localStorage.removeItem('mail');
+    localStorage.removeItem('kodeord');
+    localStorage.removeItem('fornavn');
+    localStorage.removeItem('efternavn');
+    localStorage.removeItem('dob');
+    localStorage.removeItem('køn');
+    localStorage.removeItem('beskrivelse');
+    localStorage.removeItem('min');
+    localStorage.removeItem('max');
+    localStorage.removeItem('kønPr');
+    
 
-    //----------------- 01. Knap der starter slet bruger--------------------
-deleteBtn.addEventListener('click', function(){ // Ved klik på knappen delete user
-    alert("Warning - Your profile will be deleted"); //Sender advarsel ud til brugeren
-    deleteUser(); //køre funktionen deleteUser hver gang knappen trykkes på
+    // ----------- Send user back to frontpage --------------------
+    window.location.href = "./frontpage.html"; 
+})
+
+
+// ------------- DELETE USER ---------------//
+
+    // 01. Action for click on delete button
+deleteBtn.addEventListener('click', function(){ 
+    alert("Warning - Your profile will be deleted"); 
+    deleteUser(); 
 });
     
-    // ---------------- 02. Funktion der sletter brugeren--------------------
+    // 02. Function to delete user
 function deleteUser(){
-    // ------------ 01. hvis brugernavn/ mail er at finde i localstorage -----------------------------------
-    if(localStorage.getItem('brugernavn')){
+    
+    if(localStorage.getItem('mail')){
 
-        // -------- 02. Denne instans profile af klassen Profile  bruges til at sende en delete request til databasen ved hjælp af HTTP req DELETE
+
         const option = {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify(profile), // Konvertere klassen til en json string - det er denne instans der skal fjernes fra DB
+        body: JSON.stringify(user)
         };    
        
-        // --------- 03. Her benyttes fetch til at kontakte API og dermed fjerne bruger i DB--------------
-        fetch(`http://localhost:4000/profile/${mail}`, option)
+       
+        fetch(`http://localhost:7071/api/user?email=${mail}`, option)
         .then(function() {
-            console.log("ok"); // Hvis det lykkes console logges ok i browser konsol
+            console.log("ok"); 
         }).catch(function() {
-            console.log("error"); // Ellers vil outputtet i browser kontrol være error
+            console.log("error"); 
         });
         
-        // ---------- 04. Her fjernes den information om brugeren gemt i localstorage----------------------
-        localStorage.removeItem('brugernavn');
+        
+        localStorage.removeItem('mail');
+        localStorage.removeItem('kodeord');
         localStorage.removeItem('fornavn');
         localStorage.removeItem('efternavn');
-        localStorage.removeItem('alder');
+        localStorage.removeItem('dob');
+        localStorage.removeItem('køn');
         localStorage.removeItem('beskrivelse');
-        localStorage.removeItem('kodeord');
+        localStorage.removeItem('min');
+        localStorage.removeItem('max');
+        localStorage.removeItem('kønPr');
         
-        // ----------- 05. Bruger vidersendes til forside------------------------------
-        window.location.href = "/frontpage.html";
+        
+        window.location.href = "./frontpage.html"; 
     };
 };
 

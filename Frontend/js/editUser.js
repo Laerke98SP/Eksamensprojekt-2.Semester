@@ -15,6 +15,7 @@ let genderPref = localStorage.getItem('kønPr');
 // 02. Variables for buttons
 const logout = document.getElementById("logout")
 const deleteBtn = document.getElementById('delete');
+const edit = document.getElementById('edit');
 
 // 03. Variables to display user in
 var table = document.getElementById("table"); 
@@ -37,10 +38,13 @@ class User {
     }
 }; 
 
-//Opretter en instans af klassen Profile - med oplysninger fra local storage
-const user = new User(mail, password, firstname, lastname, dob, gender, description, ageMin, ageMax, genderPref);
-let newUser = [user]; // indsætte instansen profile i et array
+   //Opretter en instans af klassen Profile - med oplysninger fra local storage
+   const user = new User(mail, password, firstname, lastname, dob, gender, description, ageMin, ageMax, genderPref);
+   let newUser = [user]; // indsætte instansen profile i et array
+
+function showEdit(){
     
+ 
     //Det omdannes til array således vi kan loope igennem det og indsætte i tabel i HTML------------
     for(let i = 0; i< newUser.length; i++){
         table.innerHTML += 
@@ -62,25 +66,26 @@ let newUser = [user]; // indsætte instansen profile i et array
         };
     
     // --------------------- Opretter felter som kan redigeres i -------------------
-for(i in newUser){ // Looper igennem 
-    table.innerHTML += // Tilføjer i html filen redigerings felterne
-    "<tr><td><input id='mail'>" + 
-    "</td><td><input id='kodeord'>"  +
-    "</td><td><input id='fornavn'>" + 
-    "</td><td><input id='efternavn'>" + 
-    "</td><td><input id='dob'>" + 
-    "</td><td><input id='køn'>" + 
-    "</td></tr>"
+    for(i in newUser){ // Looper igennem 
+        table.innerHTML += // Tilføjer i html filen redigerings felterne
+            "<tr><td><input id='mail'>" + 
+            "</td><td><input id='kodeord'>"  +
+            "</td><td><input id='fornavn'>" + 
+            "</td><td><input id='efternavn'>" + 
+            "</td><td><input id='dob'>" + 
+            "</td><td><input id='køn'>" + 
+            "</td></tr>"
 
-    info.innerHTML += "<input id='descr'>"
+        info.innerHTML += "<input id='descr'>"
 
-    pref.innerHTML +=
-    "<tr><td><input id='min'>" + 
-    "</td><td><input id='max'>" + 
-    "</td><td><input id='kønPr'>" + 
-    "</td></tr>"
-
+        pref.innerHTML +=
+            "<tr><td><input id='min'>" + 
+            "</td><td><input id='max'>" + 
+            "</td><td><input id='kønPr'>" + 
+            "</td></tr>"
+    };
 };
+
 
 
 // ----------- LOG OUT FUNCITON ------------- //
@@ -154,81 +159,82 @@ function deleteUser(){
 
 
     // -------------------- 02. Ved klik på submit ændringer---------------------------
-editBtn.addEventListener('click', function(){
+edit.addEventListener('click', function(){
     
     //Henter værdierne der er blevet indtastet i redigeringsfelterne
-    let fName = document.getElementById('fname').value
-    let lName = document.getElementById('lname').value
-    let alder = document.getElementById('alder').value
+    let password = document.getElementById('kodeord').value
+    let firstName = document.getElementById('fornavn').value
+    let lastName = document.getElementById('efternavn').value
+    let dob = document.getElementById('dob').value
+    let gender = document.getElementById('køn').value
     let descr = document.getElementById('descr').value
-    let code = document.getElementById('code').value
-    
-    // Sætter de værdier i localstorage
-    localStorage.setItem('fornavn', fName);
-    localStorage.setItem('efternavn',lName);
-    localStorage.setItem('alder', alder);
-    localStorage.setItem('beskrivelse', descr);
-    localStorage.setItem('kodeord', code);
+    let min = document.getElementById('min').value
+    let max = document.getElementById('max').value
+    let genderPref = document.getElementById('kønPr').value
+
+   
 
     // Opretter ny instans af Profile klassen
-    let updUser = new Profile(mail, fName, lName, alder, descr, code);
+    let updUser = new User(mail, password, firstName, lastName, dob, gender, descr, min, max, genderPref);
     let update = [updUser]; //indsætter denne i arr
 
     //Kalder funktionen edit(user)
-    edit(update);
+    editUser(update);
     
 })
 
     //--------------------- 03. Funktionen edit(user) -------------------------
-function edit(user){
+function editUser(user){
     //Hvis email/brugernavn eksistere - lav gammel info om til opdateret info
-    if(localStorage.getItem('brugernavn')){
-        if(mail) {
-            newUser.mail = user.mail;
+    if(localStorage.getItem('mail')){
+        if(password) {
+            newUser.password = user.password;
         }
         if(firstname) {
-            newUser.firstname = user.fName;
+            newUser.firstname = user.firstName;
         };
         if(lastname) {
-            newUser.lastname = user.lName;
+            newUser.lastname = user.lastName;
         };
-        if(age) {
-            newUser.age = user.alder;
+        if(dob) {
+            newUser.dob = user.dob;
+        };
+        if(gender){
+            newUser.gender = user.gender;
         };
         if(description) {
             newUser.description = user.descr;
         };
-        if(password) {
-            newUser.password = user.code;
+        if(ageMin) {
+            newUser.ageMin = user.min;
+        };
+        if(ageMax) {
+            newUser.ageMax = user.max;
+        };
+        if(genderPref) {
+            newUser.genderPref = user.genderPref;
         };
         // Tester hvordan bruger ser ud nu
         //console.log("After update " + newUser);
         
-        
-        // Henter nye oplysninger om bruger fra localstorage sætter det li en ny variabel
-        let fornavn = localStorage.getItem('fornavn');
-        let efternavn = localStorage.getItem('efternavn');
-        let aar = localStorage.getItem('alder');
-        let beskrivelse = localStorage.getItem('beskrivelse');
-        let kodeord = localStorage.getItem('kodeord');
 
         // Opretter en instans af klassen Profile som består af de nye værdier
-        const finish = new Profile(mail, fornavn, efternavn, aar, beskrivelse, kodeord)
+        //const finish = new Profile(mail, fornavn, efternavn, aar, beskrivelse, kodeord)
         const option = {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify(finish),// Konvertere klassen til en json string
+        body: JSON.stringify(user),// Konvertere klassen til en json string
         };    
         
         // --------- Her benyttes fetch til at kontakte API og dermed indsætte bruger i DB
-         fetch(`http://localhost:4000/edit/${mail}`, option).then(function() {
+         fetch(`http://localhost:7071/api/user`, option).then(function() {
             console.log("ok");
             alert("Succes!")
             alert("You will be directed back to your profile");
             // Naviger til brugerens profil hvis alt ovenstående lykkes
-            window.location.href = "/profile"; 
+            window.location.href = "./user.html"; 
         }).catch(function() {
             // lykkedes det ikke 
             console.log("error");

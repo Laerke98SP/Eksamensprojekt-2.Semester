@@ -25,8 +25,12 @@ module.exports.startDb = startDb;
 
 function insertMatch(payload){
     return new Promise((resolve, reject) => {
-        const sql = `INSERT INTO [match] (userID2, userID1)
-        VALUES (@userID2, @userID1);`
+        const sql = `INSERT INTO match (userID2, userID1)
+        SELECT voter.userID1 , votedOn.userID2
+        FROM userEdge as voter, userEdge as votedOn
+        WHERE voter.vote = votedOn.vote
+          AND votedOn.vote = 1
+          AND votedOn.userID2 <> voter.userID1;`
 
         
         console.log("Sending SQL query to DB");

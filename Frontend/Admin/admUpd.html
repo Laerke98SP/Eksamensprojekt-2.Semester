@@ -7,10 +7,10 @@
         <link href="../css/adm.css" rel="stylesheet">
         <script src="../js/admin.js" defer></script>
     </head>
-    <body>
+    <body onload="showUsers()">
         <!-- Navigation Bar -->
         <ul>
-            <li><a class="active" href="./frontpage.html">Home</a></li>
+            <li><a class="active" href="../User/frontpage.html">Home</a></li>
             <li><a href="./admin.html">Statistics</a></li>
             <li><a href="./admUpd.html">Update users</a></li>
             <li><a href="./admDel.html">Delete users</a></li>
@@ -26,7 +26,9 @@
         </div>
 
         <!-------- Displaying user information -->
-       
+       <div>
+            <p id="show"></p>
+        </div>
   
        <!-- Buttons for logout or delete user -->
         <div class="changes">

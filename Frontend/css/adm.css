@@ -36,7 +36,7 @@ body {
         float: left;
       }
       
-      li a {
+       a {
         display: block;
         color: white;
         text-align: center;
@@ -44,11 +44,11 @@ body {
         text-decoration: none;
       }
       
-      li a:hover:not(.active) {
+       a:hover:not(.active) {
         background-color: #111;
       }
       
-      .active {
+       .active {
         background-color: #00020e;
       }
 
@@ -71,6 +71,11 @@ body {
     margin: 5px;
     color: black;
   }
+  #users
+  {
+  list-style-type: none;
+  }
+
   #gocreate {
     background-color: #0077ff;
     color: white;

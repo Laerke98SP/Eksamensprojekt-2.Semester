@@ -2,15 +2,15 @@
 
 // 01. Variables for localstorage
 let mail = localStorage.getItem('mail');
-let password = localStorage.getItem('kodeord');
-let firstname = localStorage.getItem('fornavn');
-let lastname = localStorage.getItem('efternavn');
+let password = localStorage.getItem('password');
+let firstname = localStorage.getItem('firstname');
+let lastname = localStorage.getItem('lastname');
 let dob = localStorage.getItem('dob');
-let gender = localStorage.getItem('køn');
-let description= localStorage.getItem('beskrivelse');
+let gender = localStorage.getItem('gender');
+let description= localStorage.getItem('desc');
 let ageMin = localStorage.getItem('min');
 let ageMax = localStorage.getItem('max');
-let genderPref = localStorage.getItem('kønPr');
+let genderPref = localStorage.getItem('pref');
 
 // 02. Variables for buttons
 const logout = document.getElementById("logout")
@@ -45,7 +45,7 @@ console.log(newUser)
 
     //Det omdannes til array således vi kan loope igennem det og indsætte i tabel i HTML------------
 for(let i = 0; i< newUser.length; i++){
-table.innerHTML += 
+    table.innerHTML += 
     "<tr><td>" + newUser[i].email+ 
     "</td><td>" + newUser[i].code+ 
     "</td><td>" + newUser[i].fname +

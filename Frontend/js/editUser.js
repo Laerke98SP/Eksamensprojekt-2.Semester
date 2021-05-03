@@ -1,23 +1,12 @@
 // -----------  DEFINING VARIABLES ------------- //
 
-// 01. Variables for localstorage
-let mail = localStorage.getItem('mail');
-let password = localStorage.getItem('kodeord');
-let firstname = localStorage.getItem('fornavn');
-let lastname = localStorage.getItem('efternavn');
-let dob = localStorage.getItem('dob');
-let gender = localStorage.getItem('køn');
-let description= localStorage.getItem('beskrivelse');
-let ageMin = localStorage.getItem('min');
-let ageMax = localStorage.getItem('max');
-let genderPref = localStorage.getItem('kønPr');
 
-// 02. Variables for buttons
+// 01. Variables for buttons
 const logout = document.getElementById("logout")
 const deleteBtn = document.getElementById('delete');
 const edit = document.getElementById('edit');
 
-// 03. Variables to display user in
+// 02. Variables to display user in
 var table = document.getElementById("table"); 
 var info = document.getElementById("description"); 
 var pref = document.getElementById("info"); 
@@ -39,39 +28,64 @@ class User {
 }; 
 
    //Opretter en instans af klassen Profile - med oplysninger fra local storage
-   const user = new User(mail, password, firstname, lastname, dob, gender, description, ageMin, ageMax, genderPref);
-   let newUser = [user]; // indsætte instansen profile i et array
+   //const user = new User(mail, password, firstname, lastname, dob, gender, description, ageMin, ageMax, genderPref);
+   //let newUser = [user]; // indsætte instansen profile i et array
  
    
 
 function showEdit(){
-    let mail = document.getElementById('mail');
-    let password = document.getElementById('password');
-    let fname = document.getElementById('firstname');
-    let lname = document.getElementById('lastname');
-    let age = document.getElementById('age');
-    let gender = document.getElementById('gender');
-    let decr = document.getElementById('desc');
-    let min = document.getElementById('min');
-    let max = document.getElementById('max');
-    let pref = document.getElementById('pref');
-    //----- Al data indsættes i tabel------------
-    for(let i = 0; i< newUser.length; i++){
-            mail.innerHTML = newUser[i].email;
-            password.defaultValue = newUser[i].code 
-            fname.defaultValue = newUser[i].fname 
-            lname.defaultValue = newUser[i].lname 
-            age.defaultValue = newUser[i].bdate
-            gender.defaultValue = newUser[i].gen 
+    let email = localStorage.getItem('mail');
+    let password = localStorage.getItem('kodeord');
+    fetch(`http://localhost:7071/api/user?email=${email}&password=${password}`).then((resp) => resp.json()).then(function(data){
+        
+        console.log(data[5].value)
 
-            decr.defaultValue = newUser[i].descr;
+        document.getElementById('mail').defaultValue = data[1].value;
+        document.getElementById('password').defaultValue = data[2].value;
+        document.getElementById('firstname').defaultValue = data[3].value;
+        document.getElementById('lastname').defaultValue = data[4].value;
+        document.getElementById('dob').defaultValue = data[5].value;
+        document.getElementById('gender').defaultValue = data[6].value;
+        document.getElementById('desc').defaultValue = data[7].value;
+        document.getElementById('min').defaultValue = data[8].value;
+        document.getElementById('max').defaultValue = data[9].value;
+        document.getElementById('pref').defaultValue = data[10].value;
+
+
+    });
+         
+    
+
+
+
+    // let mail = document.getElementById('mail');
+    // let password = document.getElementById('password');
+    // let fname = document.getElementById('firstname');
+    // let lname = document.getElementById('lastname');
+    // let age = document.getElementById('age');
+    // let gender = document.getElementById('gender');
+    // let decr = document.getElementById('desc');
+    // let min = document.getElementById('min');
+    // let max = document.getElementById('max');
+    // let pref = document.getElementById('pref');
+    // //----- Al data indsættes i tabel------------
+    
+    // for(let i = 0; i< newUser.length; i++){
+    //         mail.innerHTML = newUser[i].email;
+    //         password.defaultValue = newUser[i].code 
+    //         fname.defaultValue = newUser[i].fname 
+    //         lname.defaultValue = newUser[i].lname 
+    //         age.defaultValue = newUser[i].bdate
+    //         gender.defaultValue = newUser[i].gen 
+
+    //         decr.defaultValue = newUser[i].descr;
         
             
-            min.defaultValue = newUser[i].min;
-            max.defaultValue = newUser[i].max;
-            pref.defaultValue = newUser[i].gendPref;
+    //         min.defaultValue = newUser[i].min;
+    //         max.defaultValue = newUser[i].max;
+    //         pref.defaultValue = newUser[i].gendPref;
         
-        };
+    //     };
 
    
     
@@ -172,25 +186,27 @@ function deleteUser(){
 edit.addEventListener('click', function(){
     
     // //Henter værdierne der er blevet indtastet i redigeringsfelterne
-    // let psw = document.getElementById('kodeord').value
-    // let firstName = document.getElementById('fornavn').value
-    // let lastName = document.getElementById('efternavn').value
-    // let date = document.getElementById('dob').value
-    // let gend = document.getElementById('køn').value
-    // let descr = document.getElementById('descr').value
-    // let min = document.getElementById('min').value
-    // let max = document.getElementById('max').value
-    // let gendPref = document.getElementById('kønPr').value
+    let email = localStorage.getItem('mail');
+
+    let password = document.getElementById('password').value
+    let firstName = document.getElementById('firstname').value
+    let lastName = document.getElementById('lastname').value
+    let dob = document.getElementById('dob').value
+    let gender = document.getElementById('gender').value
+    let description = document.getElementById('desc').value
+    let ageMin = document.getElementById('min').value
+    let ageMax = document.getElementById('max').value
+    let genderPref = document.getElementById('pref').value
 
 
    
     // Opretter ny instans af Profile klassen
-    let updUser = new User(mail, psw, firstName, lastName, date, gend, descr, min, max, gendPref);
-    let update = [updUser]; //indsætter denne i arr
+    let updUser = new User(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref);
+    //let update = [updUser]; //indsætter denne i arr
 
-    console.log(update)
+    console.log(updUser)
     //Kalder funktionen edit(user)
-     editUser(update);
+     editUser(updUser);
     
 })
 
@@ -198,7 +214,7 @@ edit.addEventListener('click', function(){
 function editUser(user){
     //Hvis email/brugernavn eksistere - lav gammel info om til opdateret info
     
-            
+            console.log("test editUser function")
     
         // Tester hvordan bruger ser ud nu
         //console.log("After update " + newUser);
@@ -210,8 +226,8 @@ function editUser(user){
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
-        }, 
-        body: JSON.stringify(user),// Konvertere klassen til en json string
+            }, 
+            body: JSON.stringify(user),// Konvertere klassen til en json string
         };    
         
         // --------- Her benyttes fetch til at kontakte API og dermed indsætte bruger i DB

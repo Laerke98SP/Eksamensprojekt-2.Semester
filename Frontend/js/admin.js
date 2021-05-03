@@ -1,11 +1,13 @@
-
-
 const logout = document.getElementById('logout');
 
 const countU = document.getElementById('countU');
 const countM = document.getElementById('countM');
 
 const show = document.getElementById('show');
+const mail = document.getElementById('mail');
+const edit = document.getElementById('edit');
+
+
 
 logout.addEventListener('click', function(){
     alert('loggin admin out');
@@ -92,8 +94,10 @@ function displayU(){
                     } 
                     for(i=0; i<result.length; i++){
                         console.log(result[i].value)
-                        show.innerHTML += result[i].value
+                        show.innerHTML += 
+                        "<p>"+ result[i].value + "</p>";
                     }
+                    console.log()
                 })
                 .catch(function (err){
                     console.log(err + " dette er err");
@@ -101,3 +105,59 @@ function displayU(){
             };
         });
 };
+
+edit.addEventListener('click', function(){
+    editUser();
+})
+
+function editUser(){
+   
+    localStorage.setItem('mail', mail.value)
+
+    let email = localStorage.getItem('mail');
+    fetch(`http://localhost:7071/api/admEditUser?email=${email}`)
+    .then(
+        function(response){
+            
+            // ------------  403 RESPONSE FOR KLIENT TYPING SOMETHING WRONG---------//
+            if( response.status == 404) {
+                alert( "Kodeord eller brugernavn er forkert - har du ikke en bruger opret gerne en");
+            }
+            // --------------- IF NOT 200 RESONSE CODE & NOT 404 SOMETHING ELSE WENT WRONG --//
+            else if (response.status !== 200){
+                console.log("Noget gik galt i script.js client side. " + response.status);
+                console.log(response);
+                return;
+            } else {    
+                // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
+                response.json().then(function (data) {
+                    
+
+                        //------------ RETRIEVING THE REST OF USER INFO FROM DB-----------//
+                        
+                        localStorage.setItem('password', data[2].value);
+                        localStorage.setItem('fornavn', data[3].value);
+                        localStorage.setItem('efternavn', data[4].value);
+                        localStorage.setItem('dob', data[5].value);
+                        localStorage.setItem('køn', data[6].value);
+                        localStorage.setItem('beskrivelse', data[7].value);
+                        localStorage.setItem('min', data[8].value);
+                        localStorage.setItem('max', data[9].value);
+                        localStorage.setItem('kønPr', data[10].value);
+                    
+
+                    // TEST statement
+                    console.log( "it should work if you reach here script.js client side")
+
+                  
+
+                    // ------------- IF EVERYTHING SUCCEEDED - PASS YOU TO YOUR PROFILE -------//
+                    alert("You will be directed to the users profile")
+                    window.location.href = "./editUser.html"; 
+                })
+                .catch(function (err){
+                    console.log(err + " Testing err");
+                });
+            };
+        });
+}

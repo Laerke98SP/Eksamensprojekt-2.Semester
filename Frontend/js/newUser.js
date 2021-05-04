@@ -4,34 +4,33 @@ var createUser = document.getElementById("getUser");
 // TEST STATEMENT //
 console.log("test in first line in frontend");
 
-
 // ---------------- CREATEUSER ACTION WHEN CLICK ON BUTTON ---------// 
 createUser.addEventListener('click', function(){
     // ------------- DEFINING INPUT VARIABLES -----------------//
-    var username = document.getElementById("email").value
-    var code = document.getElementById("password").value
-    var firstN = document.getElementById("firstName").value
-    var lastN = document.getElementById("lastName").value
-    var dateOfBirth = document.getElementById("dob").value
-    var gend = document.getElementById("gender").value
-    var descr = document.getElementById("description").value
+    var username = document.getElementById("email").value;
+    var code = document.getElementById("password").value;
+    var firstN = document.getElementById("firstName").value;
+    var lastN = document.getElementById("lastName").value;
+    var dateOfBirth = document.getElementById("dob").value;
+    var gendF = document.getElementById("genderF");
+    var gendM = document.getElementById("genderM");
+    var descr = document.getElementById("description").value;
     var min = document.getElementById("min").value;
     var max = document.getElementById("max").value;
     var gendPrefF = document.getElementById("genderPrefF");
-    var gendPrefM = document.getElementById("genderPrefM")
+    var gendPrefM = document.getElementById("genderPrefM");
     var intSports = document.getElementById("sports");
     var intMusic = document.getElementById("music");
     var intHiking = document.getElementById("hiking");
     var intDancing = document.getElementById("dancing");
     convertDate(dateOfBirth);
-    console.log(dateOfBirth);
     var gend = null;
     if (gendM.checked) { //tjekker hvilken gender-vÃ¦rdi der er tjekket af
         gend = gendM.value;
         console.log(gendM);
         gend;
     };
-    if (gende.checked) {
+    if (gendF.checked) {
         gend = gendF.value;
         gend;
     };
@@ -43,21 +42,21 @@ createUser.addEventListener('click', function(){
     if (gendPrefF.checked) {
         gendPref = gendPrefF.value;
         gendPref;
-    var interests = {};
+    var interests = [];
     if (intSports.checked) {
-        interests += intSports.value;
+        interests.push(intSports.value);
         interests;
     };
     if (intMusic.checked) {
-        interests += intMusic.value;
+        interests.push(intMusic.value);
         interests;
     };
     if (intHiking.checked) {
-        interests += intHiking.value;
+        interests.push(intHiking.value);
         interests;
     };
     if (intDancing.checked) {
-        interests += intDancing.value;
+        interests.push(intDancing.value);
         interests;
     };
     console.log(interests);
@@ -75,22 +74,30 @@ createUser.addEventListener('click', function(){
     localStorage.setItem('min', min);
     localStorage.setItem('max', max);
     localStorage.setItem('kønpræf', gendPref);
+    localStorage.setItem('interesser', interests);
+    console.log("virker localstorage???????")
 
     // TEST STATEMENTS //
     console.log(lastN);
     console.log(min);
+    console.log(interests)
 
     //-------------- CALL CREATEUSER FUNCTION ---------------------//
     saveUser();
+    //saveInterests();
 
     // TEST STATEMENT //
     console.log("Done executing submit button")
-});
+}});
 
+function convertDate(dobBefore){
+    var dobArray = dobBefore.split("/");
+    var dobAfter = dobArray[2] + '-' + dobArray[1] + '-' + dobArray[0];
+    return dobAfter; 
+};
 
 // ----------------- ACTION FOR CREATEUSER FUNCTION -----------------//
 function saveUser(){
-
     // ------- GET VALUE OF LOCALSTORAGE ITEMS ----------//
     let email = localStorage.getItem('brugernavn');
     let password = localStorage.getItem('kodeord');
@@ -139,5 +146,38 @@ function saveUser(){
     }).catch((err) =>{
         console.log(err)
         console.log("Something went wroooong")
-    })
+    });
 };
+
+// function saveInterests(){
+//     // ------- GET VALUE OF LOCALSTORAGE ITEMS ----------//
+//     let email = localStorage.getItem('brugernavn');
+//     let interests = localStorage.getItem('interesser');
+
+//     // TEST STATEMENT //
+//     console.log(interests);
+
+//     // ---------------- INPUT FOR FETCH REQUEST ----------//
+//     const option = {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json; charset-UTF-8'
+//         },
+//         body: JSON.stringify({
+//             email: email,
+//             interests: interests
+//         })
+//     };
+
+//     fetch("http://localhost:7071/api/user", option)   
+//     .then((response) => {
+//         return response.json()
+//     }).then((data) => {
+//             // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
+//             console.log("process Succeeded")
+//             console.log(data) 
+//     }).catch((err) =>{
+//         console.log(err)
+//         console.log("Something went wroooong")
+//     });
+// };

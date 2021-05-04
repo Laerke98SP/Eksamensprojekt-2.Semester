@@ -1,8 +1,7 @@
 const { Connection, Request, TYPES } = require('tedious');
-const config = require('./config.json')
+const config = require('./config.json');
 
-var connection = new Connection(config)
-
+var connection = new Connection(config);
 
 function startDb(){
     return new Promise((resolve, reject) => {
@@ -18,11 +17,9 @@ function startDb(){
         })
         connection.connect();
     });
-}
-
+}; 
 module.exports.sqlConnection = connection;
 module.exports.startDb = startDb;
-
 
 // POST REQ - for create user function - DONE
 function insert(payload){
@@ -30,7 +27,6 @@ function insert(payload){
         const sql = `INSERT INTO [user] (email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref)
         VALUES (@email, @password, @firstName, @lastName, @dob, @gender, @description, @ageMin, @ageMax, @genderPref);`
 
-        
         console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {
             if (err){
@@ -45,7 +41,7 @@ function insert(payload){
         request.addParameter('firstName', TYPES.VarChar, payload.firstName)
         request.addParameter('lastName', TYPES.VarChar, payload.lastName)
         request.addParameter('dob', TYPES.Date, payload.dob)
-        request.addParameter('gender', TYPES.VarChar, payload.gender)
+        request.addParameter('gender', TYPES.Int, payload.gender)
         request.addParameter('description', TYPES.VarChar, payload.description)
         request.addParameter('ageMin', TYPES.Int, payload.ageMin)
         request.addParameter('ageMax', TYPES.Int, payload.ageMax)
@@ -58,11 +54,39 @@ function insert(payload){
             resolve('user inserted', row)
         });
         connection.execSql(request)
-
     });
-}
+}; 
 module.exports.insert = insert;
 
+// POST req - for attempt oninserting interests
+// function insertInterests(payload){
+//     return new Promise((resolve, reject) => {
+//         for (i in payload.interests) {
+//             console.log(payload.interests)
+//             const sql = `INSERT INTO interest (name, userID) SELECT id, '@interests' FROM [user] WHERE [user].email = @email;`;
+//         };
+//         console.log("Sending SQL query to DB");
+//         const request = new Request(sql, (err) => {
+//             if (err){
+//                 reject(err)
+//                 console.log(err)
+//             }
+//         });
+
+//         console.log("Testing the params now");
+//         request.addParameter('interests', TYPES.VarChar, payload.interests)
+//         request.addParameter('email', TYPES.VarChar, payload.email)
+       
+//         console.log("Checking if the parameters exist " + payload.email);
+
+//         request.on('requestCompleted', (row) => {
+//             console.log('Interests inserted', row);
+//             resolve('Interests inserted', row)
+//         });
+//         connection.execSql(request)
+//     });
+// }; 
+// module.exports.insertInterests = insertInterests;
 
 //  GET req - for login function - DONE
 function select(email, password){
@@ -115,10 +139,8 @@ function select(email, password){
         //Execute the SQL represented by request.
         connection.execSql(request)
     })
-};
+}; 
 module.exports.select = select;
-
-
 
 // PATCH REQ - for update user function
 function updateUser(payload){
@@ -157,5 +179,5 @@ function updateUser(payload){
         connection.execSql(request)
 
     });
-}
+}; 
 module.exports.updateUser = updateUser;

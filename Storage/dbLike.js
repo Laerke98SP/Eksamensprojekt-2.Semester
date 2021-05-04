@@ -26,7 +26,7 @@ module.exports.startDb = startDb;
 function selectAll(email){
     //console.log("checking if first line in DB function works")
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM [user] WHERE email != @email' ;
+        const sql = 'SELECT * FROM [user] WHERE email <> @email' ;
         //console.log("Now we have ran sql query for potential matches")
         const request = new Request(sql, (err, rowcount) => {
             if(rowcount == 0) {

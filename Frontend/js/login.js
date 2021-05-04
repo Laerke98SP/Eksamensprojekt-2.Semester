@@ -15,7 +15,6 @@ getButton.addEventListener("click", function(){
     // 03. CALL LOGING FUNCTION 
     login(email, password);
 });
-    
 
 // ----------------- ACTION FOR LOGIN FUNCTION -----------------//
 function login(email, password){

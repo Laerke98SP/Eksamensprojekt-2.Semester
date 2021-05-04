@@ -109,6 +109,7 @@ function saveUser(){
     let ageMin = localStorage.getItem('min');
     let ageMax = localStorage.getItem('max');
     let genderPref = localStorage.getItem('kønpræf');
+    let interests = localStorage.getItem('interesser');
 
     // TEST STATEMENT //
     console.log(ageMin);
@@ -129,7 +130,8 @@ function saveUser(){
             description: description,
             ageMin: ageMin,
             ageMax: ageMax,
-            genderPref: genderPref
+            genderPref: genderPref,
+            interests: interests
         })
     };
     fetch("http://localhost:7071/api/user", option)   
@@ -138,7 +140,7 @@ function saveUser(){
     })
     .then((data) => {
             // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
-            console.log("process Succeeded")
+            console.log("Process Succeeded")
             console.log(data)
             alert("You will be directed to your profile")
             window.location.href = "./user.html"; 

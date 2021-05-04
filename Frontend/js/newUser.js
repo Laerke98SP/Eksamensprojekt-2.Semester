@@ -15,9 +15,52 @@ createUser.addEventListener('click', function(){
     var dateOfBirth = document.getElementById("dob").value
     var gend = document.getElementById("gender").value
     var descr = document.getElementById("description").value
-    var min = document.getElementById("min").value
-    var max = document.getElementById("max").value
-    var gendPref = document.getElementById("gendPref").value
+    var min = document.getElementById("min").value;
+    var max = document.getElementById("max").value;
+    var gendPrefF = document.getElementById("genderPrefF");
+    var gendPrefM = document.getElementById("genderPrefM")
+    var intSports = document.getElementById("sports");
+    var intMusic = document.getElementById("music");
+    var intHiking = document.getElementById("hiking");
+    var intDancing = document.getElementById("dancing");
+    convertDate(dateOfBirth);
+    console.log(dateOfBirth);
+    var gend = null;
+    if (gendM.checked) { //tjekker hvilken gender-vÃ¦rdi der er tjekket af
+        gend = gendM.value;
+        console.log(gendM);
+        gend;
+    };
+    if (gende.checked) {
+        gend = gendF.value;
+        gend;
+    };
+    var gendPref = null;
+    if (gendPrefM.checked) { //tjekker hvilken gender-vÃ¦rdi der er tjekket af
+        gendePef = gendPrefM.value;
+        gendPref;
+    };
+    if (gendPrefF.checked) {
+        gendPref = gendPrefF.value;
+        gendPref;
+    var interests = {};
+    if (intSports.checked) {
+        interests += intSports.value;
+        interests;
+    };
+    if (intMusic.checked) {
+        interests += intMusic.value;
+        interests;
+    };
+    if (intHiking.checked) {
+        interests += intHiking.value;
+        interests;
+    };
+    if (intDancing.checked) {
+        interests += intDancing.value;
+        interests;
+    };
+    console.log(interests);
 
     // TESTING STATEMENT //
     console.log("Testing add eventlistener in frontend");

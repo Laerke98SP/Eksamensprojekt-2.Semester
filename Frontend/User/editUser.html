@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
     <head>  
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,55 +31,57 @@
         </div>
         
         <!--------Getting localstorage from example of localstorage week 42-->
-    <div class="InfoDiv">
-        <table id="table">
-            <tr>
-                <th>Username:</th>
-                <th>Password</th>
-                <th>Firstname:</th>
-                <th>Lastname:</th>
-                <th>Age:</th>
-                <th>gender:</th>
-            </tr>
-            <tr>
-                <td id="mail"></td>
-                <td><input type="text" id="password"></td>
-                <td><input type="text" id="firstname"></td>
-                <td><input type="text" id="lastname"></td>
-                <td><input type="text" id="age"></td>
-                <td><input type="text" id="gender"></td>
-                
-            </tr>
-        </table>
-        <br>
-        <div id="description">
+        <div class="InfoDiv">
+            <table id="table">
+                <tr>
+                    <th>Username:</th>
+                    <th>Password</th>
+                    <th>Firstname:</th>
+                    <th>Lastname:</th>
+                    <th>Age:</th>
+                    <th>gender:</th>
+                </tr>
+                <tr>
+                    <td id="mail"></td>
+                    <td><input type="text" id="password"></td>
+                    <td><input type="text" id="firstname"></td>
+                    <td><input type="text" id="lastname"></td>
+                    <td><input type="text" id="dob"></td>
+                    <td><input type="text" id="gender"></td>
+                    
+                </tr>
+            </table>
+            <br>
+            <div id="description">
 
-            <p> Description:</p>
-            <input type="text" id="desc"> 
+                <p> Description:</p>
+                <input type="text" id="desc"> 
+            </div>
+            <br>
+            <table id="info">
+                <p>Preference in partner:</p>
+                <tr>
+                    <th>Min age:</th>
+                    <th>Max age:</th>
+                    <th>Gender preference</th>
+                </tr>
+                <tr>
+                    <td><input type="text" id="min"></td>
+                    <td><input type="text" id="max"></td>
+                    <td><input type="text" id="pref"></td>
+                </tr>
+            </table>
         </div>
-        <br>
-        <table id="info">
-            <p>Preference in partner:</p>
-             <tr>
-                 <th>Min age:</th>
-                 <th>Max age:</th>
-                 <th>Gender preference</th>
-             </tr>
-             <tr>
-                <td><input type="text" id="min"></td>
-                <td><input type="text" id="max"></td>
-                <td><input type="text" id="pref"></td>
-            </tr>
-        </table>
- </div><br><br>
-  
+        <br><br>
+    
         <!-- Buttons for logout or delete user -->
         <div class="changes">
             <input id="delete" type="reset" value="Delete"> 
             <input id="logout" type="reset" value="Logout"> 
+            <button onclick="editUser()">Edit user</button>                
             <input id="edit" type="button" value="Edit user">
         </div>
 
-
+        <script src="../js/editUser.js"></script> 
     </body>
 </html>

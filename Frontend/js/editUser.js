@@ -34,12 +34,12 @@ class User {
    
 
 function showEdit(){
+    // henter email og password fra storage, så vi kan få brugeren via et fetch request 
     let email = localStorage.getItem('mail');
     let password = localStorage.getItem('kodeord');
-    fetch(`http://localhost:7071/api/user?email=${email}&password=${password}`).then((resp) => resp.json()).then(function(data){
-        
-        console.log(data[5].value)
 
+    fetch(`http://localhost:7071/api/user?email=${email}&password=${password}`).then((resp) => resp.json()).then(function(data){
+        // Dataen bliver direkte indsadt som defailt values 
         document.getElementById('mail').defaultValue = data[1].value;
         document.getElementById('password').defaultValue = data[2].value;
         document.getElementById('firstname').defaultValue = data[3].value;
@@ -50,64 +50,7 @@ function showEdit(){
         document.getElementById('min').defaultValue = data[8].value;
         document.getElementById('max').defaultValue = data[9].value;
         document.getElementById('pref').defaultValue = data[10].value;
-
-
     });
-         
-    
-
-
-
-    // let mail = document.getElementById('mail');
-    // let password = document.getElementById('password');
-    // let fname = document.getElementById('firstname');
-    // let lname = document.getElementById('lastname');
-    // let age = document.getElementById('age');
-    // let gender = document.getElementById('gender');
-    // let decr = document.getElementById('desc');
-    // let min = document.getElementById('min');
-    // let max = document.getElementById('max');
-    // let pref = document.getElementById('pref');
-    // //----- Al data indsættes i tabel------------
-    
-    // for(let i = 0; i< newUser.length; i++){
-    //         mail.innerHTML = newUser[i].email;
-    //         password.defaultValue = newUser[i].code 
-    //         fname.defaultValue = newUser[i].fname 
-    //         lname.defaultValue = newUser[i].lname 
-    //         age.defaultValue = newUser[i].bdate
-    //         gender.defaultValue = newUser[i].gen 
-
-    //         decr.defaultValue = newUser[i].descr;
-        
-            
-    //         min.defaultValue = newUser[i].min;
-    //         max.defaultValue = newUser[i].max;
-    //         pref.defaultValue = newUser[i].gendPref;
-        
-    //     };
-
-   
-    
-    // ---- Opretter felter som kan redigeres i --------
-    // for(i in newUser){ // Looper igennem 
-    //     password.innerHTML  += // Tilføjer i html filen redigerings felterne
-    //         "<tr><td>" + 
-    //         "</td><td><input id='kodeord'>"  +
-    //         "</td><td><input id='fornavn'>" + 
-    //         "</td><td><input id='efternavn'>" + 
-    //         "</td><td><input id='dob'>" + 
-    //         "</td><td><input id='køn'>" + 
-    //         "</td></tr>"
-
-    //     info.innerHTML += "<input id='descr'>"
-
-    //     pref.innerHTML +=
-    //         "<tr><td><input id='min'>" + 
-    //         "</td><td><input id='max'>" + 
-    //         "</td><td><input id='kønPr'>" + 
-    //         "</td></tr>"
-    // };
 };
 
 
@@ -183,9 +126,12 @@ function deleteUser(){
 
 
     // -------------------- 02. Ved klik på submit ændringer---------------------------
-edit.addEventListener('click', function(){
-    
-    // //Henter værdierne der er blevet indtastet i redigeringsfelterne
+// edit.addEventListener('click', function(){
+//      editUser(updUser);
+// })
+
+    //--------------------- 03. Funktionen edit(user) -------------------------
+function editUser(){
     let email = localStorage.getItem('mail');
 
     let password = document.getElementById('password').value
@@ -198,48 +144,26 @@ edit.addEventListener('click', function(){
     let ageMax = document.getElementById('max').value
     let genderPref = document.getElementById('pref').value
 
-
-   
-    // Opretter ny instans af Profile klassen
-    let updUser = new User(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref);
-    //let update = [updUser]; //indsætter denne i arr
-
-    console.log(updUser)
-    //Kalder funktionen edit(user)
-     editUser(updUser);
+    let editedUser = {email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref}
     
-})
-
-    //--------------------- 03. Funktionen edit(user) -------------------------
-function editUser(user){
-    //Hvis email/brugernavn eksistere - lav gammel info om til opdateret info
-    
-            console.log("test editUser function")
-    
-        // Tester hvordan bruger ser ud nu
-        //console.log("After update " + newUser);
+    const option = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify(editedUser),// Konvertere klassen til en json string
+    };    
         
-
-        // Opretter en instans af klassen Profile som består af de nye værdier
-        //const finish = new Profile(mail, fornavn, efternavn, aar, beskrivelse, kodeord)
-        const option = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            }, 
-            body: JSON.stringify(user),// Konvertere klassen til en json string
-        };    
-        
-        // --------- Her benyttes fetch til at kontakte API og dermed indsætte bruger i DB
-         fetch(`http://localhost:7071/api/user`, option).then(function() {
-            console.log("ok");
-            alert("Succes!")
-            alert("You will be directed back to your profile");
-            // Naviger til brugerens profil hvis alt ovenstående lykkes
-            window.location.href = "./user.html"; 
-        }).catch(function() {
-            // lykkedes det ikke 
-            console.log("error");
-        }); // Kunne indsætte window.location.href her - efter en finally blok
-    }   
+    // --------- Her benyttes fetch til at kontakte API og dermed indsætte bruger i DB
+     fetch(`http://localhost:7071/api/user`, option).then(function() {
+        console.log("ok");
+        alert("Succes!")
+        alert("You will be directed back to your profile");
+        // Naviger til brugerens profil hvis alt ovenstående lykkes
+        window.location.href = "./user.html"; 
+    }).catch(function() {            
+        // lykkedes det ikke 
+        console.log("error");
+    }); // Kunne indsætte window.location.href her - efter en finally blok
+}   
 

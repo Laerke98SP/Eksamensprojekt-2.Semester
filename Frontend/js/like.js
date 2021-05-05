@@ -26,17 +26,24 @@ function showPotentials(){
     // retrieving one user at the time // IT DOESNT CHANGE USER
     fetch(`http://localhost:7071/api/like?email=${email}`)
     .then(function(response){
+
+        if(response.status ==  404){
+            alert('There are no more users')
+        } 
+
     return response.json(); // returnere et promise
     })
     .then(function(data){ 
         console.log(data);
-        //users.innerHTML += data;
+        
+        
         displayPotentialMatch(data); //Kunne Kalde funktionen displayData, med parametrene: storage( alle brugerne i DB & 0 der bruges som counter)
         //checkIfMatch(data); // kalder funktionen check om de matcher  
     
     })
         .catch(function(err){
         //Hvis der opstår en fejl fanges den her
+        
         console.log(err);
     }).finally((data) => {
     //displayMatch(data); // viser antal matches skal vises uanset om der er fejl eller ikke / ved fejl viser den blot 0 matches

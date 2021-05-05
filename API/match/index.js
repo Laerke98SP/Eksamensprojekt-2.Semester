@@ -1,4 +1,4 @@
-const db = require('../../Storage/dbMatch');
+const db = require('../../Storage/User/dbMatch');
 
 
 module.exports = async function (context, req) {

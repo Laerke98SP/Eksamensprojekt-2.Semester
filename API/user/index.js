@@ -1,4 +1,4 @@
-const db = require('../../Storage/dbUser');
+const db = require('../../Storage/User/dbUser');
 
 // Connection to DB
 module.exports = async function (context, req) {
@@ -41,7 +41,7 @@ async function get(context, req){
         context.res = {
             body: user
         };
-        console.log("also send the context to client side")
+
     } catch(error){
         context.res = {
             status: 404,

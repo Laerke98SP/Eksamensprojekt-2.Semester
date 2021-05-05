@@ -1,5 +1,5 @@
 const { Connection, Request, TYPES } = require('tedious');
-const config = require('./config.json')
+const config = require('../config.json')
 
 var connection = new Connection(config)
 
@@ -22,9 +22,50 @@ function startDb(){
 module.exports.sqlConnection = connection;
 module.exports.startDb = startDb;
 
-function countUsers(){
+
+function insertMatch(payload){
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT count(id) FROM [user]';
+        const sql = `INSERT INTO MATCH (userID2, userID1)
+        SELECT DISTINCT edge1.userID2, edge1.userID1
+        FROM userEdge AS edge1
+        INNER JOIN userEdge AS edge2
+            ON edge1.vote = 1
+            AND edge2.vote = 1
+        INNER JOIN [user]
+            ON edge1.userID1 = [user].id
+            AND edge2.userID2 = [user].id
+        WHERE [user].email = @email
+            AND NOT EXISTS (SELECT userID1, userID2
+                            FROM match
+                            WHERE userID1 = edge1.userID1
+                            OR userID2 = edge1.userID2);`
+
+
+        console.log("Sending SQL query to DB");
+        const request = new Request(sql, (err) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+        });
+
+        console.log("Testing the params now");
+        request.addParameter('email', TYPES.VarChar, payload.email);
+       
+
+        request.on('requestCompleted', (row) => {
+        
+            resolve('Match inserted', row)
+        });
+        connection.execSql(request)
+
+    });
+}
+module.exports.insertMatch = insertMatch;
+
+function getMatches(userID){
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT match.userID1, match.userID2 FROM match WHERE (SELECT id FROM [user] WHERE [user].email = @email) = match.userID1 OR (SELECT id FROM [user] WHERE [user].email = @email) = match.userID2;';
         console.log("Now we have ran sql query")
 
         const request = new Request(sql, (err, rowcount) => {
@@ -42,6 +83,8 @@ function countUsers(){
             }
         });       
         
+        console.log("Testing the params now");
+        request.addParameter('userID1', TYPES.Int, payload.userID);
         
         //A row resulting from execution of the SQL statement.
         // column consist of meta data and value
@@ -53,37 +96,4 @@ function countUsers(){
         connection.execSql(request)
     })
 };
-module.exports.countUsers = countUsers;
-
-function countMatches(){
-    return new Promise((resolve, reject) => {
-        const sql = 'SELECT count(id) FROM [match]';
-        console.log("Now we have ran sql query")
-
-        const request = new Request(sql, (err, rowcount) => {
-            if(rowcount == 0) {
-                reject(
-                    {message: ' There are no users'}  
-                )
-            }
-            else if (err){
-                reject(err)
-                console.log(err + " error comming from db.js")
-            } 
-            else {
-                console.log("everything went fine in db.js");
-            }
-        });       
-        
-        
-        //A row resulting from execution of the SQL statement.
-        // column consist of meta data and value
-        request.on('row', (columns) => {
-            resolve(columns)
-             console.log( "testing loop in DB.js");
-        });
-        //Execute the SQL represented by request.
-        connection.execSql(request)
-    })
-};
-module.exports.countMatches = countMatches;
+module.exports.getMatches = getMatches;

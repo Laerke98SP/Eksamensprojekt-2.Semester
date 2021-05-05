@@ -1,69 +1,115 @@
 // -----------  DEFINING VARIABLES ------------- //
 
 // 01. Variables for localstorage
-let mail = localStorage.getItem('mail');
+let email = localStorage.getItem('email');
 let password = localStorage.getItem('password');
-let firstname = localStorage.getItem('firstname');
-let lastname = localStorage.getItem('lastname');
-let dob = localStorage.getItem('dob');
-let gender = localStorage.getItem('gender');
-let description= localStorage.getItem('desc');
-let ageMin = localStorage.getItem('min');
-let ageMax = localStorage.getItem('max');
-let genderPref = localStorage.getItem('pref');
+
+console.log(email);
 
 // 02. Variables for buttons
-const logout = document.getElementById("logout")
+const logout = document.getElementById("logout");
 const deleteBtn = document.getElementById('delete');
 
 // 03. Variables to display user in
 var table = document.getElementById("table"); // en variabel for tabellen
 var info = document.getElementById("description"); // en variabel for beskrivelses divv
 var pref = document.getElementById("info"); // en variabel for info div
+var interest = document.getElementById("interest");
 
 // ------------------ CREATE CLASS USER -------------------- //
 class User {
-    constructor(email, code, fname, lname, bdate, gen, descr, min, max, gendPref){
+    constructor(email, password, firstName, lastName, dob, gender, description, minAge, maxAge, genderPref){
         this.email = email;
-        this.code = code;
-        this.fname = fname;
-        this.lname = lname;
-        this.bdate = bdate;
-        this.gen = gen;
-        this.descr = descr;
-        this.min = min;
-        this.max = max;
-        this.gendPref = gendPref;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.gender = gender;
+        this.description = description;
+        this.ageMin = ageMin;
+        this.ageMax= ageMax;
+        this.genderPref = genderPref;
     }
 }; 
 
-//Opretter en instans af klassen Profile - med oplysninger fra local storage
-const user = new User(mail, password, firstname, lastname, dob, gender, description, ageMin, ageMax, genderPref);
-let newUser = [user]; // indsætte instansen profile i et array
+// function getUser(email, password){
 
-console.log(newUser)
+//     // ---------- RETRIEVE IN DB A PERSON WITH FOLLOWING MAIL AND PASSWORD ---------//
+//     fetch(`http://localhost:7071/api/user?email=${email}&password=${password}`)
+//     .then(
+//         function(response){
+//                 // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
+//                 response.json().then(function (data) {
+                    
+//                         //------------ RETRIEVING THE REST OF USER INFO FROM DB-----------//
+//                         localStorage.setItem('firstName', data[3].value);
+//                         localStorage.setItem('lastName', data[4].value);
+//                         localStorage.setItem('dob', data[5].value);
+//                         localStorage.setItem('gender', data[6].value);
+//                         localStorage.setItem('description', data[7].value);
+//                         localStorage.setItem('ageMin', data[8].value);
+//                         localStorage.setItem('ageMax', data[9].value);
+//                         localStorage.setItem('genderPref', data[10].value);
+//                     showUser();
+//                     showInterest(email);
+//                 })
+//                 .catch(function (err){
+//                     console.log(err + " Testing err");
+//                 });
+//     }); 
+// };
 
-    //Det omdannes til array således vi kan loope igennem det og indsætte i tabel i HTML------------
-for(let i = 0; i< newUser.length; i++){
+function showUser(){
+    let firstName = localStorage.getItem('firstName');
+    let lastName = localStorage.getItem('lastName');
+    let dob = localStorage.getItem('dob');
+    let gender = localStorage.getItem('gender');
+    let description = localStorage.getItem('description');
+    let ageMin = localStorage.getItem('ageMin');
+    let ageMax = localStorage.getItem('ageMax');
+    let genderPref = localStorage.getItem('genderPref');
+
+    console.log(ageMin + " test")
+
+    const user = new User(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref);
+    console.log(user);
+
     table.innerHTML += 
-    "<tr><td>" + newUser[i].email+ 
-    "</td><td>" + newUser[i].code+ 
-    "</td><td>" + newUser[i].fname +
-    "</td><td>" + newUser[i].lname + 
-    "</td><td>" + newUser[i].bdate +
-    "</td><td>" + newUser[i].gen +
+    "<tr><td>" + email + 
+    "</td><td>" + password + 
+    "</td><td>" + firstName +
+    "</td><td>" + lastName + 
+    "</td><td>" + dob +
+    "</td><td>" + gender +
     "</td></tr>";
-    info.innerHTML += newUser[i].descr;
+   
+    info.innerHTML += description;
 
     pref.innerHTML +=
-    "<tr><td>" + newUser[i].min +
-    "</td><td>" + newUser[i].max +
-    "</td><td>" + newUser[i].gendPref +
+    "<tr><td>" + ageMin +
+    "</td><td>" + ageMax+
+    "</td><td>" + genderPref+
     "</td></tr>";
-    console.log(newUser[i].gen);
-};
+}
+
+function showInterest(email){
+    // ---------- RETRIEVE IN DB A PERSON WITH FOLLOWING MAIL AND PASSWORD ---------//
+    fetch(`http://localhost:7071/api/interest?email=${email}`)
+    .then(
+        function(response){
+                // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
+                response.json().then(function (data) {
+                    console.log(data);
+                    interest.innerHTML += data;
+                })
+                .catch(function (err){
+                    console.log(err + " Testing err");
+                });
+    }); 
 
 
+
+}
 
 // ----------- LOG OUT FUNCITON ------------- //
 logout.addEventListener('click', function(){

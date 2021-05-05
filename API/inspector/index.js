@@ -1,4 +1,4 @@
-const db = require('../../Storage/dbInspector');
+const db = require('../../Storage/Admin/dbInspector');
 
 
 module.exports = async function (context, req) {

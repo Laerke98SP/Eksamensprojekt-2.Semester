@@ -5,17 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dating App</title>
         <link href="../css/user.css" rel="stylesheet">
-        <script src="../js/editUser.js" defer></script>
+        <script src="../js/match.js" defer></script>
     </head>
-    <body onload="showEdit()">
-        <!-- Navigation Bar --> 
+    <body onload="checkIfMatch()">
+        <!-- Navigation Bar -->
         <ul>
             <li><a class="active" href="./frontpage.html">Home</a></li>
             <li><a href="./user.html">My profile</a></li>
             <li><a href="./editUser.html">Edit User</a></li>
+            <li><a href="./interest.html">Interest</a></li>
+            <li><a href="./preference.html">Preference</a></li>
             <li><a href="./like.html">Find Match</a></li>
             <li><a href="./match.html">See Match</a></li>
-
         </ul>
         <br><br><br>
 
@@ -23,39 +24,39 @@
         <div> <p id="notification"></p></div>
 
 
+
         <!-- Content for page -->
         <div>
             <h1>Make love great again</h1>
-          
-            <h3>Edit your profile here</h2>
+            
+
+            <p>View or delete matches here</p>
         </div>
-        
-        <!--------Getting localstorage from example of localstorage week 42-->
-    <div class="InfoDiv">
+
+        <!-------- Displaying user information -->
         <table id="table">
             <tr>
                 <th>Username:</th>
-                <th>Password</th>
+                <th>Password:</th>
                 <th>Firstname:</th>
                 <th>Lastname:</th>
                 <th>Age:</th>
                 <th>gender:</th>
             </tr>
             <tr>
-                <td id="mail"></td>
-                <td><input type="text" id="password"></td>
-                <td><input type="text" id="firstname"></td>
-                <td><input type="text" id="lastname"></td>
-                <td><input type="text" id="age"></td>
-                <td><input type="text" id="gender"></td>
-                
+                <td id="email"></td>
+                <td id="password"></td>
+                <td id="firstname"></td>
+                <td id="lastname"></td>
+                <td id="age"></td>
+                <td id="gender"></td>
             </tr>
         </table>
         <br>
-        <div id="description">
+        <p> Description:</p>
+        <div>
+            <p id="description"></p>
 
-            <p> Description:</p>
-            <input type="text" id="desc"> 
         </div>
         <br>
         <table id="info">
@@ -65,21 +66,20 @@
                  <th>Max age:</th>
                  <th>Gender preference</th>
              </tr>
-             <tr>
-                <td><input type="text" id="min"></td>
-                <td><input type="text" id="max"></td>
-                <td><input type="text" id="pref"></td>
+            <tr>
+                <td id="ageMin"></td>
+                <td id="ageMax"></td>
+                <td id="pref"></td>
             </tr>
         </table>
- </div><br><br>
+        <br><br>
   
         <!-- Buttons for logout or delete user -->
         <div class="changes">
-            <input id="delete" type="reset" value="Delete"> 
-            <input id="logout" type="reset" value="Logout"> 
-            <input id="edit" type="button" value="Edit user">
-        </div>
+            <input id="delete" type="reset" value="Delete match"> 
 
+            <input id="nextMatch" type="reset" value="next"> 
+        </div>
 
     </body>
 </html>

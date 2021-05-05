@@ -41,27 +41,26 @@ function login(email, password){
                         console.log(i);
 
                         //------------ RETRIEVING THE REST OF USER INFO FROM DB-----------//
-                        localStorage.setItem('mail', data[1].value);
+                        localStorage.setItem('email', data[1].value);
                         localStorage.setItem('password', data[2].value);
-                        localStorage.setItem('firstname', data[3].value);
-                        localStorage.setItem('lastname', data[4].value);
+                        localStorage.setItem('firstName', data[3].value);
+                        localStorage.setItem('lastName', data[4].value);
                         localStorage.setItem('dob', data[5].value);
                         localStorage.setItem('gender', data[6].value);
-                        localStorage.setItem('desc', data[7].value);
-                        localStorage.setItem('min', data[8].value);
-                        localStorage.setItem('max', data[9].value);
-                        localStorage.setItem('pref', data[10].value);
+                        localStorage.setItem('description', data[7].value);
+                        localStorage.setItem('ageMin', data[8].value);
+                        localStorage.setItem('ageMax', data[9].value);
+                        localStorage.setItem('genderPref', data[10].value);
                     };
 
                     // TEST statement
                     console.log( "it should work if you reach here script.js client side")
 
-                    // TEST statement
-                    console.log(data[3].value)
+                    
 
                     // ------------- IF EVERYTHING SUCCEEDED - PASS YOU TO YOUR PROFILE -------//
                     alert("You will be directed to your profile")
-                    window.location.href = "./user.html"; 
+                    window.location.href = "./1user.html"; 
                 })
                 .catch(function (err){
                     console.log(err + " Testing err");

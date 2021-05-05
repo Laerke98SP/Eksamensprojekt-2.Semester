@@ -1,6 +1,6 @@
 
 const { Connection, Request, TYPES } = require('tedious');
-const config = require('./config.json')
+const config = require('../config.json')
 
 var connection = new Connection(config)
 
@@ -35,6 +35,7 @@ function selectAll(email){
         AND (SELECT id FROM [user] WHERE [user].email = @email ) <> [user].id;` ;
         //console.log("Now we have ran sql query for potential matches")
         const request = new Request(sql, (err, rowcount) => {
+            console.log(rowcount)
             if(rowcount == 0) {
                 reject(
                     {message: 'There are no users to get'}  
@@ -54,21 +55,10 @@ function selectAll(email){
         //A row resulting from execution of the SQL statement.
         // column consist of meta data and value        
         request.on('row', (columns) => {
-            //console.log(columns)
+   
             resolve(columns)
            
-            // for ( let i = 0; i < columns.length; i++){
-            //     result = ""
-            //     result += columns[i].value
-
-            //     // console.log(columns[i]);
-            //     // resolve(columns[i].value)
-            // }
-            //console.log(result)
-            
-           
         });
-        
         //Execute the SQL represented by request.
         connection.execSql(request) // A Request Object represent the request
     });

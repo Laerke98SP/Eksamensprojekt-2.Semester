@@ -7,12 +7,15 @@
         <link href="../css/user.css" rel="stylesheet">
         <script src="../js/user.js" defer></script>
     </head>
-    <body>
+    <body onload="showUser()">
+    <!-- <body onload="getUser(email, password)"> -->
         <!-- Navigation Bar -->
         <ul>
             <li><a class="active" href="./frontpage.html">Home</a></li>
             <li><a href="./user.html">My profile</a></li>
             <li><a href="./editUser.html">Edit User</a></li>
+            <li><a href="./interest.html">Interest</a></li>
+            <li><a href="./preference.html">Preference</a></li>
             <li><a href="./like.html">Find Match</a></li>
             <li><a href="./match.html">See Match</a></li>
 
@@ -56,6 +59,9 @@
              </tr>
         </table>
         <br><br>
+        <div id="interest">
+            
+        </div>
   
        <!-- Buttons for logout or delete user -->
         <div class="changes">

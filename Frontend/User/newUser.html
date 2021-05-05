@@ -27,42 +27,50 @@
             <label for="dob"> Dob: </label><br>
             <input id="dob" type="text"><br><br>
             
-            <label for="gender"> Gender: </label><br>
-            <input id="gender" type="text"><br><br>
+            <label for="gender">Gender: </label><br>
+            <label for="genderF">Female</label>
+            <input id="genderF" type="radio" name="gender" checked>
+            <label for="genderM">Male</label>
+            <input id="genderM" type="radio" name="gender"><br><br>
             
             <label for="description">About you(Can be filled out later):</label><br>
             <input id="description" type="text"><br><br>
             
-            <label for="min">age preference minimum:</label><br>
-            <input id="min" type="number"><br><br>
-            
-            <label for="max">age preference maximum:</label><br>
-            <input id="max" type="number"><br><br>
-            
-            <label for="gendPref">Gender preference:</label><br>
-            <input id="gendPref" type="number"><br><br>
+            <label for="min">Minimum age preference:</label><br>
+            <input id="ageMin" type="range" name="rangeMin" min="18" max="100" value="0" oninput="amountMin.value=rangeMin.value"><br>                                             
+            <output id="amountMin" name="amountMin" for="rangeMin">18</output><br><br>
 
-            <!-- <label for="Interest">Interest:</label><br>
-            <input type="radio" id="dance" value="dance">
-            <label for="dance">Dance</label><br>
-            <input type="radio" id="football" value="football">
-            <label for="football">Football</label><br>
-            <input type="radio" id="technology" value="technology">
-            <label for="technology">Technology</label>
-            <input type="radio" id="hiking" value="hiking">
-            <label for="hiking">Hiking</label> -->
+            <label for="max">Maximum age preference:</label><br>
+            <input id="ageMax" type="range" name="rangeMax" min="18" max="100" value="0" oninput="amountMax.value=rangeMax.value"><br>                                             
+            <output id="amountMax" name="amountMax" for="rangeMax">18</output><br><br>
+            
+            <label for="genderPref">Gender preference:</label><br>
+            <label for="genderPrefF">Female</label>
+            <input id="genderPrefF" type="radio"  name="genderPref" checked>
+            <label for="genderPrefM">Male</label>
+            <input id="genderPrefM" type="radio"  name="genderPref"><br><br>
 
+            
+            <label for="interests">Interests:</label><br>
+            <label for="sports">Sports</label>
+            <input id="sports" type="checkbox" value="sports" name="interests">
+            <label for="music">Music</label>
+            <input id="music" type="checkbox" value="music" name="interests">
+            <label for="hiking">Hiking</label>
+            <input id="hiking" type="checkbox" value="hiking" name="interests">
+            <label for="dancing">Dancing</label>
+            <input id="dancing" type="checkbox" value="dancing" name="interests"><br><br>
             
     </form>
     <button id="getUser">Create user</button>
-    <!---------------REturn to  main page-------------------->
+    <!---------------Return to  main page-------------------->
     <br>
         <a href="./frontpage.html">
             <input id="return" type="button" value="Go back">
         </a>
   
     <footer>
-        Denne hjemmeside er lavet af alex
+        Denne hjemmeside er lavet af Gruppe 2
     </footer>
     </body>
 </html>

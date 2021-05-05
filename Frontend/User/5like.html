@@ -5,18 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dating App</title>
         <link href="../css/user.css" rel="stylesheet">
-        <script src="../js/match.js" defer></script>
+        <script src="../js/like.js" defer></script>
     </head>
-    <body onload="showMatch()">
+    <body onload="showPotentials()">
         <!-- Navigation Bar -->
         <ul>
             <li><a class="active" href="./frontpage.html">Home</a></li>
             <li><a href="./user.html">My profile</a></li>
             <li><a href="./editUser.html">Edit User</a></li>
+            <li><a href="./interest.html">Interest</a></li>
+            <li><a href="./preference.html">Preference</a></li>
             <li><a href="./like.html">Find Match</a></li>
             <li><a href="./match.html">See Match</a></li>
-
-
+            
         </ul>
         <br><br><br>
 
@@ -28,9 +29,7 @@
         <!-- Content for page -->
         <div>
             <h1>Make love great again</h1>
-            
-
-            <p>View or delete matches here</p>
+            <h3>Here you can find potential partners</h2>
         </div>
 
         <!-------- Displaying user information -->
@@ -73,13 +72,13 @@
             </tr>
         </table>
         <br><br>
-  
-        <!-- Buttons for logout or delete user -->
-        <div class="changes">
-            <input id="delete" type="reset" value="Delete match"> 
 
-            <input id="nextMatch" type="reset" value="next"> 
+        <!-- Buttons for like or dislike -->
+        <div class="love">
+            <button id="dislike">Dislike</button>
+            <button id="like">Like</button>
         </div>
-
+        <br><br>
+        
     </body>
 </html>

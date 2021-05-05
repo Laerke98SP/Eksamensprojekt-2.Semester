@@ -5,17 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dating App</title>
         <link href="../css/user.css" rel="stylesheet">
-        <script src="../js/like.js" defer></script>
+        <script src="../js/match.js" defer></script>
     </head>
-    <body onload="showPotentials()">
+    <body onload="checkIfMatch()">
         <!-- Navigation Bar -->
         <ul>
             <li><a class="active" href="./frontpage.html">Home</a></li>
             <li><a href="./user.html">My profile</a></li>
             <li><a href="./editUser.html">Edit User</a></li>
+            <li><a href="./interest.html">Interest</a></li>
+            <li><a href="./preference.html">Preference</a></li>
             <li><a href="./like.html">Find Match</a></li>
             <li><a href="./match.html">See Match</a></li>
-            
         </ul>
         <br><br><br>
 
@@ -27,7 +28,9 @@
         <!-- Content for page -->
         <div>
             <h1>Make love great again</h1>
-            <h3>Here you can find potential partners</h2>
+            
+
+            <p>View or delete matches here</p>
         </div>
 
         <!-------- Displaying user information -->
@@ -41,7 +44,7 @@
                 <th>gender:</th>
             </tr>
             <tr>
-                <td id="username"></td>
+                <td id="email"></td>
                 <td id="password"></td>
                 <td id="firstname"></td>
                 <td id="lastname"></td>
@@ -64,19 +67,19 @@
                  <th>Gender preference</th>
              </tr>
             <tr>
-                <td id="minage"></td>
-                <td id="maxage"></td>
+                <td id="ageMin"></td>
+                <td id="ageMax"></td>
                 <td id="pref"></td>
             </tr>
         </table>
         <br><br>
+  
+        <!-- Buttons for logout or delete user -->
+        <div class="changes">
+            <input id="delete" type="reset" value="Delete match"> 
 
-        <!-- Buttons for like or dislike -->
-        <div class="love">
-            <button id="dislike">Dislike</button>
-            <button id="like">Like</button>
+            <input id="nextMatch" type="reset" value="next"> 
         </div>
-        <br><br>
-        
+
     </body>
 </html>

@@ -40,6 +40,11 @@ body {
     background-color: #ff009e;
   }
   
+  #notification {
+    border: solid black;
+    color: red;
+}
+
   /* Buttons */
   #delete, #logout, #edit, #dislike, #like  {
       background-color: #cbb2ff;

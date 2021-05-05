@@ -35,8 +35,6 @@ async function get(context, req){
     try{
         let email = req.query.email;
         let password = req.query.password;
-        console.log(email);
-        console.log(password);
         let user = await db.select(email, password)
         console.log("Executed to line 31 in azure function")
         

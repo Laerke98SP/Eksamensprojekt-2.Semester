@@ -95,11 +95,7 @@ function userVote(votedOn, voter, vote){
             console.log("Something went wroooong")
         })
     };
-
-
     
-
-
 function displayMatch(data){
     console.log("skal vise antal match")
 }

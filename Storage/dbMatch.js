@@ -53,7 +53,7 @@ function insertMatch(payload){
 }
 module.exports.insertMatch = insertMatch;
 
-function getMatches(userID){
+function getMatches(payload){
     return new Promise((resolve, reject) => {
         const sql = 'SELECT match.userID1, match.userID2 FROM match WHERE (SELECT id FROM [user] WHERE [user].email = @email) = match.userID1 OR (SELECT id FROM [user] WHERE [user].email = @email) = match.userID2;';
         console.log("Now we have ran sql query")

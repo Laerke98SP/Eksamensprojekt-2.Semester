@@ -1,185 +1,198 @@
 // ---------------- DEFINING CREATEUSER BUTTON ------------------- //
 var createUser = document.getElementById("getUser");
 
-// TEST STATEMENT //
-console.log("test in first line in frontend");
+// ------------- DEFINING INPUT VARIABLES -----------------//  
+
+var genderF = document.getElementById("genderF");
+var genderM = document.getElementById("genderM");
+
+var prefFemale = document.getElementById("genderPrefF");
+var prefMale = document.getElementById("genderPrefM");
+
+
+var sports = document.getElementById("sports");
+var music = document.getElementById("music");
+var hiking = document.getElementById("hiking");
+var dancing = document.getElementById("dancing");
+
+class User{
+    constructor(email,password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref){
+        this.email = email
+        this.password = password
+        this.firstName = firstName 
+        this.lastName = lastName
+        this.dob = dob
+        this.gender = gender
+        this.description = description
+        this.ageMin = ageMin
+        this.ageMax = ageMax
+        this.genderPref = genderPref
+    }
+};
+
+class Interest{
+    constructor(email, sports, sVote, music, mVote, hiking, hVote, dancing, dVote){
+        this.email = email
+        this.sports = sports
+        this.sVote = sVote
+        this.music = music
+        this.mVote = mVote
+        this.hiking = hiking
+        this.hVote = hVote
+        this.dancing = dancing
+        this.dVote = dVote
+    }
+
+};
+
+
 
 // ---------------- CREATEUSER ACTION WHEN CLICK ON BUTTON ---------// 
 createUser.addEventListener('click', function(){
-    // ------------- DEFINING INPUT VARIABLES -----------------//
-    var username = document.getElementById("email").value;
-    var code = document.getElementById("password").value;
-    var firstN = document.getElementById("firstName").value;
-    var lastN = document.getElementById("lastName").value;
-    var dateOfBirth = document.getElementById("dob").value;
-    var gendF = document.getElementById("genderF");
-    var gendM = document.getElementById("genderM");
-    var descr = document.getElementById("description").value;
-    var min = document.getElementById("min").value;
-    var max = document.getElementById("max").value;
-    var gendPrefF = document.getElementById("genderPrefF");
-    var gendPrefM = document.getElementById("genderPrefM");
-    var intSports = document.getElementById("sports");
-    var intMusic = document.getElementById("music");
-    var intHiking = document.getElementById("hiking");
-    var intDancing = document.getElementById("dancing");
-    convertDate(dateOfBirth);
-    var gend = null;
-    if (gendM.checked) { //tjekker hvilken gender-vÃ¦rdi der er tjekket af
-        gend = gendM.value;
-        console.log(gendM);
-        gend;
-    };
-    if (gendF.checked) {
-        gend = gendF.value;
-        gend;
-    };
-    var gendPref = null;
-    if (gendPrefM.checked) { //tjekker hvilken gender-vÃ¦rdi der er tjekket af
-        gendePef = gendPrefM.value;
-        gendPref;
-    };
-    if (gendPrefF.checked) {
-        gendPref = gendPrefF.value;
-        gendPref;
-    var interests = [];
-    if (intSports.checked) {
-        interests.push(intSports.value);
-        interests;
-    };
-    if (intMusic.checked) {
-        interests.push(intMusic.value);
-        interests;
-    };
-    if (intHiking.checked) {
-        interests.push(intHiking.value);
-        interests;
-    };
-    if (intDancing.checked) {
-        interests.push(intDancing.value);
-        interests;
-    };
-    console.log(interests);
 
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var dob = document.getElementById("dob").value;
+
+    var description = document.getElementById("description").value;
+    var ageMin = document.getElementById("ageMin").value;
+    var ageMax = document.getElementById("ageMax").value;
+
+     //-------------- SAVE INPUT IN LOCALSTORAGE ---------------//
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
+    localStorage.setItem('firstName', firstName);
+    localStorage.setItem('lastName', lastName);
+    localStorage.setItem('dob', dob);
+    // localStorage.setItem('gender', gender.value);
+    localStorage.setItem('description', description);
+    localStorage.setItem('ageMin', ageMin);
+    localStorage.setItem('ageMax', ageMax);
+    // localStorage.setItem('genderPref', genderPref.value);
+    
+    
     // TESTING STATEMENT //
-    console.log("Testing add eventlistener in frontend");
-    //-------------- SAVE INPUT IN LOCALSTORAGE ---------------//
-    localStorage.setItem('brugernavn', username);
-    localStorage.setItem('kodeord', code);
-    localStorage.setItem('fornavn', firstN);
-    localStorage.setItem('efternavn', lastN);
-    localStorage.setItem('fødselsdato', dateOfBirth);
-    localStorage.setItem('køn', gend);
-    localStorage.setItem('beskrivelse', descr);
-    localStorage.setItem('min', min);
-    localStorage.setItem('max', max);
-    localStorage.setItem('kønpræf', gendPref);
-    localStorage.setItem('interesser', interests);
-    console.log("virker localstorage???????")
-
-    // TEST STATEMENTS //
-    console.log(lastN);
-    console.log(min);
-    console.log(interests)
+    console.log(firstName);
 
     //-------------- CALL CREATEUSER FUNCTION ---------------------//
-    saveUser();
-    //saveInterests();
+    saveUser()
+});
 
-    // TEST STATEMENT //
-    console.log("Done executing submit button")
-}});
-
-function convertDate(dobBefore){
-    var dobArray = dobBefore.split("/");
-    var dobAfter = dobArray[2] + '-' + dobArray[1] + '-' + dobArray[0];
-    return dobAfter; 
-};
 
 // ----------------- ACTION FOR CREATEUSER FUNCTION -----------------//
 function saveUser(){
+
+    // // Making DOB SQL friendly
+    // let dateOfBirth = convertDate(dob.value);
+
     // ------- GET VALUE OF LOCALSTORAGE ITEMS ----------//
-    let email = localStorage.getItem('brugernavn');
-    let password = localStorage.getItem('kodeord');
-    let firstName = localStorage.getItem('fornavn');
-    let lastName = localStorage.getItem('efternavn');
-    let dob = localStorage.getItem('fødselsdato');
-    let gender = localStorage.getItem('køn');
-    let description = localStorage.getItem('beskrivelse');
-    let ageMin = localStorage.getItem('min');
-    let ageMax = localStorage.getItem('max');
-    let genderPref = localStorage.getItem('kønpræf');
-    let interests = localStorage.getItem('interesser');
+    let email = localStorage.getItem('email');
+    let password = localStorage.getItem('password');
+    let firstName = localStorage.getItem('firstName');
+    let lastName = localStorage.getItem('lastName');
+    let dob = localStorage.getItem('dob');
+    let description = localStorage.getItem('description');
+    let ageMin = localStorage.getItem('ageMin');
+    let ageMax = localStorage.getItem('ageMax');
+    
+  
+    console.log(firstName)
 
-    // TEST STATEMENT //
-    console.log(ageMin);
+    // Deciding which genders 0 = females, 1= males
+    let gender1 = 0;
+    if(genderF.checked ){
+        gender1 = 0
+    } else gender1 = 1;
+    let genderPref1 = 0;
+    if(genderPrefF.checked){
+        genderPref1 = 0
+    } else genderPref1 = 1;
 
-    // ---------------- INPUT FOR FETCH REQUEST ----------//
-    const option = {
+    localStorage.setItem('gender', gender1);
+    localStorage.setItem('genderPref',genderPref1 );
+    let gender = localStorage.getItem('gender');
+    let genderPref = localStorage.getItem('genderPref');
+
+    let newUser = new User( email, password, firstName, lastName, dob , gender, description, ageMin, ageMax, genderPref)
+
+
+    console.log(newUser);
+    
+
+    // Interest and vote 0 = no , 1 = yes
+    let sVote = 0;
+    let mVote = 0;
+    let hVote = 0;
+    let dVote = 0;
+    if (sports.checked) {
+        sVote = 0;
+    } else sVote = 1;
+    if (music.checked) {
+        mVote = 0;
+    } else mVote = 1;
+    if (hiking.checked) {
+        hVote = 0;
+    } else hVote = 1;
+    if (dancing.checked) {
+        dVote = 0;
+    } else dVote = 1;
+
+    let userInterest = new Interest(email, sports.value ,sVote, music.value, mVote, hiking.value, hVote,  dancing.value, dVote)
+    
+   console.log(userInterest);
+
+
+
+    // ---------------- INPUT FOR POST USER IN DB ----------//
+    const option1 = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset-UTF-8'
         },
-        body: JSON.stringify({
-            email: email,
-            password: password,
-            firstName: firstName,
-            lastName:lastName,
-            dob: dob,
-            gender: gender,
-            description: description,
-            ageMin: ageMin,
-            ageMax: ageMax,
-            genderPref: genderPref,
-            interests: interests
-        })
+        body: JSON.stringify(
+            newUser)
     };
-    fetch("http://localhost:7071/api/user", option)   
+        fetch("http://localhost:7071/api/user", option1)
+        
     .then((response) => {
-        return response.json()
+        return response.json();
     })
     .then((data) => {
+        inputInterest(userInterest);
             // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
-            console.log("Process Succeeded")
-            console.log(data)
-            alert("You will be directed to your profile")
-            window.location.href = "./user.html"; 
+            console.log("process Succeeded")
+            console.log("Done in user transfer")
     
     }).catch((err) =>{
         console.log(err)
         console.log("Something went wroooong")
-    });
+    })
 };
 
-// function saveInterests(){
-//     // ------- GET VALUE OF LOCALSTORAGE ITEMS ----------//
-//     let email = localStorage.getItem('brugernavn');
-//     let interests = localStorage.getItem('interesser');
+function inputInterest(userInterest){
 
-//     // TEST STATEMENT //
-//     console.log(interests);
-
-//     // ---------------- INPUT FOR FETCH REQUEST ----------//
-//     const option = {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json; charset-UTF-8'
-//         },
-//         body: JSON.stringify({
-//             email: email,
-//             interests: interests
-//         })
-//     };
-
-//     fetch("http://localhost:7071/api/user", option)   
-//     .then((response) => {
-//         return response.json()
-//     }).then((data) => {
-//             // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
-//             console.log("process Succeeded")
-//             console.log(data) 
-//     }).catch((err) =>{
-//         console.log(err)
-//         console.log("Something went wroooong")
-//     });
-// };
+    const option2 = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset-UTF-8'
+        },
+        body: JSON.stringify(
+            userInterest)
+    };
+    fetch("http://localhost:7071/api/interest", option2) 
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+            // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
+            console.log("Done in Interest transfer")
+            alert('We will direct you to your profile')
+            window.location.href = "./1user.html"; 
+    
+    }).catch((err) =>{
+        console.log(err)
+        console.log("Something went wroooong")
+    })
+}

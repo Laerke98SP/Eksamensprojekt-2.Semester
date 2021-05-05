@@ -12,44 +12,45 @@
         <p id="todo">Sign in here</p>
     <!--------Getting localstorage from example of localstorage week 42-->
     <form>
-            <label for="email">Email:</label><br>
+            <label for="Email">Email/ username:</label><br>
             <input id="email" type="text" required><br><br>
             
-            <label for="password">Password:</label><br>
+            <label for="password">password:</label><br>
             <input id="password" type="text" required><br><br>
             
-            <label for="firstName">First name:</label><br>
+            <label for="firstName">Firstname:</label><br>
             <input id="firstName" type="text"><br><br>
             
-            <label for="lastName">Last name:</label><br>
+            <label for="lastName">Lastname :</label><br>
             <input id="lastName" type="text"><br><br>
             
-            <label for="dob">Date of birth:</label><br>
-            <input id="dob" type="date"><br><br>
+            <label for="dob"> Dob: </label><br>
+            <input id="dob" type="text"><br><br>
             
             <label for="gender">Gender: </label><br>
             <label for="genderF">Female</label>
-            <input id="genderF" type="radio" value="0" name="gender" checked>
+            <input id="genderF" type="radio" name="gender" checked>
             <label for="genderM">Male</label>
-            <input id="genderM" type="radio" value="1" name="gender"><br><br>
+            <input id="genderM" type="radio" name="gender"><br><br>
             
-            <label for="description">About you <br> (can be filled out later):</label><br>
+            <label for="description">About you(Can be filled out later):</label><br>
             <input id="description" type="text"><br><br>
             
             <label for="min">Minimum age preference:</label><br>
-            <input id="min" type="range" name="rangeMin" min="18" max="100" value="0" oninput="amountMin.value=rangeMin.value"><br>                                             
-                <output id="amountMin" name="amountMin" for="rangeMin">18</output><br><br>
+            <input id="ageMin" type="range" name="rangeMin" min="18" max="100" value="0" oninput="amountMin.value=rangeMin.value"><br>                                             
+            <output id="amountMin" name="amountMin" for="rangeMin">18</output><br><br>
 
             <label for="max">Maximum age preference:</label><br>
-            <input id="max" type="range" name="rangeMax" min="18" max="100" value="0" oninput="amountMax.value=rangeMax.value"><br>                                             
-                <output id="amountMax" name="amountMax" for="rangeMax">18</output><br><br>
+            <input id="ageMax" type="range" name="rangeMax" min="18" max="100" value="0" oninput="amountMax.value=rangeMax.value"><br>                                             
+            <output id="amountMax" name="amountMax" for="rangeMax">18</output><br><br>
             
             <label for="genderPref">Gender preference:</label><br>
             <label for="genderPrefF">Female</label>
-            <input id="genderPrefF" type="radio" value="0" name="genderPref" checked>
+            <input id="genderPrefF" type="radio"  name="genderPref" checked>
             <label for="genderPrefM">Male</label>
-            <input id="genderPrefM" type="radio" value="1" name="genderPref"><br><br>
+            <input id="genderPrefM" type="radio"  name="genderPref"><br><br>
 
+            
             <label for="interests">Interests:</label><br>
             <label for="sports">Sports</label>
             <input id="sports" type="checkbox" value="sports" name="interests">
@@ -60,17 +61,16 @@
             <label for="dancing">Dancing</label>
             <input id="dancing" type="checkbox" value="dancing" name="interests"><br><br>
             
-
-            <button id="getUser">Create user</button>
     </form>
-    <!---------------REturn to  main page-------------------->
+    <button id="getUser">Create user</button>
+    <!---------------Return to  main page-------------------->
     <br>
-        <a href="./frontpage.html">
+        <a href="./0frontpage.html">
             <input id="return" type="button" value="Go back">
         </a>
   
     <footer>
-        Denne hjemmeside er lavet af alex
+        Denne hjemmeside er lavet af Gruppe 2
     </footer>
     </body>
 </html>

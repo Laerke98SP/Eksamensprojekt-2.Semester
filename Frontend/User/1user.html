@@ -7,68 +7,67 @@
         <link href="../css/user.css" rel="stylesheet">
         <script src="../js/user.js" defer></script>
     </head>
-    <body>
+    <body onload="showUser()">
+    <!-- <body onload="getUser(email, password)"> -->
         <!-- Navigation Bar -->
         <ul>
             <li><a class="active" href="./frontpage.html">Home</a></li>
-            <li><a href="./user.html">My profile</a></li>
-            <li><a href="./editUser.html">Edit User</a></li>
-            <li><a href="./like.html">Find Match</a></li>
-            <li><a href="./match.html">See Match</a></li>
-
+            <li><a href="./1user.html">My profile</a></li>
+            <li><a href="./2editUser.html">Edit User</a></li>
+            <li><a href="./3interest.html">Interest</a></li>
+            <li><a href="./4preference.html">Preference</a></li>
+            <li><a href="./5like.html">Find Match</a></li>
+            <li><a href="./6match.html">See Match</a></li>
 
         </ul>
         <br><br><br>
 
         <!-- Div for notification -->
-        <div> <p id="notification">hej</p></div>
+        <div> <p id="notification"></p></div>
 
 
 
         <!-- Content for page -->
         <div>
             <h1>Make love great again</h1>
-            <h3>We believe in love, do you?</h2>
-            <h2>On this page you can see your profile</h2>
 
-            <p>Some text some text some text some text..</p>
-            <p>Some text some text some text some text..</p>
+            <h3>On this page you can see your profile</h2>
         </div>
-        <!--------Getting localstorage from example of localstorage week 42-->
-    <div class="InfoDiv">
+
+        <!-------- Displaying user information -->
         <table id="table">
             <tr>
                 <th>Username:</th>
-                <th>Password:</th>
-                <th>First name:</th>
-                <th>Last name:</th>
+                <th>Password</th>
+                <th>Firstname:</th>
+                <th>Lastname:</th>
                 <th>Age:</th>
-                <th>Gender:</th>
+                <th>gender:</th>
             </tr>
         </table>
         <br>
         <div id="description">
-
-         <p> Description:</p>
-
+            <p> Description:</p>
         </div>
         <br>
         <table id="info">
             <p>Preference in partner:</p>
              <tr>
-                 <th>Minimum age preference:</th>
-                 <th>Maximum age preference:</th>
-                 <th>Gender preference:</th>
+                 <th>Min age:</th>
+                 <th>Max age:</th>
+                 <th>Gender preference</th>
              </tr>
         </table>
- </div><br><br>
+        <br><br>
+        <div onload="showInterest(mail)">
+            <p id="interest"></p>
+            
+        </div>
   
        <!-- Buttons for logout or delete user -->
         <div class="changes">
             <input id="delete" type="reset" value="Delete"> 
-            <a href="./frontpage.html">
-                <input id="submitlogout" type="reset" value="Log out"> 
-            </a>
+            <input id="logout" type="reset" value="logout"> 
         </div>
 
     </body>

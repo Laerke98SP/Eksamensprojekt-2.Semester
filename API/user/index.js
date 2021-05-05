@@ -1,4 +1,4 @@
-const db = require('../../Storage/dbUser');
+const db = require('../../Storage/User/dbUser');
 
 // Connection to DB
 module.exports = async function (context, req) {
@@ -35,13 +35,13 @@ async function get(context, req){
     try{
         let email = req.query.email;
         let password = req.query.password;
+        
         let user = await db.select(email, password)
-        console.log("Executed to line 31 in azure function")
         
         context.res = {
             body: user
         };
-        console.log("also send the context to client side")
+
     } catch(error){
         context.res = {
             status: 404,
@@ -95,16 +95,17 @@ async function deleteUser(context, req){
         let email = req.query.email;
         console.log(email);
         let user = await db.deleteUser(email);
-        console.log("Executed to line 31 in azure function");
         
         context.res = {
-            body: user
+            body: {
+                status: "succes"
+            }
         };
         console.log("also send the context to client side");
     } catch(error){
         context.res = {
-            status: 404,
-            body: `No user - ${error.message}`
+            status: 400,
+            body: error.message
         }
     } 
 }

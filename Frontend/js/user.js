@@ -18,7 +18,7 @@ var interest = document.getElementById("interest");
 
 // ------------------ CREATE CLASS USER -------------------- //
 class User {
-    constructor(email, password, firstName, lastName, dob, gender, description, minAge, maxAge, genderPref){
+    constructor(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref){
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -31,33 +31,6 @@ class User {
         this.genderPref = genderPref;
     }
 }; 
-
-// function getUser(email, password){
-
-//     // ---------- RETRIEVE IN DB A PERSON WITH FOLLOWING MAIL AND PASSWORD ---------//
-//     fetch(`http://localhost:7071/api/user?email=${email}&password=${password}`)
-//     .then(
-//         function(response){
-//                 // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
-//                 response.json().then(function (data) {
-                    
-//                         //------------ RETRIEVING THE REST OF USER INFO FROM DB-----------//
-//                         localStorage.setItem('firstName', data[3].value);
-//                         localStorage.setItem('lastName', data[4].value);
-//                         localStorage.setItem('dob', data[5].value);
-//                         localStorage.setItem('gender', data[6].value);
-//                         localStorage.setItem('description', data[7].value);
-//                         localStorage.setItem('ageMin', data[8].value);
-//                         localStorage.setItem('ageMax', data[9].value);
-//                         localStorage.setItem('genderPref', data[10].value);
-//                     showUser();
-//                     showInterest(email);
-//                 })
-//                 .catch(function (err){
-//                     console.log(err + " Testing err");
-//                 });
-//     }); 
-// };
 
 function showUser(){
     let firstName = localStorage.getItem('firstName');
@@ -127,7 +100,7 @@ logout.addEventListener('click', function(){
     
 
     // ----------- Sent user back to frontpage --------------------
-    window.location.href = "./frontpage.html"; 
+    window.location.href = "./0frontpage.html"; 
 })
 
 // -------------- DELETE USER ---------------//
@@ -173,6 +146,6 @@ function deleteUser(){
         localStorage.removeItem('kønPr');
             
             
-        window.location.href = "./frontpage.html"; 
+        window.location.href = "./0frontpage.html"; 
     };
 };

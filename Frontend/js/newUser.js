@@ -1,18 +1,12 @@
 // ---------------- DEFINING CREATEUSER BUTTON ------------------- //
 var createUser = document.getElementById("getUser");
 
-// ------------- DEFINING INPUT VARIABLES -----------------//  var username = document.getElementById("email")
-var email = document.getElementById("email");
-var password = document.getElementById("password")
-var firstName = document.getElementById("firstName")
-var lastName = document.getElementById("lastName")
-var dob = document.getElementById("dob")
-var genderF = document.getElementById("genderF")
-var genderM = document.getElementById("genderM")
-var description = document.getElementById("description")
-var ageMin = document.getElementById("ageMin")
-var ageMax = document.getElementById("ageMax")
-var prefFemale = document.getElementById("genderPrefF")
+// ------------- DEFINING INPUT VARIABLES -----------------//  
+
+var genderF = document.getElementById("genderF");
+var genderM = document.getElementById("genderM");
+
+var prefFemale = document.getElementById("genderPrefF");
 var prefMale = document.getElementById("genderPrefM");
 
 
@@ -55,21 +49,32 @@ class Interest{
 
 // ---------------- CREATEUSER ACTION WHEN CLICK ON BUTTON ---------// 
 createUser.addEventListener('click', function(){
+
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var dob = document.getElementById("dob").value;
+
+    var description = document.getElementById("description").value;
+    var ageMin = document.getElementById("ageMin").value;
+    var ageMax = document.getElementById("ageMax").value;
+
      //-------------- SAVE INPUT IN LOCALSTORAGE ---------------//
-    localStorage.setItem('email', email.value);
-    localStorage.setItem('password', password.value);
-    localStorage.setItem('firstName', firstName.value);
-    localStorage.setItem('lastName', lastName.value);
-    localStorage.setItem('dob', dob.value);
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
+    localStorage.setItem('firstName', firstName);
+    localStorage.setItem('lastName', lastName);
+    localStorage.setItem('dob', dob);
     // localStorage.setItem('gender', gender.value);
-    localStorage.setItem('description', description.value);
-    localStorage.setItem('ageMin', ageMin.value);
-    localStorage.setItem('ageMax', ageMax.value);
+    localStorage.setItem('description', description);
+    localStorage.setItem('ageMin', ageMin);
+    localStorage.setItem('ageMax', ageMax);
     // localStorage.setItem('genderPref', genderPref.value);
     
     
     // TESTING STATEMENT //
-    console.log(email.value);
+    console.log(firstName);
 
     //-------------- CALL CREATEUSER FUNCTION ---------------------//
     saveUser()
@@ -93,7 +98,7 @@ function saveUser(){
     let ageMax = localStorage.getItem('ageMax');
     
   
-
+    console.log(firstName)
 
     // Deciding which genders 0 = females, 1= males
     let gender1 = 0;
@@ -110,7 +115,7 @@ function saveUser(){
     let gender = localStorage.getItem('gender');
     let genderPref = localStorage.getItem('genderPref');
 
-    let newUser = new User( email, password, firstName.value, lastName.value, dob.value , gender, description.value, ageMin.value, ageMax.value, genderPref)
+    let newUser = new User( email, password, firstName, lastName, dob , gender, description, ageMin, ageMax, genderPref)
 
 
     console.log(newUser);
@@ -184,7 +189,7 @@ function inputInterest(userInterest){
             // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
             console.log("Done in Interest transfer")
             alert('We will direct you to your profile')
-            window.location.href = "./user.html"; 
+            window.location.href = "./1user.html"; 
     
     }).catch((err) =>{
         console.log(err)

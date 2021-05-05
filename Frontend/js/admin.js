@@ -11,7 +11,7 @@ const edit = document.getElementById('edit');
 
 logout.addEventListener('click', function(){
     alert('loggin admin out');
-    window.location.href = "../User/frontpage.html";
+    window.location.href = "../User/0frontpage.html";
 });
 
 

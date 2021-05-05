@@ -31,9 +31,8 @@ module.exports = async function (context, req) {
 async function get(context, req){
     try{
         let email = req.query.email;
-        let password = req.query.password;
         
-        let user = await db.showInterest(email, password)
+        let user = await db.showInterest(email)
         
         context.res = {
             body: user

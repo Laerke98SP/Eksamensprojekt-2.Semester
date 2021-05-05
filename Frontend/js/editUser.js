@@ -13,17 +13,17 @@ var pref = document.getElementById("info");
 
 // ------------------ CREATE CLASS USER -------------------- //
 class User {
-    constructor(email, code, fname, lname, bdate, gen, descr, min, max, gendPref){
+    constructor(email, password, firstName, lastName, dob, gender, description, minAge, maxage, genderPref){
         this.email = email;
-        this.code = code;
-        this.fname = fname;
-        this.lname = lname;
-        this.bdate = bdate;
-        this.gen = gen;
-        this.descr = descr;
-        this.min = min;
-        this.max = max;
-        this.gendPref = gendPref;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.gender = gender;
+        this.description = description;
+        this.minAge = minAge;
+        this.maxage = maxage;
+        this.genderPref = genderPref;
     }
 }; 
 
@@ -35,12 +35,13 @@ class User {
 
 function showEdit(){
     // henter email og password fra storage, så vi kan få brugeren via et fetch request 
-    let email = localStorage.getItem('mail');
-    let password = localStorage.getItem('kodeord');
+    let email = localStorage.getItem('email');
+    let password = localStorage.getItem('password');
 
-    fetch(`http://localhost:7071/api/user?email=${email}&password=${password}`).then((resp) => resp.json()).then(function(data){
+    fetch(`http://localhost:7071/api/user?email=${email}&password=${password}`)
+    .then((resp) => resp.json()).then(function(data){
         // Dataen bliver direkte indsadt som defailt values 
-        document.getElementById('mail').defaultValue = data[1].value;
+        document.getElementById('email').defaultValue = data[1].value;
         document.getElementById('password').defaultValue = data[2].value;
         document.getElementById('firstname').defaultValue = data[3].value;
         document.getElementById('lastname').defaultValue = data[4].value;
@@ -58,20 +59,20 @@ function showEdit(){
 // ----------- LOG OUT FUNCITON ------------- //
 logout.addEventListener('click', function(){
     // ---------- Remove values from localstorage ----------------------
-    localStorage.removeItem('mail');
-    localStorage.removeItem('kodeord');
-    localStorage.removeItem('fornavn');
-    localStorage.removeItem('efternavn');
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('lastName');
     localStorage.removeItem('dob');
-    localStorage.removeItem('køn');
-    localStorage.removeItem('beskrivelse');
-    localStorage.removeItem('min');
-    localStorage.removeItem('max');
-    localStorage.removeItem('kønPr');
+    localStorage.removeItem('gender');
+    localStorage.removeItem('description');
+    localStorage.removeItem('minAge');
+    localStorage.removeItem('maxAge');
+    localStorage.removeItem('genderPref');
     
 
     // ----------- Send user back to frontpage --------------------
-    window.location.href = "./frontpage.html"; 
+    window.location.href = "./0frontpage.html"; 
 })
 
 
@@ -127,12 +128,12 @@ function deleteUser(){
 
     // -------------------- 02. Ved klik på submit ændringer---------------------------
 // edit.addEventListener('click', function(){
-//      editUser(updUser);
+//      editUser();
 // })
 
     //--------------------- 03. Funktionen edit(user) -------------------------
 function editUser(){
-    let email = localStorage.getItem('mail');
+    let email = localStorage.getItem('email');
 
     let password = document.getElementById('password').value
     let firstName = document.getElementById('firstname').value
@@ -144,7 +145,9 @@ function editUser(){
     let ageMax = document.getElementById('max').value
     let genderPref = document.getElementById('pref').value
 
-    let editedUser = {email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref}
+    let editedUser = new User(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref);
+
+    console.log(editUser)
     
     const option = {
         method: 'PATCH',
@@ -160,7 +163,7 @@ function editUser(){
         alert("Succes!")
         alert("You will be directed back to your profile");
         // Naviger til brugerens profil hvis alt ovenstående lykkes
-        window.location.href = "./user.html"; 
+        window.location.href = "./1user.html"; 
     }).catch(function() {            
         // lykkedes det ikke 
         console.log("error");

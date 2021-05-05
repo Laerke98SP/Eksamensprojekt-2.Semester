@@ -32,47 +32,44 @@ module.exports = async function (context, req) {
 
 // Login function
 async function get(context, req){
-    try{
+    try {
         let email = req.query.email;
         let password = req.query.password;
-        
-        let user = await db.select(email, password)
-        
+        let user = await db.select(email, password);
         context.res = {
             body: user
         };
-
     } catch(error){
         context.res = {
             status: 404,
             body: `No user - ${error.message}`
-        }
-    } 
-}
+        };
+    };
+};
 
 // Create user function
 async function post(context, req){
-    try{
+    try {
         let payload = req.body;
-        await db.insert(payload)
+        await db.insert(payload);
         context.res = {
             status: 200,
             body: {
                 status: 'Success'
             }
-        }
+        };
     } catch(error){
         context.res = {
             status: 400,
             body: error.message
-        }
-    }
-}
+        };
+    };
+};
 
 
 // Update user function
 async function patch(context, req){
-    try{
+    try {
         let payload = req.body;
         await db.updateUser(payload)
         context.res = {

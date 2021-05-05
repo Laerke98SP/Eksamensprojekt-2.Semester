@@ -18,11 +18,9 @@ function startDb(){
         })
         connection.connect();
     });
-}
-
+};
 module.exports.sqlConnection = connection;
 module.exports.startDb = startDb;
-
 
 // POST REQ - for create user function - DONE
 function insert(payload){
@@ -60,9 +58,8 @@ function insert(payload){
         connection.execSql(request)
 
     });
-}
+};
 module.exports.insert = insert;
-
 
 //  GET req - for login function - DONE
 function select(email, password){
@@ -85,14 +82,12 @@ function select(email, password){
                 console.log(rowcount + " logging rowcount");
             }
         });
-        // column name, data type, paramname
+        //Column name, data type, paramname
         request.addParameter('email', TYPES.VarChar, email)
         request.addParameter('password', TYPES.VarChar, password)
         
-        
-        
         //A row resulting from execution of the SQL statement.
-        // column consist of meta data and value
+        //Column consist of meta data and value
         request.on('row', (columns) => {
             resolve(columns)
             
@@ -102,8 +97,6 @@ function select(email, password){
     })
 };
 module.exports.select = select;
-
-
 
 // PATCH REQ - for update user function
 function updateUser(payload){
@@ -178,5 +171,5 @@ function deleteUser(email){
         connection.execSql(request)
 
     });
-}
+};
 module.exports.deleteUser = deleteUser;

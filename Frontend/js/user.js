@@ -1,10 +1,8 @@
 // -----------  DEFINING VARIABLES ------------- //
 
 // 01. Variables for localstorage
-let email = localStorage.getItem('email');
-let password = localStorage.getItem('password');
-
-console.log(email);
+// let email = localStorage.getItem('email');
+// let password = localStorage.getItem('password');
 
 // 02. Variables for buttons
 const logout = document.getElementById("logout");
@@ -33,55 +31,85 @@ class User {
 }; 
 
 function showUser(){
-    let firstName = localStorage.getItem('firstName');
-    let lastName = localStorage.getItem('lastName');
-    let dob = localStorage.getItem('dob');
-    let gender = localStorage.getItem('gender');
-    let description = localStorage.getItem('description');
-    let ageMin = localStorage.getItem('ageMin');
-    let ageMax = localStorage.getItem('ageMax');
-    let genderPref = localStorage.getItem('genderPref');
+    let email = localStorage.getItem('email');
+    let password = localStorage.getItem('password');
 
-    console.log(ageMin + " test")
+    fetch(`http://localhost:7071/api/user?email=${email}&password=${password}`)
+    .then((resp) => resp.json()).then(function(data) {
+        // alert(data[1].value)
+        table.innerHTML += 
+        "<tr><td>" + data[1].value + 
+        "</td><td>" + data[2].value + 
+        "</td><td>" + data[3].value +
+        "</td><td>" + data[4].value + 
+        "</td><td>" + data[5].value +
+        "</td><td>" + data[6].value +
+        "</td></tr>";
+       
+        info.innerHTML += data[7].value;
+    
+        pref.innerHTML +=
+        "<tr><td>" + data[8].value +
+        "</td><td>" + data[9].value +
+        "</td><td>" + data[10].value +
+        "</td></tr>";
+        
+        
+    }).catch(function() {            
+        // lykkedes det ikke 
+        console.log("error");
+    }); // Kunne indsætte window.location.href her - efter en finally blok
 
-    const user = new User(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref);
-    console.log(user);
 
-    table.innerHTML += 
-    "<tr><td>" + email + 
-    "</td><td>" + password + 
-    "</td><td>" + firstName +
-    "</td><td>" + lastName + 
-    "</td><td>" + dob +
-    "</td><td>" + gender +
-    "</td></tr>";
+
+
+    // let firstName = localStorage.getItem('firstName');
+    // let lastName = localStorage.getItem('lastName');
+    // let dob = localStorage.getItem('dob');
+    // let gender = localStorage.getItem('gender');
+    // let description = localStorage.getItem('description');
+    // let ageMin = localStorage.getItem('ageMin');
+    // let ageMax = localStorage.getItem('ageMax');
+    // let genderPref = localStorage.getItem('genderPref');
+
+    // console.log(ageMin + " test")
+
+    // const user = new User(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref);
+    // console.log(user);
+
+    // table.innerHTML += 
+    // "<tr><td>" + email + 
+    // "</td><td>" + password + 
+    // "</td><td>" + firstName +
+    // "</td><td>" + lastName + 
+    // "</td><td>" + dob +
+    // "</td><td>" + gender +
+    // "</td></tr>";
    
-    info.innerHTML += description;
+    // info.innerHTML += description;
 
-    pref.innerHTML +=
-    "<tr><td>" + ageMin +
-    "</td><td>" + ageMax+
-    "</td><td>" + genderPref+
-    "</td></tr>";
+    // pref.innerHTML +=
+    // "<tr><td>" + ageMin +
+    // "</td><td>" + ageMax+
+    // "</td><td>" + genderPref+
+    // "</td></tr>";
+    showInterest()
 }
 
-function showInterest(email){
+function showInterest(){
+    let email = localStorage.getItem('email');
+
     // ---------- RETRIEVE IN DB A PERSON WITH FOLLOWING MAIL AND PASSWORD ---------//
     fetch(`http://localhost:7071/api/interest?email=${email}`)
-    .then(
-        function(response){
-                // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
-                response.json().then(function (data) {
-                    console.log(data);
-                    interest.innerHTML += data;
-                })
-                .catch(function (err){
-                    console.log(err + " Testing err");
-                });
+    .then(function(response){
+        // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
+        response.json().then(function (data) {
+            console.log(data);
+            interest.innerHTML += data;
+        }).catch(function (err){
+            console.log(err + " Testing err");
+        });
     }); 
-
-
-
 }
 
 // ----------- LOG OUT FUNCITON ------------- //

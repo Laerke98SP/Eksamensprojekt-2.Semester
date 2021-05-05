@@ -145,7 +145,9 @@ function editUser(){
     let ageMax = document.getElementById('max').value
     let genderPref = document.getElementById('pref').value
 
-    let editedUser = new User(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref);
+    // let editedUser = new User(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref);
+
+    let editedUser = {email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref}
 
     console.log(editUser)
     

@@ -27,10 +27,8 @@ module.exports = async function (context, req) {
 async function get(context, req){
     try{
         let email = req.query.email;
-        console.log(email);
-        let user = await db.insertMatch(email)
+        let user = await db.getMatches(email)
         console.log("Executed to line 31 in azure function")
-        
         context.res = {
             body: user
         };

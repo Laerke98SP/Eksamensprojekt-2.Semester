@@ -87,16 +87,16 @@ function showInterest(email){
 // ----------- LOG OUT FUNCITON ------------- //
 logout.addEventListener('click', function(){
     // ---------- Remove values from localstorage ----------------------
-    localStorage.removeItem('mail');
-    localStorage.removeItem('kodeord');
-    localStorage.removeItem('fornavn');
-    localStorage.removeItem('efternavn');
+    localStorage.removeItem('email');
+    localStorage.removeItem('password');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('lastName');
     localStorage.removeItem('dob');
-    localStorage.removeItem('køn');
-    localStorage.removeItem('beskrivelse');
-    localStorage.removeItem('min');
-    localStorage.removeItem('max');
-    localStorage.removeItem('kønPr');
+    localStorage.removeItem('gender');
+    localStorage.removeItem('description');
+    localStorage.removeItem('ageMin');
+    localStorage.removeItem('ageMax');
+    localStorage.removeItem('genderPref');
     
 
     // ----------- Sent user back to frontpage --------------------
@@ -134,16 +134,16 @@ function deleteUser(){
         });
             
             
-        localStorage.removeItem('mail');
-        localStorage.removeItem('kodeord');
-        localStorage.removeItem('fornavn');
-        localStorage.removeItem('efternavn');
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
+        localStorage.removeItem('firstName');
+        localStorage.removeItem('lastName');
         localStorage.removeItem('dob');
-        localStorage.removeItem('køn');
-        localStorage.removeItem('beskrivelse');
-        localStorage.removeItem('min');
-        localStorage.removeItem('max');
-        localStorage.removeItem('kønPr');
+        localStorage.removeItem('gender');
+        localStorage.removeItem('description');
+        localStorage.removeItem('ageMin');
+        localStorage.removeItem('ageMax');
+        localStorage.removeItem('genderPref');
             
             
         window.location.href = "./0frontpage.html"; 

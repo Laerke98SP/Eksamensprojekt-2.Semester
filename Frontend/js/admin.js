@@ -136,14 +136,14 @@ function editUser(){
                         //------------ RETRIEVING THE REST OF USER INFO FROM DB-----------//
                         
                         localStorage.setItem('password', data[2].value);
-                        localStorage.setItem('fornavn', data[3].value);
-                        localStorage.setItem('efternavn', data[4].value);
+                        localStorage.setItem('firstName', data[3].value);
+                        localStorage.setItem('lastName', data[4].value);
                         localStorage.setItem('dob', data[5].value);
-                        localStorage.setItem('køn', data[6].value);
-                        localStorage.setItem('beskrivelse', data[7].value);
-                        localStorage.setItem('min', data[8].value);
-                        localStorage.setItem('max', data[9].value);
-                        localStorage.setItem('kønPr', data[10].value);
+                        localStorage.setItem('gender', data[6].value);
+                        localStorage.setItem('description', data[7].value);
+                        localStorage.setItem('ageMin', data[8].value);
+                        localStorage.setItem('ageMax', data[9].value);
+                        localStorage.setItem('genderPref', data[10].value);
                     
 
                     // TEST statement

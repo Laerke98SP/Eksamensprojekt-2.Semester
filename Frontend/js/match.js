@@ -47,10 +47,10 @@ function checkIfMatch(){
         console.log(data)
         if( data.status == 'Success' ){
             note.innerHTML += "You have a new match"
+            return getMatches();
         } else {
             note.innerHTML += "No new matches"
         };
-        getMatches();
     }).catch((err) =>{
         console.log(err)
         console.log("Something went wroooong")
@@ -61,20 +61,19 @@ function checkIfMatch(){
 function getMatches(){
     // Getting the matches inked to the user email
     fetch(`http://localhost:7071/api/match?email=${userEmail}`)
-    .then((response) => {
-        response.json();
-    }).then((matches) => {
+    .then(function(response) {
+        return response.json();
+    }).then(function(matches) {
         console.log(matches);
         // Creating a forloop that iterates through matches
-        for (i in matches){
-            // Saving the matched profiles email and saving the match id
-            var age = calculateAge(matches[i].dob);
-
+        for (i in matches) {
+            var age = calculateAge(matches[i][5].value);                            
             // Creating full name
-            var fullName = matches[i].firstName + " " + matches[i].lastName;
-
+            var fullName = matches[i][3].value + " " + matches[i][4].value;
+            var email = matches[i][1].value
             // Calling matches function
-            showMatches(fullName, age, id)
+            // Saving the matched profiles email and saving the match id
+            showMatches(fullName, age, email)
         };
     });
 };

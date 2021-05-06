@@ -28,12 +28,12 @@ async function get(context, req){
     try{
         let email = req.query.email;
         console.log(email);
-        let user = await db.insertMatch(email)
+        let matches = await db.getMatches(email)
         console.log("Executed to line 31 in azure function")
-        
         context.res = {
-            body: user
+            body: matches
         };
+        console.log(matches);
         console.log("also send the context to client side")
     } catch(error){
         context.res = {
@@ -55,7 +55,7 @@ async function post(context, req){
         }
     } catch(error){
         context.res = {
-            status: 400,
+            status: 404,
             body: error.message
         }
     }

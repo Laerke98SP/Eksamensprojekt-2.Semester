@@ -16,6 +16,9 @@ module.exports = async function (context, req) {
         case 'POST':
             await post(context, req);
             break;
+        case 'DELETE':
+            await deleteMatches(context, req);
+            break;
         default:
             context.res = {
                 body: "Please get or post"
@@ -59,4 +62,23 @@ async function post(context, req){
             body: error.message
         }
     }
+}
+
+async function deleteMatches(context, req){
+    try {
+        let email = req.query.email;
+        let match = req.query.match
+        await db.deleteMatch(email, match);
+        context.res = {
+            body: {
+                status: "succes"
+            }
+        };
+        console.log("also send the context to client side");
+    } catch(error){
+        context.res = {
+            status: 400,
+            body: error.message
+        }
+    } 
 }

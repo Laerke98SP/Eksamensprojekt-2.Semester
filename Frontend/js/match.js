@@ -102,8 +102,8 @@ function showMatches(name, age, className){
     // Creating function that runs onClick
     deleteMatch.onclick = function() {
         // Getting the id from the classname
-        var id = deleteMatch.id
-
+        var match = deleteMatch.id
+        var email = localStorage.getItem('mail');
         // Creating API delete request
         const options = { 
             method: 'DELETE', 
@@ -112,11 +112,12 @@ function showMatches(name, age, className){
             }
         };
         // Contacting match api with id
-        fetch(`http://localhost:7071/api/match?email=${id}`, options)
-        .then(function () {
-            // Delay function so data has time to update 
-            setTimeout(function(){
-            }, 1000);
+        fetch(`http://localhost:7071/api/match?email=${email}&match=${match}`, options)
+        .then(function() {
+            console.log("Match deleted"); 
+            return getMatches();
+        }).catch(function() {
+            console.log("Match not deleted - something went wrong"); 
         });
     };
 

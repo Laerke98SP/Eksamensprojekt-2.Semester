@@ -1,7 +1,10 @@
-// ---------------- DEFINING BUTTONS ------------------- //
-const like = document.getElementById("like");
-const dislike = document.getElementById("dislike");
-const deleteBtn = document.getElementById("delete");
+function showGender(gender) {
+    if (gender = 0) {
+        return gender = "Female"
+    } else if (gender = 1) {
+        return gender = "Male"
+    };
+};
 
 // ---------- SHOW DIV CONTAINERS FOR INNERHTML -------- //
 const table = document.getElementById("table")

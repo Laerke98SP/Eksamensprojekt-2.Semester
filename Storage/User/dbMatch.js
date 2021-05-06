@@ -50,7 +50,6 @@ function insertMatch(payload){
         console.log("Testing the params now");
         request.addParameter('email', TYPES.VarChar, payload.email);
        
-
         request.on('requestCompleted', (row) => {
         
             resolve('Match inserted', row)
@@ -63,22 +62,19 @@ module.exports.insertMatch = insertMatch;
 
 function getMatches(email){
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM [user] INNER JOIN match ON [user].id = match.userID1 OR [user].id = match.userID2 WHERE [user].email <> "lauraboejer@hej.dk"';
+        const sql = 'SELECT * FROM [user] INNER JOIN match ON [user].id = match.userID1 OR [user].id = match.userID2 WHERE [user].email <> @email';
         console.log("Now we have ran sql query");
-
         const request = new Request(sql, (err, rowcount) => {
             if(rowcount == 0) {
                 reject(
                     {message: ' There are no users'}  
-                )
-            }
-            else if (err){
+                );
+            } else if (err) {
                 reject(err)
                 console.log(err + " error comming from db.js")
-            } 
-            else {
-                console.log("everything went fine in db.js");
-            }
+            } else {
+                console.log("Everything went fine in db.js");
+            };
         });       
         //Column name, data type, paramname
         request.addParameter('email', TYPES.VarChar, email)

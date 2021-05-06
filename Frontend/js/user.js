@@ -32,6 +32,29 @@ class User {
     }
 }; 
 
+function showGender(gender) {
+    if (gender = 0) {
+        return gender = "Female"
+    } else if (gender = 1) {
+        return gender = "Male"
+    };
+};
+
+function showGenderPref(genderPref) {
+    if (genderPref = 0) {
+        return genderPref = "Female"
+    } else if (genderPref = 1) {
+        return genderPref = "Male"
+    };
+};
+
+function calculateAge(dob) {
+    var age = new Date(dob);
+    var diffMS = Date.now() - age.getTime(); //d.d. minus 'age', dsv. differencen udregnes gemmes som ny variabel
+    var ageDate = new Date(diffMS); //udregningen af differencen mellem d.d. og 'age' gemmes som ny dato
+        return dob = Math.abs(ageDate.getUTCFullYear() - 1970); // getUTCFullYear = omregner til et helt år minus 1970
+} //ovenstående metode udregner objekternes alder ud fra attributterne 'birthYear', 'birthMonth' og birthDate.
+
 function showUser(){
     let firstName = localStorage.getItem('firstName');
     let lastName = localStorage.getItem('lastName');
@@ -52,8 +75,8 @@ function showUser(){
     "</td><td>" + password + 
     "</td><td>" + firstName +
     "</td><td>" + lastName + 
-    "</td><td>" + dob +
-    "</td><td>" + gender +
+    "</td><td>" + calculateAge(dob) +
+    "</td><td>" + showGender(gender) +
     "</td></tr>";
    
     info.innerHTML += description;
@@ -61,7 +84,7 @@ function showUser(){
     pref.innerHTML +=
     "<tr><td>" + ageMin +
     "</td><td>" + ageMax+
-    "</td><td>" + genderPref+
+    "</td><td>" + showGenderPref(genderPref)+
     "</td></tr>";
 }
 

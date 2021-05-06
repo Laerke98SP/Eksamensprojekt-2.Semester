@@ -36,18 +36,18 @@
         <div class="InfoDiv">
             <table id="table">
                 <tr>
-                    <th>Username:</th>
+                    <th>Email:</th>
                     <th>Password</th>
-                    <th>Firstname:</th>
-                    <th>Lastname:</th>
+                    <th>First name:</th>
+                    <th>Last name:</th>
                     <th>Age:</th>
-                    <th>gender:</th>
+                    <th>Gender:</th>
                 </tr>
                 <tr>
                     <td id="email"></td>
                     <td><input type="text" id="password"></td>
-                    <td><input type="text" id="firstname"></td>
-                    <td><input type="text" id="lastname"></td>
+                    <td><input type="text" id="firsNname"></td>
+                    <td><input type="text" id="lastName"></td>
                     <td><input type="text" id="dob"></td>
                     <td><input type="text" id="gender"></td>
                     
@@ -57,7 +57,7 @@
             <div id="description">
 
                 <p> Description:</p>
-                <input type="text" id="desc"> 
+                <input type="text" id="description"> 
             </div>
             <br>
             <table id="info">
@@ -68,9 +68,9 @@
                     <th>Gender preference</th>
                 </tr>
                 <tr>
-                    <td><input type="text" id="min"></td>
-                    <td><input type="text" id="max"></td>
-                    <td><input type="text" id="pref"></td>
+                    <td><input type="text" id="ageMin"></td>
+                    <td><input type="text" id="ageMax"></td>
+                    <td><input type="text" id="genderPref"></td>
                 </tr>
             </table>
         </div>
@@ -79,7 +79,7 @@
         <!-- Buttons for logout or delete user -->
         <div class="changes">
             <input id="delete" type="reset" value="Delete"> 
-            <input id="logout" type="reset" value="Logout"> 
+            <input id="logout" type="reset" value="Log out"> 
             <button onclick="editUser()">Edit user</button>                
             <input id="edit" type="button" value="Edit user">
         </div>

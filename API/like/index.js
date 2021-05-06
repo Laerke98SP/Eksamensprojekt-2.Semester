@@ -29,7 +29,6 @@ async function get(context, req){
     console.log("checking if first line in like API function works")
     try{
         let email = req.query.email;
-    
         let users = await db.selectAll(email)
     
         context.res = {
@@ -43,7 +42,6 @@ async function get(context, req){
     } 
 }
 
-
 //  Like or dislike User
 async function post(context, req){
     try{
@@ -53,12 +51,11 @@ async function post(context, req){
             status: 200,
             body: {
                 status: 'Success'
-    
             }
         }
     } catch(error){
         context.res = {
-            status: 400,
+            status: 404,
             body: error.message
         }
     }

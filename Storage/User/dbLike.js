@@ -1,7 +1,5 @@
-
 const { Connection, Request, TYPES } = require('tedious');
 const config = require('../config.json')
-
 var connection = new Connection(config)
 
 function startDb(){
@@ -17,9 +15,8 @@ function startDb(){
             };
         })
         connection.connect();
-    })
-}
-
+    });
+};
 module.exports.sqlConnection = connection;
 module.exports.startDb = startDb;
 
@@ -39,25 +36,20 @@ function selectAll(email){
             if(rowcount == 0) {
                 reject(
                     {message: 'There are no users to get'}  
-                )
-            }
-            else if (err){
+                );
+            } else if (err) {
                 reject(err)
                 console.log(err + " error comming from db.js")
-            } 
-            else {
+            } else {
                 console.log(" everything went fine in db.js " + rowcount);
-            }
+            };
         });
         // column name, data type, paramname
         request.addParameter('email', TYPES.VarChar, email)
-        
         //A row resulting from execution of the SQL statement.
         // column consist of meta data and value        
         request.on('row', (columns) => {
-   
             resolve(columns)
-           
         });
         //Execute the SQL represented by request.
         connection.execSql(request) // A Request Object represent the request
@@ -65,37 +57,29 @@ function selectAll(email){
 };
 module.exports.selectAll = selectAll;
 
-
-function userVote(payload){
+function userVote(payload) {
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO  userEdge (userID2, userID1, vote)
         SELECT votedOn.id, voter.id, vote = @vote
         FROM [user] as votedOn, [user] as voter
-            WHERE  voter.email = @voter AND votedOn.email = @votedOn `
-
-        
+            WHERE  voter.email = @voter AND votedOn.email = @votedOn;`;
         //console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {
-            if (err){
-                reject(err)
-                console.log(err)
-            }
+            if (err) {
+                reject(err);
+                console.log("Fejl i userVote. " + err);
+            };
         });
-
         //console.log("Testing the params now");
-        request.addParameter('votedOn', TYPES.VarChar, payload.votedOn)
-        request.addParameter('voter', TYPES.VarChar, payload.voter)
-        request.addParameter('vote', TYPES.Int, payload.vote)
-  
-       
+        request.addParameter('votedOn', TYPES.VarChar, payload.votedOn);
+        request.addParameter('voter', TYPES.VarChar, payload.voter);
+        request.addParameter('vote', TYPES.Int, payload.vote);
         //console.log("Checking if the parameters exist " + payload.votedOn);
-
         request.on('requestCompleted', (row) => {
             //console.log('User inserted', row);
-            resolve('user inserted', row)
+            resolve('User inserted', row);
         });
-        connection.execSql(request)
-
+        connection.execSql(request);
     });
-}
+};
 module.exports.userVote = userVote;

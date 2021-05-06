@@ -63,7 +63,6 @@ function getMatches(){
     fetch(`http://localhost:7071/api/match?email=${userEmail}`)
     .then((response) => {
         response.json();
-        console.log(response.json);
     }).then((matches) => {
         console.log(matches);
         // Creating a forloop that iterates through matches

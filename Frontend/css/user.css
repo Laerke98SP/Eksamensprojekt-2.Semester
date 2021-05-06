@@ -75,13 +75,24 @@ body {
     }
   
   #description {
-        border-color: white;
+        
         border: 3px solid;
         padding-bottom: 10px;
         margin-left: auto;
         margin-right: auto;
+        color: black;
+        border-color: white;
   }
-    
+  
+  #interest {
+    border: 3px solid;
+        padding-bottom: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        color: black;
+        border-color: white;
+
+  }
   
  
   
@@ -103,3 +114,4 @@ body {
         }
     
       }  
+      

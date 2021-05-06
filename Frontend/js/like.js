@@ -147,18 +147,19 @@ function userVote(votedOn, voter, vote){
 
 function usersInterest(email){
 
-    console.log(email)
+
     
-    fetch(`http://localhost:7071/api/interest?email=${email}`)
+    fetch(`http://localhost:7071/api/interest?email=${userEmail}`)
     .then(function(response){
         // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
         response.json().then(function (data) {
-            let arr = [];
+            let user1 = [];
             for(i=0; i<data.length; i++){
-                arr.push(data[i][0].value)
+                user1.push(data[i][0].value)
             }
-            console.log(arr);
-            match.innerHTML += arr;
+
+            return matchInterest(email, user1)
+
         }).catch(function (err){
             console.log(err + " Testing err");
         });
@@ -166,44 +167,60 @@ function usersInterest(email){
 
 }
 
-
-//  // EXAMPLE OF VOTING (o(1) tid)
-//         // Check om personen allerede har stemt, hvis ikke skriv dem op som stemt.
-//         class Preference {
-//             constructor(){
-//                 this.interest = {};
-//                 this.result = 0;
-//             }
-//             addToInterest(interest){
-//                 this.interest[interest] = 1;
-//                 return this.interest; 
-//             }
-//             checkifMatch(arr){
-//                 if( this.interest[arr] = 1){ // henter ledger og sætter navn = 1, så den eksistere inde i vores hashmap
-//                 this.result +=1;
-//                 } return this.result 
-//             }
-//         }
-// vote = new Preference()
-
-
-// user1 = ['dancing', 'sports', 'music', 'hiking'];
-// user2 = ['dancing', 'hiking'];
-// user3 = ['dancing', 'hiking'];
-
-// // Tilføjer bruger1 interesser
-// for( i = 0; i< user2.length; i++){
-//     vote.addToInterest(user1[i]);
-// }
-// console.log(vote.interest)
-
-// // console.log(vote.checkifMatch(user3))
-// // // Checker bruger 2 interesser mod bruger 1
-// for(i =0; i<user3.length; i++){
+function matchInterest(email, user1){
+    fetch(`http://localhost:7071/api/interest?email=${email}`)
+    .then(function(response){
+        // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
+        response.json().then(function (data) {
+            let user2 = [];
+            for(i=0; i<data.length; i++){
+                user2.push(data[i][0].value)
+            }
     
-//    vote.checkifMatch(user3[i]);
-// }
+            console.log()
+            return matching(user1, user2)
 
-// console.log(vote.result);
-        
-//         match.innerHTML = "You have " + result + " matching interest";
+        }).catch(function (err){
+            console.log(err + " Testing err");
+        });
+    }); 
+}
+
+function matching( user1, user2){
+ // EXAMPLE OF VOTING (o(1) tid)
+        // Check om personen allerede har stemt, hvis ikke skriv dem op som stemt.
+        class Preference {
+            constructor(){
+                this.interest = {};
+                this.result = 0;
+            }
+            addToInterest(interest){
+                this.interest[interest] = 1;
+                return this.interest; 
+            }
+            checkifMatch(arr){
+                if( this.interest[arr] == 1){ // henter ledger og sætter navn = 1, så den eksistere inde i vores hashmap
+                this.result +=1;
+                } return this.result;
+            }
+        }
+        vote = new Preference()
+
+        console.log(user1)
+        console.log(user2)
+
+        // Tilføjer bruger1 interesser
+        for( i = 0; i< user1.length; i++){
+            vote.addToInterest(user1[i]);
+        }
+        console.log(vote.interest)
+
+        // console.log(vote.checkifMatch(user3))
+        // Checker bruger 2 interesser mod bruger 1
+        for(i =0; i<user2.length; i++){
+            vote.checkifMatch(user2[i]);
+        }
+
+        match.innerHTML = "You are Matching on " + vote.result + " interest: " ;
+
+}

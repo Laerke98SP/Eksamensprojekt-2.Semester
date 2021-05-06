@@ -91,8 +91,9 @@ function showInterest(email){
         ON u.id = ui.userID
         WHERE u.email = @email  and ui.vote = 1;`;
         console.log("Now we have ran sql query")
-        const request = new Request(sql, (err, rowcount) => {
-            console.log(rowcount)
+        const request = new Request(sql, (err, rowcount, rows) => {
+            // console.log(rowcount)
+            // console.log(rows)
             if (rowcount == 0) {
                 reject(
                     { message: 'There is no interest'}  
@@ -114,7 +115,7 @@ function showInterest(email){
         //A row resulting from execution of the SQL statement.
         // column consist of meta data and value
         request.on('doneInProc', function (rowCount, more, rows) { 
-        
+         
             resolve(rows)
         });
         //Execute the SQL represented by request.

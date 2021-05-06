@@ -96,21 +96,21 @@ function showUser(){
     showInterest()
 }
 
-function showInterest(){
-    let email = localStorage.getItem('email');
+// function showInterest(){
+//     let email = localStorage.getItem('email');
 
-    // ---------- RETRIEVE IN DB A PERSON WITH FOLLOWING MAIL AND PASSWORD ---------//
-    fetch(`http://localhost:7071/api/interest?email=${email}`)
-    .then(function(response){
-        // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
-        response.json().then(function (data) {
-            console.log(data);
-            interest.innerHTML += data;
-        }).catch(function (err){
-            console.log(err + " Testing err");
-        });
-    }); 
-}
+//     // ---------- RETRIEVE IN DB A PERSON WITH FOLLOWING MAIL AND PASSWORD ---------//
+//     fetch(`http://localhost:7071/api/interest?email=${email}`)
+//     .then(function(response){
+//         // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
+//         response.json().then(function (data) {
+//             console.log(data);
+//             interest.innerHTML += data;
+//         }).catch(function (err){
+//             console.log(err + " Testing err");
+//         });
+//     }); 
+// }
 
 // ----------- LOG OUT FUNCITON ------------- //
 logout.addEventListener('click', function(){

@@ -32,10 +32,12 @@ async function get(context, req){
     try{
         let email = req.query.email;
         
-        let user = await db.showInterest(email)
+        let interest = await db.showInterest(email)
+        console.log(interest)
         
+       
         context.res = {
-            body: user
+            body: interest
         };
 
     } catch(error){

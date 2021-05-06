@@ -66,24 +66,24 @@ async function post(context, req){
 }
 
 
-// Update user function
-async function patch(context, req){
-    try{
-        let payload = req.body;
-        await db.updateUser(payload)
-        context.res = {
-            status: 200,
-            body: {
-                status: 'Success'
-            }
-        }
-    } catch(error){
-        context.res = {
-            status: 400,
-            body: error.message
-        }
-    }
-}
+// // Update user function
+// async function patch(context, req){
+//     try{
+//         let payload = req.body;
+//         await db.updateUser(payload)
+//         context.res = {
+//             status: 200,
+//             body: {
+//                 status: 'Success'
+//             }
+//         }
+//     } catch(error){
+//         context.res = {
+//             status: 400,
+//             body: error.message
+//         }
+//     }
+// }
 
 // // delete user function
 // async function deleteUser(context, req){

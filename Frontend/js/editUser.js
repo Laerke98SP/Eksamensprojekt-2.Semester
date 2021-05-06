@@ -13,7 +13,7 @@ var pref = document.getElementById("info");
 
 // ------------------ CREATE CLASS USER -------------------- //
 class User {
-    constructor(email, password, firstName, lastName, dob, gender, description, minAge, maxage, genderPref){
+    constructor(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref){
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -21,8 +21,8 @@ class User {
         this.dob = dob;
         this.gender = gender;
         this.description = description;
-        this.minAge = minAge;
-        this.maxage = maxage;
+        this.ageMin = ageMin;
+        this.ageMax = ageMax;
         this.genderPref = genderPref;
     }
 }; 
@@ -145,9 +145,9 @@ function editUser(){
     let ageMax = document.getElementById('max').value
     let genderPref = document.getElementById('pref').value
 
-    // let editedUser = new User(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref);
+    let editedUser = new User(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref);
 
-    let editedUser = {email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref}
+    //let editedUser = {email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref}
 
     console.log(editUser)
     

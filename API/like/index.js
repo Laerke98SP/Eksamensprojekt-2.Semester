@@ -58,7 +58,7 @@ async function post(context, req){
         }
     } catch(error){
         context.res = {
-            status: 400,
+            status: 404,
             body: error.message
         }
     }

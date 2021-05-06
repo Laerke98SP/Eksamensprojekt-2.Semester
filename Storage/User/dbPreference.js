@@ -26,15 +26,17 @@ module.exports.startDb = startDb;
 
 
 //  GET req - for login function - DONE
-function potential(email, password){
+function potential(ageMin, ageMax, genderPref){
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT firstName, lastName, dob, gender, description FROM [user] WHERE ageMin < @ageMin AND ageMax > @ageMax AND gender = @gender';
+        const sql = `SELECT firstName, lastName, dob, gender, description
+        FROM [user]
+            WHERE ( DATEDIFF(YEAR , dob, GETDATE()) BETWEEN @ageMin AND @ageMax) And gender = @genderPref`;
         console.log("Now we have ran sql query")
         const request = new Request(sql, (err, rowcount) => {
             console.log(rowcount)
             if (rowcount == 0) {
                 reject(
-                    { message: 'We couldnt log you in'}  
+                    { message: 'Could not find any users with the age requirements'}  
                 )
             }
             else if (err){
@@ -42,13 +44,14 @@ function potential(email, password){
                 console.log(err + " error comming from db.js")
             } 
             else {
-                console.log(" everything went fine in db.js");
+                console.log(" everything went fine in dbPreferences");
                 console.log(rowcount + " logging rowcount");
             }
         });
         // column name, data type, paramname
-        request.addParameter('email', TYPES.VarChar, email)
-        request.addParameter('password', TYPES.VarChar, password)
+        request.addParameter('ageMin', TYPES.Int, ageMin);
+        request.addParameter('ageMax', TYPES.Int, ageMax);
+        request.addParameter('genderPref', TYPES.Int, genderPref);
         
         
         
@@ -56,6 +59,10 @@ function potential(email, password){
         // column consist of meta data and value
         request.on('doneInProc', function (rowCount, more, rows) { 
             
+            for( i in rows){
+                console.log(i.rows)
+            }
+
             console.log(rows);
             resolve(rows)
         });

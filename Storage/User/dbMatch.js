@@ -88,3 +88,25 @@ function getMatches(email){
     });
 };
 module.exports.getMatches = getMatches;
+
+function deleteMatch(email){
+    return new Promise((resolve, reject) => {
+        const sql = `DELETE FROM match WHERE match.userID1 = (SELECT id FROM [user] WHERE [user].email = 'lauraboejer@hej.dk') OR match.userID2 = (SELECT id FROM [user] WHERE [user].email = @email);`;      
+        console.log("Sending SQL query to DB");
+        const request = new Request(sql, (err) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            }
+        });
+        console.log("Testing the params now");
+        request.addParameter('email', TYPES.VarChar, email) 
+        console.log("Checking if the parameters exist " + email);
+        request.on('requestCompleted', (row) => {
+            console.log('Match deleted', row);
+            resolve('Match deleted')
+        });
+        connection.execSql(request)
+    });
+}
+module.exports.deleteMatch = deleteMatch;

@@ -112,7 +112,7 @@ function showMatches(name, age, className){
             }
         };
         // Contacting match api with id
-        fetch(`http://localhost:5000/match/${id}`, options)
+        fetch(`http://localhost:7071/api/match?email=${id}`, options)
         .then(function () {
             // Delay function so data has time to update 
             setTimeout(function(){

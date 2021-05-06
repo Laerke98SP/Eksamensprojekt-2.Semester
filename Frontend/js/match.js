@@ -115,6 +115,7 @@ function showMatches(name, age, className){
         fetch(`http://localhost:7071/api/match?email=${email}&match=${match}`, options)
         .then(function() {
             console.log("Match deleted"); 
+            location.reload();
             return getMatches();
         }).catch(function() {
             console.log("Match not deleted - something went wrong"); 

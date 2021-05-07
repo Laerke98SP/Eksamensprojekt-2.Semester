@@ -1,34 +1,25 @@
  
 body {
   height: 900px;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #ff009e;
-    color: white;
-    text-align: center;
-    background-image: linear-gradient( #cbb2ff, white);
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ff009e;
+  color: white;
+  text-align: center;
+  background-image: linear-gradient( #cbb2ff, white);
 }
-
-/* @font-face{
-  font-family: Love;
-  src: url("eksamen/Frontend/Font/Calligraffitti-Regular.ttf");
-}
-
-.h1{
-    font-family: Love;
-} */
 
 form {
-      border: 3px solid #f1f1f1;
-      /* text-align: center; */
-      background-color: #ffb2d7;
-      padding: 16px;
-      color: black;
-      width: auto;
-      margin-left: 20%;
-      margin-right: 20%; 
+  border: 3px solid #f1f1f1;
+  /* text-align: center; */
+  background-color: #ffb2d7;
+  padding: 16px;
+  color: black;
+  width: auto;
+  margin-left: 20%;
+  margin-right: 20%; 
 }
 
-
+/* Buttons */
 #gocreate {
   background-color: #ff009e;
   color: white;
@@ -43,19 +34,29 @@ form {
   opacity: 0.40;
 }
 
-#gologin, #getUser{
-    background-color: #ff009e;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-  }
+#gologin, #getUser {
+  background-color: #ff009e;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
   
 #gologin:hover, #getUser:hover {
-    opacity: 0.40;
-  }
+  opacity: 0.40;
+}
+
+#admin {
+  background-color: blue;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 250px;
+}
 
 #return {
   background-color: red;
@@ -67,7 +68,6 @@ form {
   width: 250px;
 }
 
-
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 600px) {
   body {
@@ -76,11 +76,12 @@ form {
     color: white;
     text-align: center;
     background-image: linear-gradient( #cbb2ff, white);
+  }
+
+  form {
+    width: auto;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
 }
 
-    form {
-        width: auto;
-        margin-left: 20%;
-        margin-right: 20%;
-    }
-  }

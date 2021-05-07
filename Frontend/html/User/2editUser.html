@@ -4,17 +4,17 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dating App</title>
-        <link href="../css/user.css" rel="stylesheet">
+        <link href="../../css/user.css" rel="stylesheet">
         <!-- <script src="../js/editUser.js" defer></script> -->
     </head>
     <body onload="showEdit()">
         <!-- Navigation Bar --> 
         <ul>
-            <li><a class="active" href="./0frontpage.html">Home</a></li>
-            <li><a href="./1user.html">My profile</a></li>
-            <li><a href="./2editUser.html">Edit User</a></li>
-            <li><a href="./3like.html">Find Match</a></li>
-            <li><a href="./4match.html">See Match</a></li>
+            <li><a class="active" href="../0frontpage.html">Home</a></li>
+            <li><a href="../1user.html">My profile</a></li>
+            <li><a href="../2editUser.html">Edit profile</a></li>
+            <li><a href="../3like.html">Find matches</a></li>
+            <li><a href="../4match.html">See matches</a></li>
         </ul>
         <br><br><br>
 
@@ -33,12 +33,12 @@
         <div class="InfoDiv">
             <table id="table">
                 <tr>
-                    <th>Username:</th>
+                    <th>Email:</th>
                     <th>Password</th>
-                    <th>Firstname:</th>
-                    <th>Lastname:</th>
+                    <th>First name:</th>
+                    <th>Last name:</th>
                     <th>Age:</th>
-                    <th>gender:</th>
+                    <th>Gender:</th>
                 </tr>
                 <tr>
                     <td id="email"></td>
@@ -58,11 +58,11 @@
             </div>
             <br>
             <table id="info">
-                <p>Preference in partner:</p>
+                <p>Preferences in partner:</p>
                 <tr>
-                    <th>Min age:</th>
-                    <th>Max age:</th>
-                    <th>Gender preference</th>
+                    <th>Minimum age:</th>
+                    <th>Maximum age:</th>
+                    <th>Gender:</th>
                 </tr>
                 <tr>
                     <td><input type="text" id="min"></td>
@@ -80,6 +80,6 @@
             <button id="edit" onclick="editUser()">Edit user</button>                
         </div>
 
-        <script src="../js/User/editUser.js"></script> 
+        <script src="../../js/User/editUser.js"></script> 
     </body>
 </html>

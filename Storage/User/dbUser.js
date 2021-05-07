@@ -24,14 +24,12 @@ module.exports.sqlConnection = connection;
 module.exports.startDb = startDb;
 
 
-// POST REQ - for create user function - DONE
+// POST REQ - for create user function 
 function insert(payload){
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO [user] (email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref)
         VALUES (@email, @password, @firstName, @lastName, @dob, @gender, @description, @ageMin, @ageMax, @genderPref);`
 
-        
-        console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {
             if (err){
                 reject(err)
@@ -39,7 +37,7 @@ function insert(payload){
             }
         });
 
-        console.log("Testing the params now");
+        // Defining params for SQL query
         request.addParameter('email', TYPES.VarChar, payload.email)
         request.addParameter('password', TYPES.VarChar, payload.password)
         request.addParameter('firstName', TYPES.VarChar, payload.firstName)
@@ -51,14 +49,11 @@ function insert(payload){
         request.addParameter('ageMax', TYPES.Int, payload.ageMax)
         request.addParameter('genderPref', TYPES.Int, payload.genderPref)
        
-        console.log("Checking if the parameters exist " + payload.email);
-
+        // When inserted , return to API
         request.on('requestCompleted', (row) => {
-            console.log('User inserted', row);
             resolve('user inserted')
         });
         connection.execSql(request)
-
     });
 }
 module.exports.insert = insert;
@@ -148,13 +143,16 @@ module.exports.updateUser = updateUser;
 // DELETE REQ - for delete user function
 function deleteUser(email){
     return new Promise((resolve, reject) => {
-        const sql = `delete from userEdge
-        where EXISTS
-        (SELECT *
-            from userEdge as vote, [user] as  u
-            WHERE  u.email = @email
-            AND u.id = vote.userID2 or u.id = vote.userID1);
-        DELETE FROM [user] WHERE [user].email = @email;`
+        const sql =`BEGIN TRANSACTION;
+        DELETE FROM match
+        WHERE userID1 = (SELECT id FROM [user] WHERE [user].email = @email) OR userID2 = (SELECT id FROM [user] WHERE [user].email = @email);
+        DELETE FROM userEdge
+        WHERE userID1 = (SELECT id FROM [user] WHERE [user].email = @email) OR userID2 = (SELECT id FROM [user] WHERE [user].email = @email);
+        DELETE FROM userInterest
+        WHERE userID = (SELECT id FROM [user] WHERE [user].email = @email);
+        DELETE FROM [user]
+        WHERE id = (SELECT id FROM [user] WHERE [user].email = @email);
+COMMIT TRANSACTION;`;   
 
         
         console.log("Sending SQL query to DB");

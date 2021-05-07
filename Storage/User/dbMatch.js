@@ -17,30 +17,22 @@ function startDb(){
         });
         connection.connect();
     })
-}
-
+};
 module.exports.sqlConnection = connection;
 module.exports.startDb = startDb;
 
-
 function insertMatch(payload){
     return new Promise((resolve, reject) => {
-        const sql = `INSERT INTO MATCH (userID2, userID1)
-        SELECT DISTINCT edge1.userID2, edge1.userID1
-        FROM userEdge AS edge1
-        INNER JOIN userEdge AS edge2
-            ON edge1.vote = 1
-            AND edge2.vote = 1
-        INNER JOIN [user]
-            ON edge1.userID1 = [user].id
-            AND edge2.userID2 = [user].id
-        WHERE [user].email = @email
-            AND NOT EXISTS (SELECT userID1, userID2
-                            FROM match
-                            WHERE userID1 = edge1.userID1
-                            OR userID2 = edge1.userID2);`
-
-
+        const sql = `INSERT INTO match (userID2, userID1)
+        OUTPUT inserted.*
+                SELECT TOP 1 ue1.userID2, ue1.userID1
+                FROM userEdge AS ue1
+                INNER JOIN userEdge AS ue2
+                    ON ue1.userID1 = ue2.userID2
+                    AND ue1.userID2 = ue2.userID1
+                AND ue1.userID1 = (SELECT id FROM [user] WHERE [user].email = @email)
+                OR ue1.userID2 = (SELECT id FROM [user] WHERE [user].email = @email)
+        EXCEPT SELECT userID2, userID1 FROM match;`
         console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {
             if (err){
@@ -52,7 +44,6 @@ function insertMatch(payload){
         console.log("Testing the params now");
         request.addParameter('email', TYPES.VarChar, payload.email);
        
-
         request.on('requestCompleted', (row) => {
         
             resolve('Match inserted', row)
@@ -60,40 +51,66 @@ function insertMatch(payload){
         connection.execSql(request)
 
     });
-}
+};
 module.exports.insertMatch = insertMatch;
 
-function getMatches(userID){
+function getMatches(email){
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT match.userID1, match.userID2 FROM match WHERE (SELECT id FROM [user] WHERE [user].email = @email) = match.userID1 OR (SELECT id FROM [user] WHERE [user].email = @email) = match.userID2;';
-        console.log("Now we have ran sql query")
-
+        const sql = 'SELECT * FROM [user] INNER JOIN match ON [user].id = match.userID1 OR [user].id = match.userID2 WHERE [user].email <> @email';
+        console.log("Now we have ran sql query");
         const request = new Request(sql, (err, rowcount) => {
             if(rowcount == 0) {
                 reject(
                     {message: ' There are no users'}  
-                )
-            }
-            else if (err){
+                );
+            } else if (err) {
                 reject(err)
                 console.log(err + " error comming from db.js")
-            } 
-            else {
-                console.log("everything went fine in db.js");
-            }
+            } else {
+                console.log("Everything went fine in db.js");
+            };
         });       
-        
-        console.log("Testing the params now");
-        request.addParameter('userID1', TYPES.Int, payload.userID);
+        //Column name, data type, paramname
+        request.addParameter('email', TYPES.VarChar, email)
         
         //A row resulting from execution of the SQL statement.
-        // column consist of meta data and value
-        request.on('row', (columns) => {
-            resolve(columns)
-             console.log( "testing loop in DB.js");
+        //Column consist of meta data and value
+        request.on('doneInProc', function (rowCount, more, rows) { 
+            resolve(rows)
         });
-        //Execute the SQL represented by request.
         connection.execSql(request)
-    })
+    });
 };
 module.exports.getMatches = getMatches;
+
+function deleteMatch(email, match){
+    return new Promise((resolve, reject) => {
+        const sql = `BEGIN TRANSACTION;
+        DELETE FROM match
+        OUTPUT deleted.*
+        WHERE match.userID1 = (SELECT id FROM [user] WHERE [user].email = @email) AND match.userID2 = (SELECT id FROM [user] WHERE [user].email = @match)
+          OR match.userID2 = (SELECT id FROM [user] WHERE [user].email = @email) AND match.userID2 = (SELECT id FROM [user] WHERE [user].email = @match);
+        DELETE FROM userEdge
+        OUTPUT deleted.*
+        WHERE userEdge.userID1 = (SELECT id FROM [user] WHERE [user].email = @email)
+          AND userEdge.userID2 = (SELECT id FROM [user] WHERE [user].email = @match)
+        COMMIT TRANSACTION;`;      
+        console.log("Sending SQL query to DB");
+        const request = new Request(sql, (err) => {
+            if (err){
+                reject(err)
+                console.log(err)
+            };
+        });
+        console.log("Testing the params now");
+        request.addParameter('email', TYPES.VarChar, email) 
+        request.addParameter('match', TYPES.VarChar, match) 
+        console.log("Checking if the parameters exist " + email);
+        request.on('requestCompleted', (row) => {
+            console.log('Match deleted', row);
+            resolve('Match deleted')
+        });
+        connection.execSql(request)
+    });
+}
+module.exports.deleteMatch = deleteMatch;

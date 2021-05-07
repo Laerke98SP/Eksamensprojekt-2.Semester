@@ -5,30 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dating App</title>
         <link href="../css/adm.css" rel="stylesheet">
-        <script src="../js/editUser.js" defer></script>
+        <script src="../js/Admin/editUser.js" defer></script>
     </head>
     <body onload="showEdit()">
-        <!-- Navigation Bar --> 
+        <!-- Navigation Bar -->
         <ul>
-            <li><a class="active" href="./frontpage.html">Home</a></li>
-            <li><a href="./user.html">My profile</a></li>
-            <li><a href="./editUser.html">Edit User</a></li>
-            <li><a href="./like.html">Find Match</a></li>
-            <li><a href="./match.html">See Match</a></li>
-
+            <li><a class="active" href="../Admin/0frontpage.html">Home</a></li>
+            <li><a href="../Admin/1statistic.html">Statistics</a></li>
+            <li><a href="../Admin/2admUpd.html">Update users</a></li>
+            <li><a href="../Admin/3admDel.html">Delete users</a></li>
         </ul>
         <br><br><br>
 
-        <!-- Div for notification -->
-        <div> <p id="notification"></p></div>
-
-
-        <!-- Content for page -->
-        <div>
-            <h1>Make love great again</h1>
-          
-            <h3>Edit your profile here</h2>
-        </div>
+        <h3> Change user here:</h3>
         
         <!--------Getting localstorage from example of localstorage week 42-->
     <div class="InfoDiv">
@@ -42,7 +31,7 @@
                 <th>gender:</th>
             </tr>
             <tr>
-                <td id="mail"></td>
+                <td id="email"></td>
                 <td><input type="text" id="password"></td>
                 <td><input type="text" id="firstname"></td>
                 <td><input type="text" id="lastname"></td>
@@ -75,8 +64,6 @@
   
         <!-- Buttons for logout or delete user -->
         <div class="changes">
-            <input id="delete" type="reset" value="Delete"> 
-            <input id="logout" type="reset" value="Logout"> 
             <input id="edit" type="button" value="Edit user">
         </div>
 

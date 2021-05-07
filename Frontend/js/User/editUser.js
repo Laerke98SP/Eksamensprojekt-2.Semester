@@ -1,6 +1,4 @@
 // -----------  DEFINING VARIABLES ------------- //
-
-
 // 01. Variables for buttons
 const logout = document.getElementById("logout")
 const deleteBtn = document.getElementById('delete');
@@ -11,35 +9,18 @@ var table = document.getElementById("table");
 var info = document.getElementById("description"); 
 var pref = document.getElementById("info"); 
 
-// ------------------ CREATE CLASS USER -------------------- //
-class User {
-    constructor(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref){
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.gender = gender;
-        this.description = description;
-        this.ageMin = ageMin;
-        this.ageMax = ageMax;
-        this.genderPref = genderPref;
-    }
-}; 
 
-   //Opretter en instans af klassen Profile - med oplysninger fra local storage
-   //const user = new User(mail, password, firstname, lastname, dob, gender, description, ageMin, ageMax, genderPref);
-   //let newUser = [user]; // indsætte instansen profile i et array
- 
    
-
+// -------- SHOW USER AND EDIT INPUT ---------//
 function showEdit(){
     // henter email og password fra storage, så vi kan få brugeren via et fetch request 
     let email = localStorage.getItem('email');
     let password = localStorage.getItem('password');
 
-    fetch(`http://localhost:7071/api/user?email=${email}&password=${password}`)
+    fetch(`http://localhost:7071/api/admEditUser?email=${email}`)
     .then((resp) => resp.json()).then(function(data){
+       
+
         // Dataen bliver direkte indsadt som defailt values 
         document.getElementById('email').defaultValue = data[1].value;
         document.getElementById('password').defaultValue = data[2].value;
@@ -126,12 +107,7 @@ function deleteUser(){
 
 
 
-    // -------------------- 02. Ved klik på submit ændringer---------------------------
-// edit.addEventListener('click', function(){
-//      editUser();
-// })
-
-    //--------------------- 03. Funktionen edit(user) -------------------------
+//------------ EDIT USER FUNCTION -------------//
 function editUser(){
     let email = localStorage.getItem('email');
 
@@ -145,7 +121,7 @@ function editUser(){
     let ageMax = document.getElementById('max').value
     let genderPref = document.getElementById('pref').value
 
-    let editedUser = new User(email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref);
+    let editedUser = {email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref };
 
     //let editedUser = {email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref}
 

@@ -36,19 +36,10 @@ function login(email, password){
             } else {    
                 // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
                 response.json().then(function (data) {
-                    console.log(data)
                     console.log('Succes!!')
-                        //------------ RETRIEVING THE REST OF USER INFO FROM DB-----------//
-                        // localStorage.setItem('email', data[1].value);
-                        // localStorage.setItem('password', data[2].value);
-                        
-                    
-
-                    
-
                     // ------------- IF EVERYTHING SUCCEEDED - PASS YOU TO YOUR PROFILE -------//
                     alert("You will be directed to your profile")
-                    window.location.href = "./admin.html"; 
+                    window.location.href = "./1statistic.html"; 
                 })
                 .catch(function (err){
                     console.log(err + " Testing err");

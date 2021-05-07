@@ -20,7 +20,7 @@ module.exports = async function (context, req) {
             await patch(context, req);
             break
         case 'DELETE':
-            await erase(context, req);
+            await deleteUser(context, req);
             break
         default:
             context.res = {
@@ -49,4 +49,42 @@ async function get(context, req){
             body: `No users - ${error.message}`
         }
     } 
+}
+
+
+async function deleteUser(context, req){
+    try {
+        let email = req.query.email;
+        await db.admDelete(email);
+        context.res = {
+            body: {
+                status: "succes"
+            }
+        };
+        console.log("also send the context to client side");
+    } catch(error){
+        context.res = {
+            status: 400,
+            body: error.message
+        }
+    } 
+}
+
+// Update user function
+async function patch(context, req){
+    try{
+        let payload = req.body;
+        await db.updateUser(payload)
+        context.res = {
+            status: 200,
+            body: {
+                status: 'Success'
+            }
+        }
+    } catch(error){
+        context.res = {
+            status: 400,
+            body: error.message
+        }
+    }
 }

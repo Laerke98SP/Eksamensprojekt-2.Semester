@@ -24,7 +24,7 @@ function login(email, password){
     .then(
         function(response){
             
-            // ------------  403 RESPONSE FOR KLIENT TYPING SOMETHING WRONG---------//
+            // ------------  404 RESPONSE FOR KLIENT TYPING SOMETHING WRONG---------//
             if( response.status == 404) {
                 alert( "Kodeord eller brugernavn er forkert - har du ikke en bruger opret gerne en");
             }
@@ -36,35 +36,29 @@ function login(email, password){
             } else {    
                 // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
                 response.json().then(function (data) {
-                    for(i = 1; i< data.length; i++){
-                        console.log(data[i].value)
-                        console.log(i);
+                    console.log(data)
+                    
+                       
 
                         //------------ RETRIEVING THE REST OF USER INFO FROM DB-----------//
-                        localStorage.setItem('email', data[1].value);
-                        localStorage.setItem('password', data[2].value);
-                        localStorage.setItem('firstName', data[3].value);
-                        localStorage.setItem('lastName', data[4].value);
-                        localStorage.setItem('dob', data[5].value);
-                        localStorage.setItem('gender', data[6].value);
-                        localStorage.setItem('description', data[7].value);
-                        localStorage.setItem('ageMin', data[8].value);
-                        localStorage.setItem('ageMax', data[9].value);
-                        localStorage.setItem('genderPref', data[10].value);
-                    };
-
-                    // TEST statement
-                    console.log( "it should work if you reach here script.js client side")
-
-                    
+                        localStorage.setItem('email', data.email );
+                        localStorage.setItem('password', data.password );
+                        localStorage.setItem('firstName', data.firstName);
+                        localStorage.setItem('lastName', data.lastName);
+                        localStorage.setItem('dob', data.dob);
+                        localStorage.setItem('gender', data.gender);
+                        localStorage.setItem('description', data.description);
+                        localStorage.setItem('ageMin', data.ageMin);
+                        localStorage.setItem('ageMax', data.ageMax);
+                        localStorage.setItem('genderPref', data.genderPref);
+                   
 
                     // ------------- IF EVERYTHING SUCCEEDED - PASS YOU TO YOUR PROFILE -------//
                     alert("You will be directed to your profile")
                     window.location.href = "./1user.html"; 
                 })
-                .catch(function (err){
+                }
+            }).catch(function (err){
                     console.log(err + " Testing err");
-                });
-            };
         });
 };

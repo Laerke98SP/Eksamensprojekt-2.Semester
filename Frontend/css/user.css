@@ -1,117 +1,123 @@
 body {
-      height: 900px;
-      background-color: #ff009e;
-      color: white;
-      text-align: center;
-      background-image: linear-gradient( #cbb2ff, white);
-  }
-  
-  
-
-  /* For navigation bar */
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #ffb2d7;
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
-  
-  li {
-    float: left;
-  }
-  
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-  li a:hover:not(.active) {
-    background-color: #111;
-  }
-  
-  .active {
-    background-color: #ff009e;
-  }
-  
-  #notification {
-    border: solid black;
-    color: red;
+  height: 900px;
+  background-color: #ff009e;
+  color: white;
+  text-align: center;
+  background-image: linear-gradient( #cbb2ff, white);
 }
 
-  /* Buttons */
-  #delete, #logout, #edit, #dislike, #like  {
-      background-color: #cbb2ff;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: ridge;
-      border-color: white;
-      cursor: pointer;
-      width: 155px;
-    }
+/* For navigation bar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #ffb2d7;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+  
+li {
+  float: left;
+}
+  
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+  
+li a:hover:not(.active) {
+  background-color: #111;
+}
+  
+.active {
+  background-color: #ff009e;
+}
+  
+#notification {
+  border: solid black;
+  color: red;
+}
+
+/* Buttons */
+#delete, #logout, #edit, #dislike, #like  {
+  background-color: #cbb2ff;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: ridge;
+  border-color: white;
+  cursor: pointer;
+  width: 155px;
+}
+  
+#match:hover, #delete:hover, #logout:hover, #edit:hover {
+  opacity: 0.40;
+}
+  
+/* For profile */
+table {
+  border: 3px solid #f1f1f1;
+  /* text-align: center; */
+  background-color: #ffb2d7;
+  padding: 16px;
+  color: black;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto; 
+}
   
 
-  #match:hover, #delete:hover, #logout:hover, #edit:hover {
-      opacity: 0.40;
-    }
-  
-    /* For profile */
+#interest, #description {
+  padding-top: 5px;
+  margin-top: 10px;
+  color: black;
+  border: 3px solid;
+  padding-bottom: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  border-color: white;
+}
+    
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 600px) {
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 900px;
+    color: white;
+    text-align: center;
+    background-image: linear-gradient( #cbb2ff, white);
+  }
   table {
-          border: 3px solid #f1f1f1;
-          /* text-align: center; */
-          background-color: #ffb2d7;
-          padding: 16px;
-          color: black;
-          width: fit-content;
-          margin-left: auto;
-          margin-right: auto; 
-    }
-  
-  #description {
-        
-        border: 3px solid;
-        padding-bottom: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        color: black;
-        border-color: white;
-  }
-  
-  #interest {
-    border: 3px solid;
-        padding-bottom: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        color: black;
-        border-color: white;
+  width: auto;
+  margin-left: 20%;
+  margin-right: 20%;
+  } 
+}  
 
-  }
-  
- 
-  
-  
-    /* Change styles for span and cancel button on extra small screens */
-    @media screen and (max-width: 600px) {
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-        height: 900px;
-        color: white;
-        text-align: center;
-        background-image: linear-gradient( #cbb2ff, white);
-    }
-    
-        table {
-            width: auto;
-            margin-left: 20%;
-            margin-right: 20%;
-        }
-    
-      }  
-      
+.deleteMatch {
+  background-color: #cbb2ff;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: ridge;
+  border-color: white;
+  cursor: pointer;
+  width: 155px;
+}
+
+.matchHolder {
+  border: 3px solid #f1f1f1;
+  /* text-align: center; */
+  background-color: #ffb2d7;
+  padding: 10px;
+  color: black;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto; 
+  margin-bottom: 10px;
+}

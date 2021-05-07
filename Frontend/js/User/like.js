@@ -21,26 +21,6 @@ let userEmail = localStorage.getItem('email');
 
 // ----------- functions for presenting user data --------- //
 
-function showGender(gender) {
-    if (gender = 0) {
-        return gender = "Female"
-    } else if (gender = 1) {
-        return gender = "Male"
-    };
-};
-function showGenderPref(genderPref) {
-    if (genderPref = 0) {
-        return genderPref = "Female"
-    } else if (genderPref = 1) {
-        return genderPref = "Male"
-    };
-};
-function calculateAge(dob) {
-    var age = new Date(dob);
-    var diffMS = Date.now() - age.getTime(); //d.d. minus 'age', dsv. differencen udregnes gemmes som ny variabel
-    var ageDate = new Date(diffMS); //udregningen af differencen mellem d.d. og 'age' gemmes som ny dato
-        return dob = Math.abs(ageDate.getUTCFullYear() - 1970); // getUTCFullYear = omregner til et helt år minus 1970
-}; //ovenstående metode udregner objekternes alder ud fra attributterne 'birthYear', 'birthMonth' og birthDate.
 
 function showPotentials(){
     // retrieving one user at the time // IT DOESNT CHANGE USER
@@ -62,20 +42,20 @@ function showPotentials(){
 };
 
 function displayPotentialMatch(data){
-        email.innerHTML = data[1].value
-        password.innerHTML = data[2].value 
-        firstName.innerHTML = data[3].value 
-        lastName.innerHTML = data[4].value  
-        dob.innerHTML = calculateAge(data[5].value)
-        gender.innerHTML = showGender(data[6].value)
-        localStorage.setItem('votedOn', data[1].value);
-        description.innerHTML = data[7].value;
-        minAge.innerHTML = data[8].value; 
-        maxAge.innerHTML = data[9].value;
-        genderPref.innerHTML = showGenderPref(data[10].value);
+        email.innerHTML = data.email 
+        password.innerHTML = data.password
+        firstName.innerHTML = data.firstName 
+        lastName.innerHTML = data.lastName   
+        dob.innerHTML = data.dob
+        gender.innerHTML = data.gender
+        localStorage.setItem('votedOn', data.email);
+        description.innerHTML = data.description;
+        minAge.innerHTML = data.ageMin; 
+        maxAge.innerHTML = data.ageMax;
+        genderPref.innerHTML = data.genderPref;
 
-        console.log(data[1].value)
-       usersInterest(data[1].value);
+        
+       usersInterest(data.email );
 };
 
 like.addEventListener('click', function(){
@@ -146,9 +126,6 @@ function userVote(votedOn, voter, vote){
 
 
 function usersInterest(email){
-
-
-    
     fetch(`http://localhost:7071/api/interest?email=${userEmail}`)
     .then(function(response){
         // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
@@ -177,7 +154,7 @@ function matchInterest(email, user1){
                 user2.push(data[i][0].value)
             }
     
-            console.log()
+           
             return matching(user1, user2)
 
         }).catch(function (err){
@@ -221,6 +198,6 @@ function matching( user1, user2){
             vote.checkifMatch(user2[i]);
         }
 
-        match.innerHTML = "You are Matching on " + vote.result + " interest: " ;
+        match.innerHTML = "You are Matching on " + vote.result + " interest. " ;
 
 }

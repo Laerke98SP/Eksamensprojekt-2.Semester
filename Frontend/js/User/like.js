@@ -10,9 +10,9 @@ const firstName = document.getElementById("firstName")
 const lastName = document.getElementById("lastName")
 const dob = document.getElementById("dob")
 const gender = document.getElementById("gender")
-const minAge = document.getElementById("minAge")
-const maxAge = document.getElementById("maxAge")
-const genderPref = document.getElementById("genderPref")
+//const minAge = document.getElementById("minAge")
+//const maxAge = document.getElementById("maxAge")
+//const genderPref = document.getElementById("genderPref")
 const description = document.getElementById("description");
 const match = document.getElementById("match");
 
@@ -43,19 +43,17 @@ function showPotentials(){
 
 function displayPotentialMatch(data){
         email.innerHTML = data.email 
-        password.innerHTML = data.password
+        //password.innerHTML = data.password
         firstName.innerHTML = data.firstName 
         lastName.innerHTML = data.lastName   
         dob.innerHTML = data.dob
         gender.innerHTML = data.gender
         localStorage.setItem('votedOn', data.email);
         description.innerHTML = data.description;
-        minAge.innerHTML = data.ageMin; 
-        maxAge.innerHTML = data.ageMax;
-        genderPref.innerHTML = data.genderPref;
-
-        
-       usersInterest(data.email );
+        //minAge.innerHTML = data.ageMin; 
+        //maxAge.innerHTML = data.ageMax;
+        //genderPref.innerHTML = data.genderPref;
+        usersInterest(data.email);
 };
 
 like.addEventListener('click', function(){
@@ -124,25 +122,21 @@ function userVote(votedOn, voter, vote){
     });
 };
 
-
 function usersInterest(email){
     fetch(`http://localhost:7071/api/interest?email=${userEmail}`)
     .then(function(response){
         // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
         response.json().then(function (data) {
             let user1 = [];
-            for(i=0; i<data.length; i++){
+            for(i = 0; i < data.length; i++){
                 user1.push(data[i][0].value)
-            }
-
-            return matchInterest(email, user1)
-
+            };
+        return matchInterest(email, user1);
         }).catch(function (err){
             console.log(err + " Testing err");
         });
     }); 
-
-}
+};
 
 function matchInterest(email, user1){
     fetch(`http://localhost:7071/api/interest?email=${email}`)
@@ -150,18 +144,15 @@ function matchInterest(email, user1){
         // ----------- IF 200 RESPONSE CODE IT SUCCEEDED ---------------------//
         response.json().then(function (data) {
             let user2 = [];
-            for(i=0; i<data.length; i++){
+            for(i = 0; i < data.length; i++){
                 user2.push(data[i][0].value)
-            }
-    
-           
-            return matching(user1, user2)
-
+            };
+        return matching(user1, user2);
         }).catch(function (err){
             console.log(err + " Testing err");
         });
     }); 
-}
+};
 
 function matching( user1, user2){
  // EXAMPLE OF VOTING (o(1) tid)
@@ -198,6 +189,6 @@ function matching( user1, user2){
             vote.checkifMatch(user2[i]);
         }
 
-        match.innerHTML = "You are Matching on " + vote.result + " interest. " ;
+        match.innerHTML = "You are matching on " + vote.result + " interests" ;
 
-}
+};

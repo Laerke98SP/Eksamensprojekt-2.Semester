@@ -107,7 +107,6 @@ function updateUser(payload){
         SET password = @password, firstName = @firstName, lastName = @lastName, dob = @dob, gender = @gender, description = @description, ageMin = @ageMin, ageMax = @ageMax, genderPref = @genderPref
         WHERE email = @email;`
 
-        
         console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {
             if (err){

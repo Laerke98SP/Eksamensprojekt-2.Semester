@@ -87,13 +87,11 @@ function deleteMatch(email, match){
     return new Promise((resolve, reject) => {
         const sql = `BEGIN TRANSACTION;
         DELETE FROM match
-        OUTPUT deleted.*
         WHERE match.userID1 = (SELECT id FROM [user] WHERE [user].email = @email) AND match.userID2 = (SELECT id FROM [user] WHERE [user].email = @match)
           OR match.userID2 = (SELECT id FROM [user] WHERE [user].email = @email) AND match.userID2 = (SELECT id FROM [user] WHERE [user].email = @match);
         DELETE FROM userEdge
-        OUTPUT deleted.*
         WHERE userEdge.userID1 = (SELECT id FROM [user] WHERE [user].email = @email)
-          AND userEdge.userID2 = (SELECT id FROM [user] WHERE [user].email = @match)
+          AND userEdge.userID2 = (SELECT id FROM [user] WHERE [user].email = @match);
         COMMIT TRANSACTION;`;      
         console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {

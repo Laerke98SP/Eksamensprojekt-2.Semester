@@ -15,12 +15,10 @@ var pref = document.getElementById("info");
 function showEdit(){
     // henter email og password fra storage, så vi kan få brugeren via et fetch request 
     let email = localStorage.getItem('email');
-    let password = localStorage.getItem('password');
+    //let password = localStorage.getItem('password');
 
     fetch(`http://localhost:7071/api/admEditUser?email=${email}`)
     .then((resp) => resp.json()).then(function(data){
-       
-
         // Dataen bliver direkte indsadt som defailt values 
         document.getElementById('email').defaultValue = data[1].value;
         document.getElementById('password').defaultValue = data[2].value;
@@ -34,8 +32,6 @@ function showEdit(){
         document.getElementById('pref').defaultValue = data[10].value;
     });
 };
-
-
 
 // ----------- LOG OUT FUNCITON ------------- //
 logout.addEventListener('click', function(){
@@ -55,7 +51,6 @@ logout.addEventListener('click', function(){
     // ----------- Send user back to frontpage --------------------
     window.location.href = "./0frontpage.html"; 
 })
-
 
 // ------------- DELETE USER ---------------//
 
@@ -104,13 +99,9 @@ function deleteUser(){
     };
 };
 
-
-
-
 //------------ EDIT USER FUNCTION -------------//
 function editUser(){
     let email = localStorage.getItem('email');
-
     let password = document.getElementById('password').value
     let firstName = document.getElementById('firstname').value
     let lastName = document.getElementById('lastname').value
@@ -125,14 +116,14 @@ function editUser(){
 
     //let editedUser = {email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref}
 
-    console.log(editUser)
+    console.log(editedUser);
     
     const option = {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify(editedUser),// Konvertere klassen til en json string
+        body: JSON.stringify(editedUser)// Konvertere klassen til en json string
     };    
         
     // --------- Her benyttes fetch til at kontakte API og dermed indsætte bruger i DB

@@ -77,6 +77,11 @@ createUser.addEventListener('click', function(){
     saveUser()
 });
 
+function convertDate(dobBefore){
+    var dobArray = dobBefore.split("/");
+    var dobAfter = dobArray[2] + '-' + dobArray[1] + '-' + dobArray[0];
+    return dobAfter; 
+};
 
 // ----------------- ACTION FOR CREATEUSER FUNCTION -----------------//
 function saveUser(){
@@ -93,7 +98,7 @@ function saveUser(){
     let description = localStorage.getItem('description');
     let ageMin = localStorage.getItem('ageMin');
     let ageMax = localStorage.getItem('ageMax');
-    
+    //convertDate(dob);
   
     console.log(firstName)
 
@@ -140,17 +145,14 @@ function saveUser(){
     
    console.log(userInterest);
 
-
-
     // ---------------- INPUT FOR POST USER IN DB ----------//
     const option1 = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset-UTF-8'
         },
-        body: JSON.stringify(
-            newUser)
-    };
+        body: JSON.stringify(newUser)
+        };
         fetch("http://localhost:7071/api/user", option1)
         
     .then((response) => {

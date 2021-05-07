@@ -78,7 +78,7 @@ function getMatches(){
     });
 };
 
-function showMatches(name, age, className){
+function showMatches(name, age, userEmail){
     // Creating html elements
     const holder = document.createElement('div');
     const matchName = document.createElement('h2');
@@ -97,7 +97,7 @@ function showMatches(name, age, className){
     deleteMatch.className = 'deleteMatch';
 
     // Defining button id as match className
-    deleteMatch.id = className;
+    deleteMatch.id = userEmail;
 
     // Creating function that runs onClick
     deleteMatch.onclick = function() {
@@ -115,6 +115,7 @@ function showMatches(name, age, className){
         fetch(`http://localhost:7071/api/match?email=${email}&match=${match}`, options)
         .then(function() {
             console.log("Match deleted"); 
+            location.reload();
             return getMatches();
         }).catch(function() {
             console.log("Match not deleted - something went wrong"); 

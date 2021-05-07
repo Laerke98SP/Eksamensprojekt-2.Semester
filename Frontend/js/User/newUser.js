@@ -2,7 +2,6 @@
 var createUser = document.getElementById("getUser");
 
 // ------------- DEFINING INPUT VARIABLES -----------------//  
-
 var genderF = document.getElementById("genderF");
 var genderM = document.getElementById("genderM");
 
@@ -44,8 +43,6 @@ class Interest{
     }
 
 };
-
-
 
 // ---------------- CREATEUSER ACTION WHEN CLICK ON BUTTON ---------// 
 createUser.addEventListener('click', function(){

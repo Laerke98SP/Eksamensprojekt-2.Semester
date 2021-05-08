@@ -20,7 +20,7 @@ form {
 }
 
 /* Buttons */
-#gocreate {
+#gologin, #getUser, #gocreate  {
   background-color: #ff009e;
   color: white;
   padding: 14px 20px;
@@ -28,32 +28,19 @@ form {
   border: none;
   cursor: pointer;
   width: 100%;
-}
-
-#gocreate:hover {
-  opacity: 0.40;
-}
-
-#gologin, #getUser {
-  background-color: #ff009e;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
+  width: 250px;
 }
   
-#gologin:hover, #getUser:hover {
+#gologin:hover, #getUser:hover, #gocreate:hover, #admin:hover {
   opacity: 0.40;
 }
 
 #admin {
-  background-color: blue;
-  color: white;
+  background-color: #cbb2ff;
+  color: black;
   padding: 14px 20px;
   margin: 8px 0;
-  border: none;
+  border: solid black;
   cursor: pointer;
   width: 250px;
 }
@@ -83,5 +70,39 @@ form {
     margin-left: 20%;
     margin-right: 20%;
   }
+
+  /* Buttons */
+#gologin, #getUser, #gocreate  {
+  background-color: #ff009e;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+  
+#gologin:hover, #getUser:hover, #gocreate:hover, #admin:hover {
+  opacity: 0.40;
+}
+
+#admin {
+  background-color: #cbb2ff;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: solid black;
+  cursor: pointer;
+
+}
+
+#return {
+  background-color: red;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
 }
 

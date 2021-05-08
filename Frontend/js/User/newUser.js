@@ -8,7 +8,6 @@ var genderM = document.getElementById("genderM");
 var prefFemale = document.getElementById("genderPrefF");
 var prefMale = document.getElementById("genderPrefM");
 
-
 var sports = document.getElementById("sports");
 var music = document.getElementById("music");
 var hiking = document.getElementById("hiking");
@@ -86,10 +85,7 @@ function convertDate(dobBefore){
 // ----------------- ACTION FOR CREATEUSER FUNCTION -----------------//
 function saveUser(){
 
-    // // Making DOB SQL friendly
-    // let dateOfBirth = convertDate(dob.value);
-
-    // ------- GET VALUE OF LOCALSTORAGE ITEMS ----------//
+    // 01. Get values from localStorage
     let email = localStorage.getItem('email');
     let password = localStorage.getItem('password');
     let firstName = localStorage.getItem('firstName');
@@ -98,32 +94,31 @@ function saveUser(){
     let description = localStorage.getItem('description');
     let ageMin = localStorage.getItem('ageMin');
     let ageMax = localStorage.getItem('ageMax');
-    //convertDate(dob);
   
-    console.log(firstName)
 
-    // Deciding which genders 0 = females, 1= males
+    // 02. Defining gender and gender preference 0 = female , 1= male
     let gender1 = 0;
     if(genderF.checked ){
         gender1 = 0
     } else gender1 = 1;
     let genderPref1 = 0;
+
     if(genderPrefF.checked){
         genderPref1 = 0
     } else genderPref1 = 1;
 
+    // 03. Set gender and genderPref in localstorage
     localStorage.setItem('gender', gender1);
     localStorage.setItem('genderPref',genderPref1 );
+
     let gender = localStorage.getItem('gender');
     let genderPref = localStorage.getItem('genderPref');
 
+    // 04. Create a new class
     let newUser = new User( email, password, firstName, lastName, dob , gender, description, ageMin, ageMax, genderPref)
-
-
-    console.log(newUser);
     
 
-    // Interest and vote 0 = no , 1 = yes
+    // 05. Interest and vote 0 = no , 1 = yes
     let sVote = 0;
     let mVote = 0;
     let hVote = 0;
@@ -141,9 +136,9 @@ function saveUser(){
         dVote = 0;
     } else dVote = 1;
 
+    // 06. Create new interest class
     let userInterest = new Interest(email, sports.value ,sVote, music.value, mVote, hiking.value, hVote,  dancing.value, dVote)
     
-   console.log(userInterest);
 
     // ---------------- INPUT FOR POST USER IN DB ----------//
     const option1 = {

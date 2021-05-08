@@ -51,9 +51,9 @@ class User {
         };
     };
     showGenderPref(genderPref) {
-        if (genderPref = 0) {
+        if (genderPref == 0) {
             return genderPref = "Female"
-        } else if (genderPref = 1) {
+        } else if (genderPref == 1) {
             return genderPref = "Male"
         };
     };

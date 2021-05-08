@@ -62,45 +62,11 @@ a:hover:not(.active) {
   width: 250px;
 }
 
-#user {
-  background-color: #ff009e;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 250px;
-}
 
-#gocreate {
-  background-color:  #0026ff;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
   
-#gocreate:hover {
-  opacity: 0.40;
-}
-  
-#gologin, #getUser{
-  background-color: #0026ff;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-    
-#gologin:hover, #getUser:hover {
-  opacity: 0.40;
-}
-  
-/* Divs */
+
+
+/* Divs for statistics */
 #countUsers, #countMatches {
   border: solid white;
   padding: 5px;
@@ -108,8 +74,18 @@ a:hover:not(.active) {
   color: black;
 }
 
-#users {
+/* #users {
   list-style-type: none;
+} */
+
+#return {
+  background-color: red;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 250px;
 }
 
 /* Change styles for span and cancel button on extra small screens */

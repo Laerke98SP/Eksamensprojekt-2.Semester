@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dating App</title>
         <link href="../../css/user.css" rel="stylesheet">
-        <!-- <script src="../js/editUser.js" defer></script> -->
     </head>
     <body onload="showEdit()">
+
         <!-- Navigation Bar --> 
         <ul>
             <li><a class="active" href="./0frontpage.html">Home</a></li>
@@ -18,10 +18,6 @@
         </ul>
         <br><br><br>
 
-        <!-- Div for notification -->
-        <div> <p id="notification"></p></div>
-
-
         <!-- Content for page -->
         <div>
             <h1>Make love great again</h1>
@@ -29,8 +25,7 @@
             <h3>Edit your profile here</h2>
         </div>
         
-        <!--------Getting localstorage from example of localstorage week 42-->
-        <div class="InfoDiv">
+        <!-------- Displaying user information -->
             <table id="table">
                 <tr>
                     <th>Email:</th>
@@ -70,10 +65,9 @@
                     <td><input type="text" id="pref"></td>
                 </tr>
             </table>
-        </div>
         <br><br>
     
-        <!-- Buttons for logout or delete user -->
+        <!-- Buttons for logout, delete user or edit user-->
         <div class="changes">
             <input id="delete" type="reset" value="Delete"> 
             <input id="logout" type="reset" value="Logout"> 

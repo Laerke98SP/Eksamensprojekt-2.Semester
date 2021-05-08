@@ -1,4 +1,3 @@
-// -----------  DEFINING VARIABLES ------------- //
 
 
 // 01. Variables for buttons
@@ -38,6 +37,7 @@ function showUser(){
         "</td><td>" + data.genderPref +
         "</td></tr>";
         
+        // Invoke show users interest function
         showInterest();
         
     }).catch(function() {            
@@ -71,7 +71,7 @@ function displayInt(arr){
     interest.innerHTML = arr;
 }
 
-// ----------- LOG OUT FUNCITON ------------- //
+// 06. Logout button
 logout.addEventListener('click', function(){
     // ---------- Remove values from localstorage ----------------------
     localStorage.removeItem('mail');
@@ -91,17 +91,17 @@ logout.addEventListener('click', function(){
 })
 
 
-// -------------- DELETE USER ---------------//
-    // 01. Action for click on delete button
+// 07. Delete button
 deleteBtn.addEventListener('click', function(){ 
     alert("Warning - Your profile will be deleted"); 
+    // Invoke delete function
     deleteUser(); 
 });
         
-    // 02. Function to delete user
+// 08. Function to delete user
 function deleteUser(){
         
-  
+    // Retrieving user email
     let email = localStorage.getItem('email');
     
         const option = {
@@ -111,18 +111,16 @@ function deleteUser(){
             }
         };    
            
-           
+        
         fetch(`http://localhost:7071/api/user?email=${email}`, option)
         .then(function() {
             console.log("ok"); 
-                 
+            // Clear localStorage
             localStorage.clear();
             
-            
+            // return to main page
             window.location.href = "./0frontpage.html"; 
         }).catch(function() {
             console.log("error"); 
         });
-            
-       
 };

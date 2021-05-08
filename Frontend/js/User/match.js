@@ -57,7 +57,7 @@ function checkIfMatch(){
     });
 };
 
-// Lærkes kode!!
+
 function getMatches(){
     // Getting the matches inked to the user email
     fetch(`http://localhost:7071/api/match?email=${userEmail}`)
@@ -85,25 +85,26 @@ function showMatches(name, age, userEmail){
     const matchAge = document.createElement('h4');
     const deleteMatch = document.createElement('button');
 
-    // Inserting values in html elements
+    // Inserting name and age in html elements
     const nameTxt = document.createTextNode(name);
     const ageTxt = document.createTextNode(age);
     const buttonTxt = document.createTextNode('Slet match');
 
-    // Defining id's
+    // Defining id's for the div, h2 and h4 elements
     holder.className = 'matchHolder';
     matchName.className = 'matchName';
     matchAge.className = 'matchAge';
     deleteMatch.className = 'deleteMatch';
 
-    // Defining button id as match className
+    // Delete buttons id = the users email it belongs to
     deleteMatch.id = userEmail;
 
     // Creating function that runs onClick
     deleteMatch.onclick = function() {
         // Getting the id from the classname
-        var match = deleteMatch.id
-        var email = localStorage.getItem('mail');
+        var match = deleteMatch.id // the matched users email
+        var email = localStorage.getItem('mail'); // the users email
+
         // Creating API delete request
         const options = { 
             method: 'DELETE', 
@@ -111,7 +112,7 @@ function showMatches(name, age, userEmail){
                 'Content-type': 'application/json'
             }
         };
-        // Contacting match api with id
+        // Contacting match api with emails
         fetch(`http://localhost:7071/api/match?email=${email}&match=${match}`, options)
         .then(function() {
             console.log("Match deleted"); 
@@ -122,7 +123,7 @@ function showMatches(name, age, userEmail){
         });
     };
 
-    // Inserting text into elements
+    // Inserting values into elements
     matchName.appendChild(nameTxt);
     matchAge.appendChild(ageTxt);
     deleteMatch.appendChild(buttonTxt);

@@ -10,9 +10,6 @@ const firstName = document.getElementById("firstName")
 const lastName = document.getElementById("lastName")
 const dob = document.getElementById("dob")
 const gender = document.getElementById("gender")
-//const minAge = document.getElementById("minAge")
-//const maxAge = document.getElementById("maxAge")
-//const genderPref = document.getElementById("genderPref")
 const description = document.getElementById("description");
 const match = document.getElementById("match");
 
@@ -32,27 +29,22 @@ function showPotentials(){
     return response.json(); // returnere et promise
     }).then(function(data){ 
         console.log(data);
-        displayPotentialMatch(data); //Kunne Kalde funktionen displayData, med parametrene: storage( alle brugerne i DB & 0 der bruges som counter)
-        //checkIfMatch(data); // kalder funktionen check om de matcher  
+        displayPotentialMatch(data);
+      
     }).catch(function(err){
         //Hvis der opstår en fejl fanges den her
         console.log(err);
-    //displayMatch(data); // viser antal matches skal vises uanset om der er fejl eller ikke / ved fejl viser den blot 0 matches
     });
 };
 
 function displayPotentialMatch(data){
         email.innerHTML = data.email 
-        //password.innerHTML = data.password
         firstName.innerHTML = data.firstName 
         lastName.innerHTML = data.lastName   
         dob.innerHTML = data.dob
         gender.innerHTML = data.gender
         localStorage.setItem('votedOn', data.email);
         description.innerHTML = data.description;
-        //minAge.innerHTML = data.ageMin; 
-        //maxAge.innerHTML = data.ageMax;
-        //genderPref.innerHTML = data.genderPref;
         usersInterest(data.email);
 };
 
@@ -61,12 +53,11 @@ like.addEventListener('click', function(){
     .then((response) => {
         return response.json(); // returnere et promise
     }).then((data) => { 
-        //users.innerHTML += data;
         var votedOn = localStorage.getItem('votedOn');
         var voter = localStorage.getItem('email');
         var vote = 1;
         return userVote(votedOn, voter, vote); 
-        //checkIfMatch(data); // kalder funktionen check om de matcher  
+  
     }).catch((err) => {
         //Hvis der opstår en fejl fanges den her
         console.log(err);
@@ -74,17 +65,17 @@ like.addEventListener('click', function(){
 });
 
 dislike.addEventListener('click', function(){
-     // currently only working while debugging?
+ 
     fetch(`http://localhost:7071/api/like?email=${userEmail}`)
     .then((response) => {
         return response.json(); // returnere et promise
     }).then((data) => {
-        //users.innerHTML += data;
+
         var votedOn = localStorage.getItem('votedOn');
         var voter = localStorage.getItem('email');
         var vote = 0;
         return userVote(votedOn, voter, vote);
-        //checkIfMatch(data); // kalder funktionen check om de matcher  
+    
     }).catch((err) => {
         //Hvis der opstår en fejl fanges den her
         console.log(err);

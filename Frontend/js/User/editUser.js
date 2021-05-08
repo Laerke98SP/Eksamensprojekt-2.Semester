@@ -113,8 +113,7 @@ function editUser(){
     let genderPref = document.getElementById('pref').value
 
     let editedUser = {email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref };
-
-    //let editedUser = {email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref}
+    localStorage.setItem('password', password)
 
     console.log(editedUser);
     

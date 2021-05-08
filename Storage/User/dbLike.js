@@ -33,9 +33,6 @@ function selectAll(email){
         AND liker.ageMin <= DATEDIFF(year, potential.dob, GETDATE()) AND liker.ageMax >= DATEDIFF(year, potential.dob, GETDATE())
         WHERE potential.id <> (SELECT id FROM [user] WHERE [user].email = @email) AND liker.id = (SELECT id FROM [user] WHERE [user].email = @email)
         AND potential.id NOT IN (SELECT userEdge.userID2 FROM [user] INNER JOIN userEdge ON [user].id = userEdge.userID1 WHERE [user].email = @email);`;
-
-
-        
         //console.log("Now we have ran sql query for potential matches")
         const request = new Request(sql, (err, rowcount) => {
             console.log(rowcount)

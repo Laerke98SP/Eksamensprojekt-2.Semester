@@ -30,14 +30,13 @@ module.exports = async function (context, req) {
 async function get(context, req){
     try{
         let email = req.query.email;
-        console.log(email);
+        console.log(email + " Checking if this user have a match");
         let matches = await db.getMatches(email)
-        console.log("Executed to line 31 in azure function")
+    
         context.res = {
             body: matches
         };
-        console.log(matches);
-        console.log("also send the context to client side")
+      
     } catch(error){
         context.res = {
             status: 404,

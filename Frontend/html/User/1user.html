@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>  
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dating App</title>
+        <link href="../../css/user.css" rel="stylesheet">
+ 
+    </head>
+    <body onload="showUser()">
+
+        <!-- Navigation Bar --> 
+        <ul>
+            <li><a class="active" href="./0frontpage.html">Home</a></li>
+            <li><a href="./1user.html">My profile</a></li>
+            <li><a href="./2editUser.html">Edit User</a></li>
+            <li><a href="./3like.html">Find Match</a></li>
+            <li><a href="./4match.html">See Match</a></li>
+        </ul>
+        <br><br><br>
+
+        <!-- Content for page -->
+        <div>
+            <h1>Make love great again</h1>
+
+            <h3>On this page you can see your profile</h2>
+        </div>
+
+        <!-------- Displaying user information -->
+        <table id="table">
+            <tr>
+                <th>Email:</th>
+                <th>First name:</th>
+                <th>Last name:</th>
+                <th>Age:</th>
+                <th>Gender:</th>
+            </tr>
+        </table>
+        <br>
+        <p> Description:</p>
+        <div id="description">
+            
+        </div>
+        <br>
+        <table id="info">
+            <p>Preferences in partner:</p>
+             <tr>
+                 <th>Minimum age:</th>
+                 <th>Maximum age:</th>
+                 <th>Gender:</th>
+             </tr>
+        </table>
+        <br><br>
+       
+        <!-- Show interest -->
+        <p>Interests:</p>
+        <div id="interest">
+            <p id="match"></p>
+
+        </div>
+        <br><br>
+  
+       <!-- Buttons for logout or delete user -->
+        <div class="changes">
+            <input id="delete" type="reset" value="Delete"> 
+            <input id="logout" type="reset" value="Log out"> 
+        </div>
+
+        <script src="../../js/User/user.js"></script> 
+    </body>
+</html>

@@ -16,9 +16,6 @@ module.exports = async function (context, req) {
         case 'POST':
             await post(context, req);
             break;
-        case 'PATCH':
-            await patch(context, req);
-            break;
         default:
             context.res = {
                 body: "Please get or post"
@@ -32,10 +29,12 @@ async function get(context, req){
     try{
         let email = req.query.email;
         
-        let user = await db.showInterest(email)
+        let interest = await db.showInterest(email)
+        // console.log(interest)
         
+       
         context.res = {
-            body: user
+            body: interest
         };
 
     } catch(error){
@@ -66,42 +65,3 @@ async function post(context, req){
 }
 
 
-// // Update user function
-// async function patch(context, req){
-//     try{
-//         let payload = req.body;
-//         await db.updateUser(payload)
-//         context.res = {
-//             status: 200,
-//             body: {
-//                 status: 'Success'
-//             }
-//         }
-//     } catch(error){
-//         context.res = {
-//             status: 400,
-//             body: error.message
-//         }
-//     }
-// }
-
-// // delete user function
-// async function deleteUser(context, req){
-//     try{
-//         let email = req.query.email;
-//         console.log(email);
-//         let user = await db.deleteUser(email);
-        
-//         context.res = {
-//             body: {
-//                 status: "succes"
-//             }
-//         };
-//         console.log("also send the context to client side");
-//     } catch(error){
-//         context.res = {
-//             status: 400,
-//             body: error.message
-//         }
-//     } 
-// }

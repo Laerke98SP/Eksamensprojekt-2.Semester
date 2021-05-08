@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>  
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dating App</title>
+        <link href="../../css/UserfrontPage.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1 id="Headline">We believe in love, do you?</h1>
+        <p id="todo">Sign in here</p>
+   
+        
+    <form id="signUp">
+            <label for="Email">Email:</label><br>
+            <input id="email" type="email" required><br><br>
+            
+            <label for="password">Password:</label><br>
+            <input id="password" type="password" required><br><br>
+            
+            <label for="firstName">First name:</label><br>
+            <input id="firstName" type="text"><br><br>
+            
+            <label for="lastName">Last name :</label><br>
+            <input id="lastName" type="text"><br><br>
+            
+            <label for="dob">Date of birth:</label><br>
+            <input id="dob" type="date"><br><br>
+            
+            <label for="gender">Gender:</label><br>
+            <label for="genderF">Female</label>
+            <input id="genderF" type="radio" name="gender" checked>
+            <label for="genderM">Male</label>
+            <input id="genderM" type="radio" name="gender"><br><br>
+            
+            <label for="description">About you <br> (can be filled out later):</label><br>
+            <input id="description" type="text"><br><br>
+            
+            <label for="min">Minimum age preference:</label><br>
+            <input id="ageMin" type="range" name="rangeMin" min="18" max="90" value="0" oninput="amountMin.value=rangeMin.value"><br>                                             
+            <output id="amountMin" name="amountMin" for="rangeMin">18</output><br><br>
+
+            <label for="max">Maximum age preference:</label><br>
+            <input id="ageMax" type="range" name="rangeMax" min="18" max="90" value="0" oninput="amountMax.value=rangeMax.value"><br>                                             
+            <output id="amountMax" name="amountMax" for="rangeMax">18</output><br><br>
+            
+            <label for="genderPref">Gender preference:</label><br>
+            <label for="genderPrefF">Female</label>
+            <input id="genderPrefF" type="radio"  name="genderPref" checked>
+
+            <label for="genderPrefM">Male</label>
+            <input id="genderPrefM" type="radio"  name="genderPref"><br><br>
+
+            
+            <label for="interests">Interests:</label><br>
+            <label for="sports">Sports</label>
+            <input id="sports" type="checkbox" value="sports" name="interests">
+
+            <label for="music">Music</label>
+            <input id="music" type="checkbox" value="music" name="interests">
+
+            <label for="hiking">Hiking</label>
+            <input id="hiking" type="checkbox" value="hiking" name="interests">
+
+            <label for="dancing">Dancing</label>
+            <input id="dancing" type="checkbox" value="dancing" name="interests"><br><br>
+            
+    </form>
+    <button id="getUser">Create user</button>
+    <!---------------Return to  main page-------------------->
+    <br>
+        <a href="./0frontpage.html">
+            <input id="return" type="button" value="Go back">
+        </a>
+    </body>
+    <script src="../../js/User/newUser.js"></script>
+</html>

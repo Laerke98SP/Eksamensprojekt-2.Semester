@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>  
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dating App</title>
+        <link href="../../css/user.css" rel="stylesheet">
+    </head>
+    <body onload="showPotentials()">
+
+        <!-- Navigation Bar -->
+        <ul>
+            <li><a class="active" href="./0frontpage.html">Home</a></li>
+            <li><a href="./1user.html">My profile</a></li>
+            <li><a href="./2editUser.html">Edit profile</a></li>
+            <li><a href="./3like.html">Find matches</a></li>
+            <li><a href="./4match.html" class="notification">See matches<span id="badge">1</span></a></li>
+        </ul>
+        <br><br><br>
+
+
+
+
+        <!-- Content for page -->
+        <div>
+            <h1>Make love great again</h1>
+            <h3>Here you can find potential partners</h2>
+        </div>
+
+        <!-------- Displaying user information -->
+        <table id="table">
+            <tr>
+                <th>Email:</th>
+                <th>First name:</th>
+                <th>Last name:</th>
+                <th>Age:</th>
+                <th>Gender:</th>
+            </tr>
+            <tr>
+                <td id="email"></td>
+                <td id="firstName"></td>
+                <td id="lastName"></td>
+                <td id="dob"></td>
+                <td id="gender"></td>
+            </tr>
+        </table>
+        <br>
+        <p> Description:</p>
+        <div>
+            <p id="description"></p>
+        </div>
+        <p>Compatability:</p>
+        <div id="interest">
+            <p id="match"></p>
+
+        </div>
+        <br><br>
+
+        <!-- Buttons for like or dislike -->
+        <div class="love">
+            <button id="dislike">Dislike</button>
+            <button id="like">Like</button>
+        </div>
+        <br><br>
+    <script src="../../js/User/like.js" defer></script>
+    </body>
+</html>

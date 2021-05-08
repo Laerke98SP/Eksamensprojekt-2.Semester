@@ -44,10 +44,12 @@ function checkIfMatch(){
     // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
         console.log("Process succeeded")
         console.log(data)
-        if( data.status == 'Success' ){
-           
+        if( data.status == 'Success' ){ 
             return getMatches();
         };
+    }).then(() => {
+        // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
+        //return getNotification();
     }).catch((err) =>{
         console.log(err)
         console.log("Something went wroooong")
@@ -135,3 +137,39 @@ function showMatches(name, age, userEmail){
     // Insert the final match display
     document.body.appendChild(holder);
 };
+
+function getNotification() {
+    fetch(`http://localhost:7071/api/notification?email=${userEmail}`)
+    .then((response) => {
+        return response.json();
+    }).then((data)=>{
+        let counter = 0;
+        for (i in data) {
+            counter++
+        };
+        document.getElementById("badge").style.display = counter;
+    }).catch((err) =>{
+        console.log(err);
+        console.log("Something went wrong when getting notification");
+    });
+}
+
+// function createNotification() {
+//         const option = {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json; charset-UTF-8'
+//             },
+//             body: JSON.stringify({
+//                 email: userEmail
+//             })
+//         };
+//         // Insert match if both user like eachother
+//         fetch(`http://localhost:7071/api/match`, option)
+//         .then((response) => {
+//             return response.json()
+//         }).catch((err) =>{
+//             console.log(err)
+//             console.log("Something went wrong when creating notification")
+//         });
+// }

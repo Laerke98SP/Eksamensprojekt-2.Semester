@@ -23,10 +23,14 @@ let userEmail = localStorage.getItem('email');
 //     genderPref = 0;
 // } else genderPref = 1;
 
+
+
+
+
 // ----------- functions for presenting user data --------- //
- //let notification = document.getElementById("badge").style.display = "none";
 
 function showPotentials(){
+    console.log(userEmail);
     // retrieving one user at the time // IT DOESNT CHANGE USER
     fetch(`http://localhost:7071/api/like?email=${userEmail}`)
     .then(function(response){
@@ -35,7 +39,8 @@ function showPotentials(){
         } else 
         return response.json(); // returnere et promise
     }).then(function(data){ 
-        console.log(data);
+        // console.log(data);
+        checkIfMatch()
        return displayPotentialMatch(data);
       
     }).catch(function(err){
@@ -66,7 +71,7 @@ function usersInterest(email){
             for(i = 0; i < data.length; i++){
                 user1.push(data[i][0].value)
             };
-            console.log(email);
+            // console.log(email);
         return matchInterest(email, user1);
         }).catch(function (err){
             console.log(err + " Testing err");
@@ -85,7 +90,7 @@ function matchInterest(email, user1){
             for(i = 0; i < data.length; i++){
                 user2.push(data[i][0].value)
             };
-            console.log(email)
+            // console.log(email)
         return matching(user1, user2);
         }).catch(function (err){
             console.log(err + " Testing err");
@@ -114,14 +119,14 @@ function matching( user1, user2){
         }
         vote = new Preference()
 
-        console.log(user1)
-        console.log(user2)
+        // console.log(user1)
+        // console.log(user2)
 
         // Tilføjer bruger1 interesser
         for( i = 0; i< user1.length; i++){
             vote.addToInterest(user1[i]);
         }
-        console.log(vote.interest)
+        // console.log(vote.interest)
 
         // console.log(vote.checkifMatch(user3))
         // Checker bruger 2 interesser mod bruger 1
@@ -176,7 +181,7 @@ dislike.addEventListener('click', function(){
 
 function userVote(votedOn, voter, vote){
     // ---------------- INPUT FOR FETCH REQUEST ----------//
-    console.log(votedOn, voter, vote);
+    // console.log(votedOn, voter, vote);
     const option = {
         method: 'POST',
         headers: {
@@ -190,14 +195,14 @@ function userVote(votedOn, voter, vote){
     };
     fetch("http://localhost:7071/api/like", option)   
     .then((response) => {
-        console.log(response);
+        // console.log(response);
         return response.json()
     })
     .then((data) => {
             // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
-            console.log("Process succeeded");
-            console.log(data);
-            console.log("You have voted");
+            // console.log("Process succeeded");
+            // console.log(data);
+            // console.log("You have voted");
             
             showPotentials();
             location.reload();
@@ -208,3 +213,65 @@ function userVote(votedOn, voter, vote){
 };
 
 
+function checkIfMatch(){
+    const option = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset-UTF-8'
+        },
+        body: JSON.stringify({
+            email: userEmail
+        })
+    };
+    // Insert match if both user like eachother
+    fetch(`http://localhost:7071/api/match`, option)
+    .then((response) => {
+        return response.json()
+    })
+    .then((data) => {
+    // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
+        console.log("Process succeeded")
+        console.log(data)
+        if( data.status == 'Success' ){
+           
+            message();
+        };
+    }).catch((err) =>{
+        console.log(err)
+        console.log("Something went wroooong")
+    });
+};
+
+
+function message(){
+    let result = 0;
+    // document.getElementById("badge").style.display = "block"; // uncover
+    
+     // Getting the matches inked to the user email
+     fetch(`http://localhost:7071/api/match?email=${userEmail}`)
+        .then(function(response) {
+            return response.json();
+        }).then(function(matches) {
+            if(localStorage.getItem("counter") !== null){
+                var counter = localStorage.getItem("counter");
+            } else var counter = 0;
+            // console.log(matches);
+            //Creating a forloop that iterates through matches
+            for (i in matches) {
+                result++;
+            }; 
+            if(result > counter) {
+                // console.log(counter)
+                document.getElementById("badge").style.display = "block"; // Element will  be displayed
+                counter = result;
+                localStorage.setItem('counter', counter)
+                //console.log(counter + " if there are more in match than counter")
+            } else if(result <= counter) {
+                document.getElementById("badge").style.display = "none"; // Element will not be displayed
+                //console.log(result + " + " + counter); 
+                counter = result;
+                localStorage.setItem('counter', counter)
+               // console.log(counter + " if there are less in match than counter")
+            }
+        });
+    };

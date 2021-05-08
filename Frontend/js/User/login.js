@@ -9,8 +9,8 @@ getButton.addEventListener("click", function(){
     var password = document.getElementById("password").value
 
     // 02. SAVE INPUT IN LOCALSTORAGE 
-    localStorage.setItem('mail', email);
-    localStorage.setItem('kodeord', password);
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
 
     // 03. CALL LOGING FUNCTION 
     login(email, password);

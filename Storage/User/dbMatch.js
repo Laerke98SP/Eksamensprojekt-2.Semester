@@ -24,15 +24,19 @@ module.exports.startDb = startDb;
 function insertMatch(payload){
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO match (userID2, userID1)
-        OUTPUT inserted.*
-                SELECT TOP 1 ue1.userID2, ue1.userID1
-                FROM userEdge AS ue1
-                INNER JOIN userEdge AS ue2
-                    ON ue1.userID1 = ue2.userID2
-                    AND ue1.userID2 = ue2.userID1
-                AND ue1.userID1 = (SELECT id FROM [user] WHERE [user].email = @email)
-                OR ue1.userID2 = (SELECT id FROM [user] WHERE [user].email = @email)
-        EXCEPT SELECT userID2, userID1 FROM match;`
+        SELECT DISTINCT edge1.userID2, edge1.userID1
+        FROM userEdge AS edge1
+        INNER JOIN userEdge AS edge2
+            ON edge1.vote = 1
+            AND edge2.vote = 1
+        INNER JOIN [user]
+            ON edge1.userID1 = [user].id
+            AND edge2.userID2 = [user].id
+            WHERE [user].email = @email
+    AND NOT EXISTS (SELECT userID1, userID2
+                    FROM match
+                    WHERE userID1 = edge1.userID1
+                    OR userID2 = edge1.userID2);`;
         console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {
             if (err){
@@ -41,7 +45,7 @@ function insertMatch(payload){
             }
         });
 
-        console.log("Testing the params now");
+        // console.log("Testing the params now");
         request.addParameter('email', TYPES.VarChar, payload.email);
        
         request.on('requestCompleted', (row) => {
@@ -56,7 +60,11 @@ module.exports.insertMatch = insertMatch;
 
 function getMatches(email){
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM [user] INNER JOIN match ON [user].id = match.userID1 OR [user].id = match.userID2 WHERE [user].email <> @email';
+        const sql = `SELECT * 
+                    FROM [user] 
+                    INNER JOIN match 
+                        ON [user].id = match.userID1 OR [user].id = match.userID2 
+                    WHERE [user].email <> @email;`;
         console.log("Now we have ran sql query");
         const request = new Request(sql, (err, rowcount) => {
             if(rowcount == 0) {
@@ -88,7 +96,7 @@ function deleteMatch(email, match){
         const sql = `BEGIN TRANSACTION;
         DELETE FROM match
         WHERE match.userID1 = (SELECT id FROM [user] WHERE [user].email = @email) AND match.userID2 = (SELECT id FROM [user] WHERE [user].email = @match)
-          OR match.userID2 = (SELECT id FROM [user] WHERE [user].email = @email) AND match.userID2 = (SELECT id FROM [user] WHERE [user].email = @match);
+          OR match.userID2 = (SELECT id FROM [user] WHERE [user].email = @email) AND match.userID1 = (SELECT id FROM [user] WHERE [user].email = @match);
         DELETE FROM userEdge
         WHERE userEdge.userID1 = (SELECT id FROM [user] WHERE [user].email = @email)
           AND userEdge.userID2 = (SELECT id FROM [user] WHERE [user].email = @match);

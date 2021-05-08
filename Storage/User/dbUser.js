@@ -37,13 +37,14 @@ function insert(payload){
             }
         });
 
+
         // Defining params for SQL query
         request.addParameter('email', TYPES.VarChar, payload.email)
         request.addParameter('password', TYPES.VarChar, payload.password)
         request.addParameter('firstName', TYPES.VarChar, payload.firstName)
         request.addParameter('lastName', TYPES.VarChar, payload.lastName)
         request.addParameter('dob', TYPES.VarChar, payload.dob)
-        request.addParameter('gender', TYPES.VarChar, payload.gender)
+        request.addParameter('gender', TYPES.Int, payload.gender)
         request.addParameter('description', TYPES.VarChar, payload.description)
         request.addParameter('ageMin', TYPES.Int, payload.ageMin)
         request.addParameter('ageMax', TYPES.Int, payload.ageMax)

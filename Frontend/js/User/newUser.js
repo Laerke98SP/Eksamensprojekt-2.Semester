@@ -151,13 +151,14 @@ function saveUser(){
         fetch("http://localhost:7071/api/user", option1)
         
     .then((response) => {
-        return response.json();
+         return response.json();
     })
     .then((data) => {
-        inputInterest(userInterest);
+        
             // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
             console.log("process Succeeded")
             console.log("Done in user transfer")
+            inputInterest(userInterest);
     
     }).catch((err) =>{
         console.log(err)

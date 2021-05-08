@@ -31,13 +31,32 @@ li a {
 }
   
 li a:hover:not(.active) {
-  background-color: #111;
+  background-color: #ff009e;
 }
   
 .active {
   background-color: #ff009e;
 }
   
+.notification {
+  background-color: #ffb2d7;
+  color: white;
+  text-decoration: none;
+  padding: 15px 26px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+} 
+
+#badge  {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: red;
+  color: #ffb2d7;
+}
 
 /* Buttons */
 #delete, #logout, #edit, #dislike, #like  {

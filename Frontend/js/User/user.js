@@ -37,6 +37,9 @@ function showUser(){
         "</td><td>" + data.genderPref +
         "</td></tr>";
         
+        localStorage.setItem('ageMin', data.ageMin);
+        localStorage.setItem('ageMax', data.ageMax);
+        localStorage.setItem('genderPref', data.genderPref);
         // Invoke show users interest function
         showInterest();
         
@@ -73,17 +76,18 @@ function displayInt(arr){
 
 // 06. Logout button
 logout.addEventListener('click', function(){
+    let email = localStorage.getItem('email');
+    let password = localStorage.getItem('password');
     // ---------- Remove values from localstorage ----------------------
-    localStorage.removeItem('mail');
-    localStorage.removeItem('kodeord');
-    localStorage.removeItem('fornavn');
-    localStorage.removeItem('efternavn');
-    localStorage.removeItem('dob');
-    localStorage.removeItem('køn');
-    localStorage.removeItem('beskrivelse');
-    localStorage.removeItem('min');
-    localStorage.removeItem('max');
-    localStorage.removeItem('kønPr');
+    localStorage.clear(email , password);
+    // localStorage.removeItem('fornavn');
+    // localStorage.removeItem('efternavn');
+    // localStorage.removeItem('dob');
+    // localStorage.removeItem('køn');
+    // localStorage.removeItem('beskrivelse');
+    // localStorage.removeItem('min');
+    // localStorage.removeItem('max');
+    // localStorage.removeItem('kønPr');
     
 
     // ----------- Sent user back to frontpage --------------------

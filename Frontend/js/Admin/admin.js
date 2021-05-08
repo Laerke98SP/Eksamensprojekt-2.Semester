@@ -16,7 +16,7 @@ logout.addEventListener('click', function(){
 
 function showStats(){
     userStats();
-    matchStats();
+    // matchStats();
 };
 function userStats(){
     fetch(`http://localhost:7071/api/countUsers`)
@@ -32,6 +32,7 @@ function userStats(){
                 console.log(data)
                 console.log(data[0].value)
                 countU.innerHTML = data[0].value
+                return matchStats();
                 })
                 .catch(function(err){
                     console.log(err + 'error besked fra klient siden')

@@ -15,9 +15,16 @@ const match = document.getElementById("match");
 
 // ----------------- The logged in users mail -----------//
 let userEmail = localStorage.getItem('email');
+// let ageMin = localStorage.getItem('ageMin');
+// let ageMax = localStorage.getItem('ageMax');
+// let genderPref = localStorage.getItem('genderPref');
+
+// if( genderPref == 'Female'){
+//     genderPref = 0;
+// } else genderPref = 1;
 
 // ----------- functions for presenting user data --------- //
-
+ //let notification = document.getElementById("badge").style.display = "none";
 
 function showPotentials(){
     // retrieving one user at the time // IT DOESNT CHANGE USER
@@ -25,11 +32,11 @@ function showPotentials(){
     .then(function(response){
         if(response.status == 404){
             alert('There are no more users');
-        };
-    return response.json(); // returnere et promise
+        } else 
+        return response.json(); // returnere et promise
     }).then(function(data){ 
         console.log(data);
-        displayPotentialMatch(data);
+       return displayPotentialMatch(data);
       
     }).catch(function(err){
         //Hvis der opstår en fejl fanges den her
@@ -48,71 +55,8 @@ function displayPotentialMatch(data){
         usersInterest(data.email);
 };
 
-like.addEventListener('click', function(){
-    fetch(`http://localhost:7071/api/like?email=${userEmail}`)
-    .then((response) => {
-        return response.json(); // returnere et promise
-    }).then((data) => { 
-        var votedOn = localStorage.getItem('votedOn');
-        var voter = localStorage.getItem('email');
-        var vote = 1;
-        return userVote(votedOn, voter, vote); 
-  
-    }).catch((err) => {
-        //Hvis der opstår en fejl fanges den her
-        console.log(err);
-    });
-});
 
-dislike.addEventListener('click', function(){
- 
-    fetch(`http://localhost:7071/api/like?email=${userEmail}`)
-    .then((response) => {
-        return response.json(); // returnere et promise
-    }).then((data) => {
-
-        var votedOn = localStorage.getItem('votedOn');
-        var voter = localStorage.getItem('email');
-        var vote = 0;
-        return userVote(votedOn, voter, vote);
-    
-    }).catch((err) => {
-        //Hvis der opstår en fejl fanges den her
-        console.log(err);
-    });
-});
-
-function userVote(votedOn, voter, vote){
-    // ---------------- INPUT FOR FETCH REQUEST ----------//
-    console.log(votedOn, voter, vote);
-    const option = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json; charset-UTF-8'
-        },
-        body: JSON.stringify({
-            votedOn: votedOn,
-            voter: voter,
-            vote: vote
-        })
-    };
-    fetch("http://localhost:7071/api/like", option)   
-    .then((response) => {
-        console.log(response);
-        return response.json()
-    })
-    .then((data) => {
-            // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
-            console.log("Process succeeded");
-            console.log(data);
-            console.log("You have voted");
-            location.reload();
-    }).catch((err) => {
-        console.log(err)
-        console.log("Something went wroooong")
-    });
-};
-
+// Retrieving potentiel match interests
 function usersInterest(email){
     fetch(`http://localhost:7071/api/interest?email=${userEmail}`)
     .then(function(response){
@@ -122,6 +66,7 @@ function usersInterest(email){
             for(i = 0; i < data.length; i++){
                 user1.push(data[i][0].value)
             };
+            console.log(email);
         return matchInterest(email, user1);
         }).catch(function (err){
             console.log(err + " Testing err");
@@ -129,6 +74,8 @@ function usersInterest(email){
     }); 
 };
 
+
+// Retrieving the logged in users interest
 function matchInterest(email, user1){
     fetch(`http://localhost:7071/api/interest?email=${email}`)
     .then(function(response){
@@ -138,6 +85,7 @@ function matchInterest(email, user1){
             for(i = 0; i < data.length; i++){
                 user2.push(data[i][0].value)
             };
+            console.log(email)
         return matching(user1, user2);
         }).catch(function (err){
             console.log(err + " Testing err");
@@ -145,6 +93,7 @@ function matchInterest(email, user1){
     }); 
 };
 
+// Matching algorithm
 function matching( user1, user2){
  // EXAMPLE OF VOTING (o(1) tid)
         // Check om personen allerede har stemt, hvis ikke skriv dem op som stemt.
@@ -183,3 +132,79 @@ function matching( user1, user2){
         match.innerHTML = "You are matching on " + vote.result + " interests" ;
 
 };
+
+like.addEventListener('click', function(){
+
+        var votedOn = localStorage.getItem('votedOn');
+        var voter = localStorage.getItem('email');
+        var vote = 1;
+        return userVote(votedOn, voter, vote); 
+
+    //     // retrieving one user at the time // IT DOESNT CHANGE USER
+    // fetch(`http://localhost:7071/api/like?email=${userEmail}&ageMin=${ageMin}&ageMax=${ageMax}&genderPref=${genderPref}`)
+    // .then((response) => {
+    //     return response.json(); // returnere et promise
+    // }).then((data) => { 
+    //     var votedOn = localStorage.getItem('votedOn');
+    //     var voter = localStorage.getItem('email');
+    //     var vote = 1;
+    //     return userVote(votedOn, voter, vote); 
+  
+    // }).catch((err) => {
+    //     //Hvis der opstår en fejl fanges den her
+    //     console.log(err);
+    // });
+});
+
+dislike.addEventListener('click', function(){
+ 
+    // fetch(`http://localhost:7071/api/like?email=${userEmail}&ageMin=${ageMin}&ageMax=${ageMax}&genderPref=${genderPref}`)
+    // .then((response) => {
+    //     return response.json(); // returnere et promise
+    // }).then((data) => {
+
+        var votedOn = localStorage.getItem('votedOn');
+        var voter = localStorage.getItem('email');
+        var vote = 0;
+        return userVote(votedOn, voter, vote);
+    
+    // }).catch((err) => {
+    //     //Hvis der opstår en fejl fanges den her
+    //     console.log(err);
+    // });
+});
+
+function userVote(votedOn, voter, vote){
+    // ---------------- INPUT FOR FETCH REQUEST ----------//
+    console.log(votedOn, voter, vote);
+    const option = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset-UTF-8'
+        },
+        body: JSON.stringify({
+            votedOn: votedOn,
+            voter: voter,
+            vote: vote
+        })
+    };
+    fetch("http://localhost:7071/api/like", option)   
+    .then((response) => {
+        console.log(response);
+        return response.json()
+    })
+    .then((data) => {
+            // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
+            console.log("Process succeeded");
+            console.log(data);
+            console.log("You have voted");
+            
+            showPotentials();
+            location.reload();
+    }).catch((err) => {
+        console.log(err)
+        console.log("Something went wroooong")
+    });
+};
+
+

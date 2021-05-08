@@ -20,10 +20,12 @@ function startDb(){
 module.exports.sqlConnection = connection;
 module.exports.startDb = startDb;
 
+// function selectAll(email, ageMin, ageMax, genderPref){
 function selectAll(email){
     //console.log("checking if first line in DB function works")
     return new Promise((resolve, reject) => {
-        const sql = `SELECT DISTINCT potential.id, potential.email, potential.firstName, potential.lastName, potential.dob, potential.gender, potential.description, potential.ageMin, potential.ageMax, potential.genderPref
+        const sql = `
+        SELECT  *
         FROM [user] as potential
         INNER JOIN [user] AS liker
         ON liker.genderPref = potential.gender
@@ -31,6 +33,9 @@ function selectAll(email){
         AND liker.ageMin <= DATEDIFF(year, potential.dob, GETDATE()) AND liker.ageMax >= DATEDIFF(year, potential.dob, GETDATE())
         WHERE potential.id <> (SELECT id FROM [user] WHERE [user].email = @email) AND liker.id = (SELECT id FROM [user] WHERE [user].email = @email)
         AND potential.id NOT IN (SELECT userEdge.userID2 FROM [user] INNER JOIN userEdge ON [user].id = userEdge.userID1 WHERE [user].email = @email);`;
+
+
+        
         //console.log("Now we have ran sql query for potential matches")
         const request = new Request(sql, (err, rowcount) => {
             console.log(rowcount)
@@ -47,9 +52,15 @@ function selectAll(email){
         });
         // column name, data type, paramname
         request.addParameter('email', TYPES.VarChar, email)
+        // request.addParameter('ageMin', TYPES.Int, ageMin)
+        // request.addParameter('ageMax', TYPES.Int, ageMax)
+        // request.addParameter('genderPref', TYPES.Int, genderPref);
+
+        
         //A row resulting from execution of the SQL statement.
         // column consist of meta data and value        
         request.on('row', (columns) => {
+            // console.log(columns)
             resolve(columns)
         });
         //Execute the SQL represented by request.

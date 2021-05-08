@@ -63,13 +63,13 @@ let profile = new User();
 
 // Show potential matches
 async function get(context, req){
-    console.log("checking if first line in like API function works")
+    
     try{
         let email = req.query.email;
     
         let users = await db.selectAll(email)
 
-
+       
         let getUser = new User( 
             users[1].value,  
             users[2].value,  
@@ -82,10 +82,13 @@ async function get(context, req){
             users[9].value,  
             profile.showGenderPref(users[10].value)
         );
-    
+        console.log(getUser)
+
+        // console.log(users[1].value)
+        // console.log(users)
         
         context.res = {
-            body: getUser 
+            body: getUser
         };
     } catch(error){
         context.res = {

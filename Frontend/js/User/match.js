@@ -62,8 +62,10 @@ function getMatches(){
         return response.json();
     }).then(function(matches) {
         console.log(matches);
+        let counter = 0;
         // Creating a forloop that iterates through matches
         for (i in matches) {
+            counter++;
             var age = calculateAge(matches[i][5].value);                            
             // Creating full name
             var fullName = matches[i][3].value + " " + matches[i][4].value;
@@ -71,7 +73,7 @@ function getMatches(){
             // Calling matches function
             // Saving the matched profiles email and saving the match id
             showMatches(fullName, age, email)
-        };
+        }; 
     });
 };
 

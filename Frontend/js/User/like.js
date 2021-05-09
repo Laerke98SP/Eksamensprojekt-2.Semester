@@ -100,36 +100,31 @@ function matchInterest(email, user1){
 
 // Matching algorithm
 function matching( user1, user2){
- // EXAMPLE OF VOTING (o(1) tid)
-        // Check om personen allerede har stemt, hvis ikke skriv dem op som stemt.
+ // Hashtabel (o(1) tid)
+        
         class Preference {
             constructor(){
                 this.interest = {};
                 this.result = 0;
             }
-            addToInterest(interest){
+            addToInterest(interest){ // Hvis interessen er tilføjet gives værdien 1
                 this.interest[interest] = 1;
                 return this.interest; 
             }
-            checkifMatch(arr){
-                if( this.interest[arr] == 1){ // henter ledger og sætter navn = 1, så den eksistere inde i vores hashmap
+            checkifMatch(arr){ 
+                if( this.interest[arr] == 1){ // Hvis interessen eksistere i {}, tilføjes 1 til resultat
                 this.result +=1;
                 } return this.result;
             }
         }
-        vote = new Preference()
+        vote = new Preference() // invoker en tom klasse
 
-        // console.log(user1)
-        // console.log(user2)
-
-        // Tilføjer bruger1 interesser
+        // Tilføjer bruger1 interesser O(n) tid
         for( i = 0; i< user1.length; i++){
             vote.addToInterest(user1[i]);
         }
-        // console.log(vote.interest)
-
-        // console.log(vote.checkifMatch(user3))
-        // Checker bruger 2 interesser mod bruger 1
+      
+        // Checker bruger 2 interesser mod bruger 1, O(n) tid
         for(i =0; i<user2.length; i++){
             vote.checkifMatch(user2[i]);
         }

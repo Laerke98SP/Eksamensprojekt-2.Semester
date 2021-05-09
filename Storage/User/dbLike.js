@@ -28,11 +28,18 @@ function selectAll(email){
         SELECT  *
         FROM [user] as potential
         INNER JOIN [user] AS liker
-        ON liker.genderPref = potential.gender
-        AND liker.gender = potential.genderPRef
-        AND liker.ageMin <= DATEDIFF(year, potential.dob, GETDATE()) AND liker.ageMax >= DATEDIFF(year, potential.dob, GETDATE())
-        WHERE potential.id <> (SELECT id FROM [user] WHERE [user].email = @email) AND liker.id = (SELECT id FROM [user] WHERE [user].email = @email)
-        AND potential.id NOT IN (SELECT userEdge.userID2 FROM [user] INNER JOIN userEdge ON [user].id = userEdge.userID1 WHERE [user].email = @email);`;
+            ON liker.genderPref = potential.gender
+            AND liker.gender = potential.genderPRef
+            AND liker.ageMin <= DATEDIFF(year, potential.dob, GETDATE()) 
+            AND liker.ageMax >= DATEDIFF(year, potential.dob, GETDATE())
+        WHERE potential.id <> (SELECT id FROM [user] WHERE [user].email = @email) 
+            AND liker.id = (SELECT id FROM [user] WHERE [user].email = @email)
+            AND potential.id NOT IN 
+                (SELECT userEdge.userID2 
+                FROM [user] 
+                INNER JOIN userEdge 
+                ON [user].id = userEdge.userID1 
+                WHERE [user].email = @email);`;
 
 
         

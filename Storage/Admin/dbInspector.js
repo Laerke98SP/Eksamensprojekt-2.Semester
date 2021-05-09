@@ -22,7 +22,7 @@ function startDb(){
 module.exports.sqlConnection = connection;
 module.exports.startDb = startDb;
 
-function selectAdmin(email, password){
+function selectAdmin(admin){
     return new Promise((resolve, reject) => {
         const sql = 'SELECT id FROM [admin] WHERE email = @email AND password = @password';
         console.log("Now we have ran sql query")
@@ -42,8 +42,8 @@ function selectAdmin(email, password){
             }
         });
         // column name, data type, paramname
-        request.addParameter('email', TYPES.VarChar, email)
-        request.addParameter('password', TYPES.VarChar, password)
+        request.addParameter('email', TYPES.VarChar, admin.email);
+        request.addParameter('password', TYPES.VarChar, admin.password);
         
         
         
@@ -51,7 +51,6 @@ function selectAdmin(email, password){
         // column consist of meta data and value
         request.on('row', (columns) => {
             resolve(columns)
-             
         });
         //Execute the SQL represented by request.
         connection.execSql(request)

@@ -1,13 +1,9 @@
 // -----------  DEFINING VARIABLES ------------- //
 // 01. Variables for buttons
-const logout = document.getElementById("logout")
 const deleteBtn = document.getElementById('delete');
 const edit = document.getElementById('edit');
 
 // 02. Variables to display user in
-var table = document.getElementById("table"); 
-var info = document.getElementById("description"); 
-var pref = document.getElementById("info"); 
 
 
    
@@ -20,37 +16,20 @@ function showEdit(){
     fetch(`http://localhost:7071/api/admEditUser?email=${email}`)
     .then((resp) => resp.json()).then(function(data){
         // Dataen bliver direkte indsadt som defailt values 
-        document.getElementById('email').defaultValue = data[1].value;
-        document.getElementById('password').defaultValue = data[2].value;
-        document.getElementById('firstname').defaultValue = data[3].value;
-        document.getElementById('lastname').defaultValue = data[4].value;
-        document.getElementById('dob').defaultValue = data[5].value;
-        document.getElementById('gender').defaultValue = data[6].value;
-        document.getElementById('desc').defaultValue = data[7].value;
-        document.getElementById('min').defaultValue = data[8].value;
-        document.getElementById('max').defaultValue = data[9].value;
-        document.getElementById('pref').defaultValue = data[10].value;
+        // document.getElementById('email').defaultValue = data.email;
+        document.getElementById('password').defaultValue = data.password;
+        document.getElementById('firstname').defaultValue = data.firstName;
+        document.getElementById('lastname').defaultValue = data.lastName;
+        document.getElementById('dob').defaultValue = data.dob;
+        document.getElementById('gender').defaultValue = data.genderWritten;
+        // document.getElementById('description').innerHTML = data.description;
+        document.getElementById('min').defaultValue = data.ageMin;
+        document.getElementById('max').defaultValue = data.ageMax;
+        document.getElementById('pref').defaultValue = data.prefWritten;
     });
 };
 
-// ----------- LOG OUT FUNCITON ------------- //
-logout.addEventListener('click', function(){
-    // ---------- Remove values from localstorage ----------------------
-    localStorage.removeItem('email');
-    localStorage.removeItem('password');
-    localStorage.removeItem('firstName');
-    localStorage.removeItem('lastName');
-    localStorage.removeItem('dob');
-    localStorage.removeItem('gender');
-    localStorage.removeItem('description');
-    localStorage.removeItem('minAge');
-    localStorage.removeItem('maxAge');
-    localStorage.removeItem('genderPref');
-    
 
-    // ----------- Send user back to frontpage --------------------
-    window.location.href = "./0frontpage.html"; 
-})
 
 // ------------- DELETE USER ---------------//
 
@@ -62,8 +41,7 @@ deleteBtn.addEventListener('click', function(){
     
     // 02. Function to delete user
 function deleteUser(){
-    
-    if(localStorage.getItem('mail')){
+    if(localStorage.getItem('email')){
 
 
         const option = {
@@ -83,16 +61,8 @@ function deleteUser(){
         });
         
         
-        localStorage.removeItem('mail');
-        localStorage.removeItem('kodeord');
-        localStorage.removeItem('fornavn');
-        localStorage.removeItem('efternavn');
-        localStorage.removeItem('dob');
-        localStorage.removeItem('køn');
-        localStorage.removeItem('beskrivelse');
-        localStorage.removeItem('min');
-        localStorage.removeItem('max');
-        localStorage.removeItem('kønPr');
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
         
         
         window.location.href = "./frontpage.html"; 
@@ -112,7 +82,7 @@ function editUser(){
     let ageMax = document.getElementById('max').value
     let genderPref = document.getElementById('pref').value
 
-    let editedUser = {email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref };
+    let editedUser = { email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref };
     localStorage.setItem('password', password)
 
     console.log(editedUser);

@@ -1,4 +1,5 @@
 const db = require('../../Storage/Admin/dbAdmEdit.js');
+const { User } = require('../Classes/User')
 
 // Connection to DB
 module.exports = async function (context, req) {
@@ -25,21 +26,27 @@ module.exports = async function (context, req) {
 }
 
 
-
-
 // Login function
 async function get(context, req){
     try{
-        let email = req.query.email;
-    
-        
-        let user = await db.select(email )
-        
+        // getting email from request
+        let email = req.query.email;    
+        // calling function from storage folder to get user from database 
+        let rawUserData = await db.select(email);
 
+        // creating an User object
+        let userData = new User(rawUserData[1].value, rawUserData[2].value, rawUserData[3].value, rawUserData[4].value, 
+            rawUserData[5].value, rawUserData[6].value, rawUserData[7].value, rawUserData[8].value, rawUserData[9].value, 
+            rawUserData[10].value);
 
-        
+        // calling methods to get more data
+        userData.calculateAge()
+        userData.showGender()
+        userData.showGenderPref()
+
+        // sending data in body
         context.res = {
-            body: user
+            body: userData
         };
 
     } catch(error){

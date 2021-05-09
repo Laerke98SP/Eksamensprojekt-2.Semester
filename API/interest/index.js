@@ -1,4 +1,5 @@
 const db = require('../../Storage/User/dbInterest');
+const { Interest } = require('../Classes/Interest')
 
 // Connection to DB
 module.exports = async function (context, req) {
@@ -29,12 +30,14 @@ async function get(context, req){
     try{
         let email = req.query.email;
         
-        let interest = await db.showInterest(email)
+        let rawInterestData = await db.showInterest(email)
         // console.log(interest)
+
+        // let interest = new Interest(rawInterestData[0].value);
         
        
         context.res = {
-            body: interest
+            body: rawInterestData
         };
 
     } catch(error){

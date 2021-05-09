@@ -1,8 +1,5 @@
-
-
 // 01. Variables for buttons
-const logout = document.getElementById("logout");
-const deleteBtn = document.getElementById('delete');
+// const deleteBtn = document.getElementById('delete');
 
 // 02. Variables to display user in
 var table = document.getElementById("table"); // en variabel for tabellen
@@ -21,25 +18,36 @@ function showUser(){
     .then((resp) => resp.json()).then(function(data) {
 
         // fixing dataflow from API, sent as a class
-        table.innerHTML += 
-        "<tr><td>" + data.email + 
-        "</td><td>" + data.firstName +
-        "</td><td>" + data.lastName + 
-        "</td><td>" + data.dob+
-        "</td><td>" + data.gender +
-        "</td></tr>";
+
+        document.getElementById('email').innerHTML = 'Email: ' + data.email
+        document.getElementById('fullName').innerHTML = 'Full name: ' + data.firstName + ' ' + data.lastName
+        document.getElementById('age').innerHTML = 'Age: ' + data.age
+        document.getElementById('gender').innerHTML = 'Gender: ' + data.genderWritten
+        document.getElementById('description').innerHTML = data.description
+
+
+        document.getElementById('ageMin').innerHTML = 'Age minimum: ' + data.ageMin
+        document.getElementById('ageMax').innerHTML = 'Age maximum' + data.ageMax
+        document.getElementById('genderPref').innerHTML = 'Preferred gender: ' + data.prefWritten
+
+
+
+        // table.innerHTML += 
+        // "<tr><td>" + data.email + 
+        // "</td><td>" + data.firstName +
+        // "</td><td>" + data.lastName + 
+        // "</td><td>" + data.age+
+        // "</td><td>" + data.genderWritten +
+        // "</td></tr>";
        
-        info.innerHTML += data.description;
+        // info.innerHTML += data.description;
     
-        pref.innerHTML +=
-        "<tr><td>" + data.ageMin +
-        "</td><td>" + data.ageMax +
-        "</td><td>" + data.genderPref +
-        "</td></tr>";
+        // pref.innerHTML +=
+        // "<tr><td>" + data.ageMin +
+        // "</td><td>" + data.ageMax +
+        // "</td><td>" + data.prefWritten +
+        // "</td></tr>";
         
-        localStorage.setItem('ageMin', data.ageMin);
-        localStorage.setItem('ageMax', data.ageMax);
-        localStorage.setItem('genderPref', data.genderPref);
         // Invoke show users interest function
         
     
@@ -73,102 +81,74 @@ function showInterest(){
 
 // 05. Display interests
 function displayInt(arr){
-    interest.innerHTML = arr;
+    let interests = ''
+    for (i in arr){
+        interests += ' ' + arr[i]
+    }
+    document.getElementById('interests').innerHTML = interests;
     message();
 }
 
-// 06. Logout button
-logout.addEventListener('click', function(){
-
-    console.log("logging out")
-    // ---------- Remove values from localstorage ----------------------
-   
-    localStorage.removeItem('email');
-    localStorage.removeItem('password');
-    localStorage.removeItem('firstName');
-    localStorage.removeItem('lastName');
-    localStorage.removeItem('gender');
-    localStorage.removeItem('dob');
-    localStorage.removeItem('description');
-    localStorage.removeItem('ageMin');
-    localStorage.removeItem('ageMax');
-    localStorage.removeItem('genderPref');
-
-    localStorage.clear();
-
-    // ----------- Sent user back to frontpage --------------------
-    window.location.href = "./0frontpage.html"; 
-})
-
-
-// 07. Delete button
-deleteBtn.addEventListener('click', function(){ 
-    alert("Warning - Your profile will be deleted"); 
-    // Invoke delete function
-    deleteUser(); 
-});
         
-// 08. Function to delete user
-function deleteUser(){
-        
-    // Retrieving user email
-    let email = localStorage.getItem('email');
+// // 08. Function to delete user
+// function deleteUser(){
+//     // Retrieving user email
+//     let email = localStorage.getItem('email');
     
-        const option = {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };    
+//         const option = {
+//             method: 'DELETE',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         };    
            
         
-        fetch(`http://localhost:7071/api/user?email=${email}`, option)
-        .then(function() {
-            console.log("ok"); 
-            // Clear localStorage
-            localStorage.clear();
+//         fetch(`http://localhost:7071/api/user?email=${email}`, option)
+//         .then(function() {
+//             console.log("ok"); 
+//             // Clear localStorage
+//             localStorage.clear();
             
-            // return to main page
-            window.location.href = "./0frontpage.html"; 
-        }).catch(function() {
-            console.log("error"); 
-        });
-};
+//             // return to main page
+//             window.location.href = "./0frontpage.html"; 
+//         }).catch(function() {
+//             console.log("error"); 
+//         });
+// };
 
-// 09. checkIfmatch
-function checkIfMatch(){
-
-    let email = localStorage.getItem('email');
-    const option = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json; charset-UTF-8'
-        },
-        body: JSON.stringify({
-            email: email
-        })
-    };
-    // Insert match if both user like eachother
-    fetch(`http://localhost:7071/api/match`, option)
-    .then((response) => {
-        return response.json()
-    })
-    .then((data) => {
-    // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
-        console.log("Process succeeded")
-        console.log(data)
-        if( data.status == 'Success' ){
+// // 09. checkIfmatch
+// function checkIfMatch(){
+//     let email = localStorage.getItem('email');
+//     const option = {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json; charset-UTF-8'
+//         },
+//         body: JSON.stringify({
+//             email: email
+//         })
+//     };
+//     // Insert match if both user like eachother
+//     fetch(`http://localhost:7071/api/match`, option)
+//     .then((response) => {
+//         return response.json()
+//     })
+//     .then((data) => {
+//     // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
+//         console.log("Process succeeded")
+//         console.log(data)
+//         if( data.status == 'Success' ){
            
-            message();
-        };
-    }).catch((err) =>{
-        console.log(err)
-        console.log("Something went wroooong")
-    });
-};
+//             message();
+//         };
+//     }).catch((err) =>{
+//         console.log(err)
+//         console.log("Something went wroooong")
+//     });
+// };
 
 
-// 09. function for notification
+// // 09. function for notification
 function message(){
     let result = 0;
     let email = localStorage.getItem('email');

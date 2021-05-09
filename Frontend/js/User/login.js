@@ -23,7 +23,6 @@ function login(email, password){
     fetch(`http://localhost:7071/api/user?email=${email}&password=${password}`)
     .then(
         function(response){
-            
             // ------------  404 RESPONSE FOR KLIENT TYPING SOMETHING WRONG---------//
             if( response.status == 404) {
                 alert( "Kodeord eller brugernavn er forkert - har du ikke en bruger opret gerne en");
@@ -43,22 +42,15 @@ function login(email, password){
                         //------------ RETRIEVING THE REST OF USER INFO FROM DB-----------//
                         localStorage.setItem('email', data.email );
                         localStorage.setItem('password', data.password );
-                        localStorage.setItem('firstName', data.firstName);
-                        localStorage.setItem('lastName', data.lastName);
-                        localStorage.setItem('dob', data.dob);
-                        localStorage.setItem('gender', data.gender);
-                        localStorage.setItem('description', data.description);
-                        localStorage.setItem('ageMin', data.ageMin);
-                        localStorage.setItem('ageMax', data.ageMax);
-                        localStorage.setItem('genderPref', data.genderPref);
                    
 
                     // ------------- IF EVERYTHING SUCCEEDED - PASS YOU TO YOUR PROFILE -------//
-                    alert("You will be directed to your profile")
+                    // alert("You will be directed to your profile")
                     window.location.href = "./1user.html"; 
                 })
-                }
-            }).catch(function (err){
-                    console.log(err + " Testing err");
-        });
+            }
+        })
+    .catch(function (err){
+        console.log(err + " Testing err");
+    });
 };

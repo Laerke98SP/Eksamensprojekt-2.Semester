@@ -1,4 +1,5 @@
 const db = require('../../Storage/Admin/dbInspector');
+const { Admin } = require('../Classes/Admin');
 
 
 module.exports = async function (context, req) {
@@ -16,9 +17,6 @@ module.exports = async function (context, req) {
         case 'POST':
             await post(context, req);
             break;
-        case 'PATCH':
-            await patch(context, req);
-            break
         case 'DELETE':
             await erase(context, req);
             break
@@ -34,14 +32,16 @@ async function get(context, req){
     try{
         let email = req.query.email;
         let password = req.query.password;
+
+        // creating an admin object
+        let adminData = new Admin(email, password)
        
-        let admin = await db.selectAdmin(email, password)
-        console.log("Executed to line 31 in azure function")
+        // inserting adminData object into function from storage folder
+        let response = await db.selectAdmin(adminData)
 
         context.res = {
-            body: admin
+            body: response
         };
-        console.log("also send the context to client side")
     } catch(error){
         context.res = {
             status: 404,
@@ -52,27 +52,14 @@ async function get(context, req){
 
 async function post(context, req){
     try{
-        let payload = req.body;
-        await db.insertAdmin(payload)
-        context.res = {
-            status: 200,
-            body: {
-                status: 'Success'
-            }
-        }
-    } catch(error){
-        context.res = {
-            status: 400,
-            body: error.message
-        }
-    }
-}
+        let adminData = req.body;
 
-async function patch(context, req){
-    // this is the admin changing another users profile
-    try{
-        let payload = req.body;
-        await db.updateUserProfile(payload)
+        // creating a new admin object
+        let admin = new Admin(adminData.email, adminData.password)
+
+        // inserting admin into db by function from storage folder
+        await db.insertAdmin(admin)
+
         context.res = {
             status: 200,
             body: {

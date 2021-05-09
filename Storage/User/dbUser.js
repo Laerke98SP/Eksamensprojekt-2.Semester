@@ -152,7 +152,7 @@ function deleteUser(email){
         WHERE userID = (SELECT id FROM [user] WHERE [user].email = @email);
         DELETE FROM [user]
         WHERE id = (SELECT id FROM [user] WHERE [user].email = @email);
-COMMIT TRANSACTION;`;   
+        COMMIT TRANSACTION;`;   
 
         
         console.log("Sending SQL query to DB");

@@ -1,9 +1,9 @@
 body {
   height: 900px;
-  background-color: #fff5fb;
-  color: rgb(58, 16, 16);
+  background-color: #ff009e;
+  color: white;
   text-align: center;
-  /* background-image: linear-gradient( #cbb2ff, white); */
+  background-image: linear-gradient( #cbb2ff, #dbd3ee);
 }
 
 /* For navigation bar */
@@ -12,14 +12,15 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: rgb(58, 16, 16);
+  background-color: #ffb2d7;
   position: fixed;
   top: 0;
   width: 100%;
 }
   
 li {
-  float: left;
+  display:inline-block;
+  /* float: left; */
 }
   
 li a {
@@ -39,10 +40,10 @@ li a:hover:not(.active) {
 }
   
 .notification {
-  /* background-color: #ffb2d7; */
+  background-color: #ffb2d7;
   color: white;
   text-decoration: none;
-  /* padding: 15px 26px; */
+  padding: 15px 26px;
   position: relative;
   display: inline-block;
   border-radius: 2px;
@@ -60,47 +61,20 @@ li a:hover:not(.active) {
 
 /* Buttons */
 #delete, #logout, #edit, #dislike, #like  {
-  /* background-color: #cbb2ff;
+  background-color: #cbb2ff;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
   border: ridge;
   border-color: white;
   cursor: pointer;
-  width: 155px; */
-  background-color: rgb(58, 16, 16);
-  border: none;
-  color: rgb(228, 225, 225);
-  padding: 16px 32px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
+  width: 155px;
 }
   
 #match:hover, #delete:hover, #logout:hover, #edit:hover {
   opacity: 0.40;
 }
-
-input[type=text] {
-  background-color: #ffffffbe;
-  /* background-image: url('searchicon.png'); */
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  padding-left: 10px;
-}
   
-
-textarea {
-  width: 30%;
-  height: 150px;
-  padding: 12px 20px;
-  box-sizing: border-box;
-  /* border: 2px solid rgb(204, 204, 204); */
-  border-radius: 7px;
-  background-color: #ffffffbe;
-  resize: none;
-}
-
 /* For profile */
 table {
   border: 3px solid #f1f1f1;

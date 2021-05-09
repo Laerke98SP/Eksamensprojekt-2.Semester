@@ -16,13 +16,13 @@ function showEdit(){
     fetch(`http://localhost:7071/api/admEditUser?email=${email}`)
     .then((resp) => resp.json()).then(function(data){
         // Dataen bliver direkte indsadt som defailt values 
-        // document.getElementById('email').defaultValue = data.email;
+        document.getElementById('email').defaultValue = data.email;
         document.getElementById('password').defaultValue = data.password;
         document.getElementById('firstname').defaultValue = data.firstName;
         document.getElementById('lastname').defaultValue = data.lastName;
         document.getElementById('dob').defaultValue = data.dob;
         document.getElementById('gender').defaultValue = data.genderWritten;
-        // document.getElementById('description').innerHTML = data.description;
+        document.getElementById('description').innerHTML = data.description;
         document.getElementById('min').defaultValue = data.ageMin;
         document.getElementById('max').defaultValue = data.ageMax;
         document.getElementById('pref').defaultValue = data.prefWritten;

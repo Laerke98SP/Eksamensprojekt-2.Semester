@@ -63,9 +63,6 @@ a:hover:not(.active) {
 }
 
 
-  
-
-
 /* Divs for statistics */
 #countUsers, #countMatches {
   border: solid white;

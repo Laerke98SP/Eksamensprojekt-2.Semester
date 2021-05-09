@@ -22,7 +22,7 @@ function showEdit(){
         document.getElementById('lastname').defaultValue = data.lastName;
         document.getElementById('dob').defaultValue = data.dob;
         document.getElementById('gender').defaultValue = data.genderWritten;
-        document.getElementById('description').innerHTML = data.description;
+        document.getElementById('desc').innerHTML = data.description;
         document.getElementById('min').defaultValue = data.ageMin;
         document.getElementById('max').defaultValue = data.ageMax;
         document.getElementById('pref').defaultValue = data.prefWritten;
@@ -36,37 +36,26 @@ function showEdit(){
     // 01. Action for click on delete button
 deleteBtn.addEventListener('click', function(){ 
     alert("Warning - Your profile will be deleted"); 
-    deleteUser(); 
+    return deleteUser(); 
 });
     
     // 02. Function to delete user
 function deleteUser(){
-    if(localStorage.getItem('email')){
-
-
-        const option = {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-        }, 
-        body: JSON.stringify(user)
-        };    
-       
-       
-        fetch(`http://localhost:7071/api/user?email=${mail}`, option)
-        .then(function() {
-            console.log("ok"); 
-        }).catch(function() {
-            console.log("error"); 
-        });
-        
-        
-        localStorage.removeItem('email');
-        localStorage.removeItem('password');
-        
-        
-        window.location.href = "./frontpage.html"; 
-    };
+    let email = localStorage.getItem('email');
+    const option = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };     
+    fetch(`http://localhost:7071/api/user?email=${email}`, option)
+    .then(function() {
+        console.log("ok"); 
+    }).catch(function() {
+         console.log("error"); 
+    });    
+    localStorage.clear();   
+    window.location.href = "./0frontpage.html"; 
 };
 
 //------------ EDIT USER FUNCTION -------------//

@@ -9,7 +9,7 @@ body {
 }
 
 form {
-  border: 3px solid #f1f1f1;
+  border: 3px solid white;
   /* text-align: center; */
   background-color: #ffb2d7;
   padding: 16px;
@@ -25,9 +25,9 @@ form {
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
-  border: none;
+  border: solid;
+  border-color: white;
   cursor: pointer;
-  width: 100%;
   width: 250px;
 }
   
@@ -36,13 +36,14 @@ form {
 }
 
 #admin {
-  background-color: #cbb2ff;
-  color: black;
+  background-color: #939ce9;
+  color: white;
   padding: 14px 20px;
   margin: 8px 0;
-  border: solid black;
+  border: solid;
+  border-color: white;
   cursor: pointer;
-  width: 250px;
+  width: 155px;
 }
 
 #return {
@@ -50,7 +51,8 @@ form {
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
-  border: none;
+  border: solid;
+  border-color: white;
   cursor: pointer;
   width: 250px;
 }

@@ -8,9 +8,9 @@ body {
   }
   
   form {
-    border: 3px solid #f1f1f1;
+    border: 3px solid white;
     /* text-align: center; */
-    background-color: #64a4ec;
+    background-color: #939ce9;
     padding: 16px;
     color: black;
     width: auto;
@@ -19,29 +19,31 @@ body {
   }
   
   /* Buttons */
-  #gologin, #getUser, #gocreate  {
-    background-color:  #0026ff;
+  #gologin, #getUser, #gocreate {
+    background-color: #545fc0;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
-    border: none;
+    border: solid;
+    border-color: white;
     cursor: pointer;
-    width: 100%;
     width: 250px;
   }
+
+  #user {
+    background-color: #ff009e;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: solid;
+    border-color: white;
+    cursor: pointer;
+    width: 155px;
+  }
+  
     
   #gologin:hover, #getUser:hover, #gocreate:hover, #user:hover {
     opacity: 0.40;
-  }
-  
-  #user {
-    background-color: #b2beff;
-    color: black;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: solid black;
-    cursor: pointer;
-    width: 250px;
   }
   
   #return {
@@ -49,7 +51,8 @@ body {
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
-    border: none;
+    border: solid;
+    border-color: white;
     cursor: pointer;
     width: 250px;
   }

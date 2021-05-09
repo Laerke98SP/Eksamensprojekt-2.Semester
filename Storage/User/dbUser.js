@@ -105,7 +105,7 @@ module.exports.select = select;
 function updateUser(payload){
     return new Promise((resolve, reject) => {
         const sql = `UPDATE [user]
-        SET password = @password, firstName = @firstName, lastName = @lastName, dob = @dob, gender = @gender, description = @description, ageMin = @ageMin, ageMax = @ageMax, genderPref = @genderPref
+        SET password = @password, firstName = @firstName, lastName = @lastName, gender = @gender, description = @description, ageMin = @ageMin, ageMax = @ageMax, genderPref = @genderPref
         WHERE email = @email;`
 
         console.log("Sending SQL query to DB");
@@ -121,7 +121,7 @@ function updateUser(payload){
         request.addParameter('password', TYPES.VarChar, payload.password)
         request.addParameter('firstName', TYPES.VarChar, payload.firstName)
         request.addParameter('lastName', TYPES.VarChar, payload.lastName)
-        request.addParameter('dob', TYPES.Date, payload.dob)
+        //request.addParameter('dob', TYPES.Date, payload.dob)
         request.addParameter('gender', TYPES.VarChar, payload.gender)
         request.addParameter('description', TYPES.VarChar, payload.description)
         request.addParameter('ageMin', TYPES.Int, payload.ageMin)

@@ -45,7 +45,6 @@ function checkIfMatch(){
         console.log("Process succeeded")
         console.log(data)
         if( data.status == 'Success' ){
-           
             return getMatches();
         };
     }).catch((err) =>{
@@ -62,10 +61,9 @@ function getMatches(){
         return response.json();
     }).then(function(matches) {
         console.log(matches);
-        let counter = 0;
+        
         // Creating a forloop that iterates through matches
         for (i in matches) {
-            counter++;
             var age = calculateAge(matches[i][5].value);                            
             // Creating full name
             var fullName = matches[i][3].value + " " + matches[i][4].value;
@@ -73,6 +71,7 @@ function getMatches(){
             // Calling matches function
             // Saving the matched profiles email and saving the match id
             showMatches(fullName, age, email)
+           
         }; 
     });
 };
@@ -102,7 +101,7 @@ function showMatches(name, age, userEmail){
     deleteMatch.onclick = function() {
         // Getting the id from the classname
         var match = deleteMatch.id // the matched users email
-        var email = localStorage.getItem('mail'); // the users email
+        var email = localStorage.getItem('email'); // the users email
 
         // Creating API delete request
         const options = { 
@@ -135,3 +134,4 @@ function showMatches(name, age, userEmail){
     // Insert the final match display
     document.body.appendChild(holder);
 };
+

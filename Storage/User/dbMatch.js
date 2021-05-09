@@ -23,20 +23,19 @@ module.exports.startDb = startDb;
 
 function insertMatch(payload){
     return new Promise((resolve, reject) => {
-        const sql = `INSERT INTO match (userID2, userID1)
-        SELECT DISTINCT edge1.userID2, edge1.userID1
+        const sql = `INSERT INTO MATCH (userID2, userID1)
+        SELECT edge1.userID1, edge1.userID2
         FROM userEdge AS edge1
-        INNER JOIN userEdge AS edge2
-            ON edge1.vote = 1
-            AND edge2.vote = 1
+        INNER JOIN userEdge as edge2
+            ON edge2.userID1 = edge1.userID2
         INNER JOIN [user]
             ON edge1.userID1 = [user].id
-            AND edge2.userID2 = [user].id
-            WHERE [user].email = @email
-    AND NOT EXISTS (SELECT userID1, userID2
-                    FROM match
-                    WHERE userID1 = edge1.userID1
-                    OR userID2 = edge1.userID2);`;
+        WHERE [user].email = @email
+          AND edge1.userID1 = edge2.userID2
+        AND NOT EXISTS (SELECT userID1, userID2
+                            FROM match
+                            WHERE match.userID1 = edge1.userID1
+                            OR match.userID1 = edge1.userID2);`;
         console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {
             if (err){
@@ -60,11 +59,13 @@ module.exports.insertMatch = insertMatch;
 
 function getMatches(email){
     return new Promise((resolve, reject) => {
-        const sql = `SELECT * 
-                    FROM [user] 
-                    INNER JOIN match 
-                        ON [user].id = match.userID1 OR [user].id = match.userID2 
-                    WHERE [user].email <> @email;`;
+        const sql = `SELECT  *
+        FROM [user] as lover
+        INNER JOIN match
+        ON lover.id = match.userID1 OR lover.id = match.userID2
+        INNER JOIN [user]
+            ON [user].id = match.userID1 OR [user].id = match.userID2
+            WHERE lover.email <> @email and [user].email = @email;`;
         console.log("Now we have ran sql query");
         const request = new Request(sql, (err, rowcount) => {
             if(rowcount == 0) {

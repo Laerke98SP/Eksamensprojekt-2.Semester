@@ -14,7 +14,7 @@
             <li><a href="./1user.html">My profile</a></li>
             <li><a href="./2editUser.html">Edit profile</a></li>
             <li><a href="./3like.html">Find matches</a></li>
-            <li><a href="./4match.html">See matches</a></li>
+            <li><a href="./4match.html" class="notification">See matches<span id="badge" style="display: none;">NEW</span></a></li>
         </ul>
         <br><br><br>
 
@@ -29,7 +29,7 @@
             <table id="table">
                 <tr>
                     <th>Email:</th>
-                    <th>Password</th>
+                    <th>Password:</th>
                     <th>First name:</th>
                     <th>Last name:</th>
                     <th>Age:</th>
@@ -38,18 +38,17 @@
                 <tr>
                     <td><input type="text" id="email" readonly style="background-color:lightgray;"></td>
                     <td><input type="text" id="password"></td>
-                    <td><input type="text" id="firstname"></td>
-                    <td><input type="text" id="lastname"></td>
-                    <td><input type="text" id="dob"></td>
+                    <td><input type="text" id="firstName"></td>
+                    <td><input type="text" id="lastName"></td>
+                    <td><input type="text" id="dob" readonly style="background-color:lightgray;"></td>
                     <td><input type="text" id="gender"></td>
                     
                 </tr>
             </table>
             <br>
+            <p> Description:</p>
             <div id="description">
-
-                <p> Description:</p>
-                <input type="text" id="desc"> 
+                <input type="text" id="descr"> 
             </div>
             <br>
             <table id="info">
@@ -60,18 +59,18 @@
                     <th>Gender:</th>
                 </tr>
                 <tr>
-                    <td><input type="text" id="min"></td>
-                    <td><input type="text" id="max"></td>
-                    <td><input type="text" id="pref"></td>
+                    <td><input type="text" id="ageMin"></td>
+                    <td><input type="text" id="ageMax"></td>
+                    <td><input type="text" id="genderPref"></td>
                 </tr>
             </table>
         <br><br>
     
         <!-- Buttons for logout, delete user or edit user-->
         <div class="changes">
-            <input id="delete" type="reset" value="Delete"> 
-            <input id="logout" type="reset" value="Logout"> 
-            <button id="edit" onclick="editUser()">Edit user</button>                
+            <input id="delete" type="reset" value="Delete profile"> 
+            <!-- <input id="logout" type="reset" value="Logout"> -->
+            <button id="edit" onclick="editUser()">Save changes</button>                
         </div>
 
         <script src="../../js/User/editUser.js"></script> 

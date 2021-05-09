@@ -27,7 +27,7 @@ module.exports.startDb = startDb;
 // Insert User Interest POST
 function insertInterest(payload){
     return new Promise((resolve, reject) => {
-        const sql = `INSERT INTO userInterest(userID, interestID,vote)
+        const sql = `INSERT INTO userInterest(userID, interestID, vote)
         SELECT u.id, i.id, vote = @sVote
         FROM [user] as u, interest as i
         WHERE u.email = @email AND
@@ -83,7 +83,7 @@ module.exports.insertInterest = insertInterest;
 //  GET req - for userInterestfunction - DONE
 function showInterest(email){
     return new Promise((resolve, reject) => {
-        const sql = `SELECT  i.name
+        const sql = `SELECT i.name
         FROM interest as i
         INNER JOIN userInterest as ui
         ON i.id = ui.interestID
@@ -92,8 +92,6 @@ function showInterest(email){
         WHERE u.email = @email  and ui.vote = 1;`;
         console.log("Now we have ran sql query")
         const request = new Request(sql, (err, rowcount, rows) => {
-            // console.log(rowcount)
-            // console.log(rows)
             if (rowcount == 0) {
                 reject(
                     { message: 'There is no interest'}  
@@ -115,7 +113,6 @@ function showInterest(email){
         //A row resulting from execution of the SQL statement.
         // column consist of meta data and value
         request.on('doneInProc', function (rowCount, more, rows) { 
-         
             resolve(rows)
         });
         //Execute the SQL represented by request.

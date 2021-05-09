@@ -14,11 +14,8 @@ logout.addEventListener('click', function(){
 });
 
 
-function showStats(){
-    userStats();
-    // matchStats();
-};
 function userStats(){
+    // Get request for the count user HTTP trigger
     fetch(`http://localhost:7071/api/countUsers`)
     .then(
         function(response){
@@ -27,12 +24,16 @@ function userStats(){
                 console.log(response);
                 return;
             } else {  
-                response.json().then(function (data) {
-                console.log('succes!')
-                console.log(data)
-                console.log(data[0].value)
-                countU.innerHTML = data[0].value
-                return matchStats();
+                response.json().then(function (data){
+                    // messeges logged so it is visible that it suceeded 
+                    console.log('succes!');
+                    console.log(data);
+
+                    // inserting the data in the predefined place
+                    countU.innerHTML = data;
+
+                    // calling the matchStats function
+                    matchStats();
                 })
                 .catch(function(err){
                     console.log(err + 'error besked fra klient siden')
@@ -40,6 +41,7 @@ function userStats(){
             };
     });
 };
+
 function matchStats(){
     fetch(`http://localhost:7071/api/countMatches`)
     .then(
@@ -51,8 +53,9 @@ function matchStats(){
             } else {  
                 response.json().then(function (data) {
                 console.log('succes!')
-                console.log(data)
-                countM.innerHTML = data[0].value
+                // alert(data)
+                // countM.innerHTML = data[0].value
+                countM.innerHTML = data
                 })
                 .catch(function(err){
                     console.log(err + 'error besked fra klient siden')

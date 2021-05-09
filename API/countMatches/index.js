@@ -23,11 +23,15 @@ module.exports = async function (context, req) {
 
 async function get(context, req){
     try{
+        // using function from storage folder
         let matches = await db.countMatches()
-        console.log("Executed to line 31 in azure function")
 
+        // making data readable
+        let matchCount = matches[0].value
+
+        // sending data in body
         context.res = {
-            body: matches
+            body: matchCount
         };
         console.log("also send the context to client side")
     } catch(error){

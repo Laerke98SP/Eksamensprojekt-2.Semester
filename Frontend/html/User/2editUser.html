@@ -5,16 +5,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dating App</title>
         <link href="../../css/user.css" rel="stylesheet">
+
+        <script src="../../js/User/editUser.js"></script> 
+        <script src="../../js/User/logOut.js"></script> 
+        <script src="../../js/User/checkMatch.js"></script> 
+
+        <!-- loading multiple functions when page visited -->
+        <script language="javascript">
+            function start(){
+                showEdit()
+                checkIfMatch()
+            }
+        </script> 
     </head>
-    <body onload="showEdit()">
+    <body onload="start()">
 
         <!-- Navigation Bar --> 
         <ul>
-            <li><a class="active" href="./0frontpage.html">Home</a></li>
-            <li><a href="./1user.html">My profile</a></li>
-            <li><a href="./2editUser.html">Edit profile</a></li>
-            <li><a href="./3like.html">Find matches</a></li>
-            <li><a href="./4match.html">See matches</a></li>
+            <a href="./0frontpage.html"><button id="logOut" onclick="logOut()">Log out</button></a>
+            <a href="./1user.html"><button id="profile">My profile</button></a>
+            <a href="./2editUser.html"><button id="editProfile">Edit profile</button></a>
+            <a href="./3like.html"><button id="findMatches">Find matches</button></a>
+            <a href="./4match.html" class="notification"><button id="seeMatches">See matches</button><span id="badge" style="display: none;">!</span></a>
         </ul>
         <br><br><br>
 
@@ -26,13 +38,36 @@
         </div>
         
         <!-------- Displaying user information -->
-            <table id="table">
+        <form id="editUserForm">
+
+            <input type="text" id="password" >
+            <br>
+            <input type="text" id="firstname" >
+            <br>
+            <input type="text" id="lastname" >
+            <br>
+            <p id="dobText">Birthday</p>
+            <input type="text" id="dob" >
+            <br>
+            <!-- <textarea id="description" cols="50" rows="4"></textarea> -->
+            <br>
+            <br>
+            <input type="text" id="min" >
+            <br>
+            <input type="text" id="max" >
+            <br>
+            <input type="text" id="pref">
+            <br>
+            <button type="button" style="cursor: pointer;" id="edit" onclick="editUser()">Rediger bruger</button>
+            <button type="button" style="cursor: pointer;" id="delete" onclick="deleteUser()" >Slet bruger</button>
+        </form>   
+        <!-- <table id="table">
                 <tr>
                     <th>Email:</th>
                     <th>Password</th>
                     <th>First name:</th>
                     <th>Last name:</th>
-                    <th>Age:</th>
+                    <th>Birthday:</th>
                     <th>Gender:</th>
                 </tr>
                 <tr>
@@ -44,14 +79,15 @@
                     <td><input type="text" id="gender"></td>
                     
                 </tr>
-            </table>
-            <br>
+            </table> -->
+            <!-- <br>
             <div id="description">
 
                 <p> Description:</p>
-                <input type="text" id="desc"> 
-            </div>
-            <br>
+                <textarea id="description" rows="4" cols="30"></textarea><br><br>
+                
+            </div> -->
+            <!-- <br>
             <table id="info">
                 <p>Preferences in partner:</p>
                 <tr>
@@ -65,15 +101,13 @@
                     <td><input type="text" id="pref"></td>
                 </tr>
             </table>
-        <br><br>
+        <br><br> -->
     
         <!-- Buttons for logout, delete user or edit user-->
-        <div class="changes">
+        <!-- <div class="changes">
             <input id="delete" type="reset" value="Delete"> 
             <input id="logout" type="reset" value="Logout"> 
             <button id="edit" onclick="editUser()">Edit user</button>                
-        </div>
-
-        <script src="../../js/User/editUser.js"></script> 
+        </div> -->
     </body>
 </html>

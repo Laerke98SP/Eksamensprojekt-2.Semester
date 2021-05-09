@@ -72,9 +72,9 @@ module.exports.selectAll = selectAll;
 function userVote(payload) {
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO  userEdge (userID2, userID1, vote)
-        SELECT votedOn.id, voter.id, vote = @vote
-        FROM [user] as votedOn, [user] as voter
-            WHERE  voter.email = @voter AND votedOn.email = @votedOn;`;
+        SELECT userId2.id, userId1.id, vote = @vote
+        FROM [user] as userId2, [user] as userId1
+            WHERE  userId1.email = @userId1 AND userId2.email = @userId2;`;
         //console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {
             if (err) {
@@ -83,8 +83,8 @@ function userVote(payload) {
             };
         });
         //console.log("Testing the params now");
-        request.addParameter('votedOn', TYPES.VarChar, payload.votedOn);
-        request.addParameter('voter', TYPES.VarChar, payload.voter);
+        request.addParameter('userId2', TYPES.VarChar, payload.userId2);
+        request.addParameter('userId1', TYPES.VarChar, payload.userId1);
         request.addParameter('vote', TYPES.Int, payload.vote);
         //console.log("Checking if the parameters exist " + payload.votedOn);
         request.on('requestCompleted', (row) => {

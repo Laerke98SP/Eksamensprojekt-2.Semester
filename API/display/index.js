@@ -1,4 +1,5 @@
 const db = require('../../Storage/Admin/dbDisplay');
+const { User } = require('../Classes/User');
 
 
 module.exports = async function (context, req) {
@@ -31,18 +32,13 @@ module.exports = async function (context, req) {
 };
 
 async function get(context, req){
-    try{
-        // let email = req.query.email;
-        // let password = req.query.password;
-       
-        let users = await db.displayAll()
-        //console.log("Executed in displayAll index")
-        //console.log(users);
+    try{       
+        let rawUserData = await db.displayAll()
 
         context.res = {
-            body: users
+            body: rawUserData
         };
-        //console.log("also send the context to client side")
+
     } catch(error){
         context.res = {
             status: 400,
@@ -74,7 +70,20 @@ async function deleteUser(context, req){
 async function patch(context, req){
     try{
         let payload = req.body;
-        await db.updateUser(payload)
+
+        // making at user object
+        let userData = new User(payload.email, payload.password, payload.firstName, payload.lastName, 
+            payload.dob, payload.gender, payload.description, payload.ageMin, payload.ageMax, 
+            payload.genderPref);
+        
+        // making sure the gender related inputs are either 0 or 1
+        userData.binaryGender()
+        userData.binaryGenderPref()
+
+        // calling the function for updating a user from Storage folder
+        await db.updateUser(userData)
+
+
         context.res = {
             status: 200,
             body: {

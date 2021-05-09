@@ -19,14 +19,13 @@
         </script> 
     </head>
     <body onload="start()">
-
         <!-- Navigation Bar --> 
         <ul>
-            <a href="./0frontpage.html"><button id="logOut" onclick="logOut()">Log out</button></a>
-            <a href="./1user.html"><button id="profile">My profile</button></a>
-            <a href="./2editUser.html"><button id="editProfile">Edit profile</button></a>
-            <a href="./3like.html"><button id="findMatches">Find matches</button></a>
-            <a href="./4match.html" class="notification"><button id="seeMatches">See matches</button><span id="badge" style="display: none;">!</span></a>
+            <li><a class="active" href="./0frontpage.html">Log out</a></li> 
+            <li><a href="./1user.html">My profile</a></li> 
+            <li><a href="./2editUser.html">Edit profile</a></li>
+            <li><a href="./3like.html">Find matches</a></li>
+            <li><a href="./4match.html" class="notification">See matches<span id="badge" style="display: none;">1</span></a></li>
         </ul>
         <br><br><br>
 
@@ -38,76 +37,50 @@
         </div>
         
         <!-------- Displaying user information -->
-        <form id="editUserForm">
-
-            <input type="text" id="password" >
-            <br>
-            <input type="text" id="firstname" >
-            <br>
-            <input type="text" id="lastname" >
-            <br>
-            <p id="dobText">Birthday</p>
-            <input type="text" id="dob" >
-            <br>
-            <!-- <textarea id="description" cols="50" rows="4"></textarea> -->
-            <br>
-            <br>
-            <input type="text" id="min" >
-            <br>
-            <input type="text" id="max" >
-            <br>
-            <input type="text" id="pref">
-            <br>
-            <button type="button" style="cursor: pointer;" id="edit" onclick="editUser()">Rediger bruger</button>
-            <button type="button" style="cursor: pointer;" id="delete" onclick="deleteUser()" >Slet bruger</button>
-        </form>   
-        <!-- <table id="table">
-                <tr>
-                    <th>Email:</th>
-                    <th>Password</th>
-                    <th>First name:</th>
-                    <th>Last name:</th>
-                    <th>Birthday:</th>
-                    <th>Gender:</th>
-                </tr>
-                <tr>
-                    <td><input type="text" id="email" readonly style="background-color:lightgray;"></td>
-                    <td><input type="text" id="password"></td>
-                    <td><input type="text" id="firstname"></td>
-                    <td><input type="text" id="lastname"></td>
-                    <td><input type="text" id="dob"></td>
-                    <td><input type="text" id="gender"></td>
-                    
-                </tr>
-            </table> -->
-            <!-- <br>
-            <div id="description">
-
-                <p> Description:</p>
-                <textarea id="description" rows="4" cols="30"></textarea><br><br>
-                
-            </div> -->
-            <!-- <br>
-            <table id="info">
-                <p>Preferences in partner:</p>
-                <tr>
-                    <th>Minimum age:</th>
-                    <th>Maximum age:</th>
-                    <th>Gender:</th>
-                </tr>
-                <tr>
-                    <td><input type="text" id="min"></td>
-                    <td><input type="text" id="max"></td>
-                    <td><input type="text" id="pref"></td>
-                </tr>
-            </table>
-        <br><br> -->
+        <table id="table">
+            <tr>
+                <th>Email:</th>
+                <th>Password</th>
+                <th>First name:</th>
+                <th>Last name:</th>
+                <th>Birthday:</th>
+                <th>Gender:</th>
+            </tr>
+            <tr>
+                <td><input type="text" id="email" readonly style="background-color:lightgray;"></td>
+                <td><input type="text" id="password"></td>
+                <td><input type="text" id="firstname"></td>
+                <td><input type="text" id="lastname"></td>
+                <td><input type="text" id="dob"></td>
+                <td><input type="text" id="gender"></td>                    
+            </tr>
+        </table>
+        <br>
+        <div id="description">
+            <p> Description:</p>
+            <textarea id="description" rows="4" cols="30"></textarea><br><br>
+        </div>
+        <br>
+        <table id="info">
+            <p>Preferences in partner:</p>
+            <tr>
+                <th>Minimum age:</th>
+                <th>Maximum age:</th>
+                <th>Gender:</th>
+            </tr>
+            <tr>
+                <td><input type="text" id="min"></td>
+                <td><input type="text" id="max"></td>
+                <td><input type="text" id="pref"></td>
+            </tr>
+        </table>
+        <br><br>
     
-        <!-- Buttons for logout, delete user or edit user-->
-        <!-- <div class="changes">
+        <!-- Buttons for logout, delete user or edit user -->
+        <div class="changes">
             <input id="delete" type="reset" value="Delete"> 
             <input id="logout" type="reset" value="Logout"> 
             <button id="edit" onclick="editUser()">Edit user</button>                
-        </div> -->
+        </div>
     </body>
 </html>

@@ -19,16 +19,17 @@ function showUser(){
 
         // fixing dataflow from API, sent as a class
 
-        document.getElementById('email').innerHTML = 'Email: ' + data.email
-        document.getElementById('fullName').innerHTML = 'Full name: ' + data.firstName + ' ' + data.lastName
-        document.getElementById('age').innerHTML = 'Age: ' + data.age
-        document.getElementById('gender').innerHTML = 'Gender: ' + data.genderWritten
+        document.getElementById('email').innerHTML = data.email
+        document.getElementById('firstname').innerHTML =  data.firstName 
+        document.getElementById('lastname').innerHTML =  data.lastName
+        document.getElementById('age').innerHTML = data.age
+        document.getElementById('gender').innerHTML = data.genderWritten
         document.getElementById('description').innerHTML = data.description
 
 
-        document.getElementById('ageMin').innerHTML = 'Age minimum: ' + data.ageMin
-        document.getElementById('ageMax').innerHTML = 'Age maximum' + data.ageMax
-        document.getElementById('genderPref').innerHTML = 'Preferred gender: ' + data.prefWritten
+        document.getElementById('ageMin').innerHTML = data.ageMin
+        document.getElementById('ageMax').innerHTML =  data.ageMax
+        document.getElementById('genderPref').innerHTML = data.prefWritten
 
 
 

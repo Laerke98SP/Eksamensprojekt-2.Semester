@@ -5,7 +5,7 @@ body {
   background-color: blue;
   color: white;
   text-align: center;
-  background-image: linear-gradient( #b2beff, white);
+  background-image: linear-gradient( #b2beff, #c5c9dd);
 }
   
 form {
@@ -32,7 +32,8 @@ ul {
 }
       
 li {
-  float: left;
+  display:inline-block;
+  /* float: left; */
 }
       
 a {
@@ -63,6 +64,15 @@ a:hover:not(.active) {
 }
 
 
+<<<<<<< HEAD
+=======
+#table, #info{
+  margin: auto;
+  width: 50%;
+}
+
+
+>>>>>>> d5464635988de288220a1ad5df0888ffabbf1602
 /* Divs for statistics */
 #countUsers, #countMatches {
   border: solid white;

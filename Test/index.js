@@ -31,10 +31,10 @@ describe("GET-request to db", function() {
     });
 });
 
-//testing DELETE-request on user endpoint
+//testing DELETE-request on match endpoint
 describe("DELETE-request to db", function(){
     it("Deletes profile", function(done){
-        request.delete({url: testURL + '/user?email=emilie@l.dk'},
+        request.delete({url: testURL + '/match?email=emilie@l.dk'},
             function(error, response, body){
                     var user = JSON.parse(body);
                     var status = JSON.parse(response.statusCode)     

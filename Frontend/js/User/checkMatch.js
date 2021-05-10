@@ -1,3 +1,4 @@
+// 01. Function that check if ther
 function checkIfMatch(){
     let email = localStorage.getItem('email');
     const option = {

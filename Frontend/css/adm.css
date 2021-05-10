@@ -64,15 +64,13 @@ a:hover:not(.active) {
 }
 
 
-<<<<<<< HEAD
-=======
+
 #table, #info{
   margin: auto;
   width: 50%;
 }
 
 
->>>>>>> d5464635988de288220a1ad5df0888ffabbf1602
 /* Divs for statistics */
 #countUsers, #countMatches {
   border: solid white;

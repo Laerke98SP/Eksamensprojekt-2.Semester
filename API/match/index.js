@@ -32,6 +32,7 @@ async function get(context, req){
         let email = req.query.email;
         console.log(email + " Checking if this user have a match");
         let matches = await db.getMatches(email)
+       //console.log(matches);
     
         context.res = {
             body: matches

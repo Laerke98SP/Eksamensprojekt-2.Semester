@@ -1,14 +1,12 @@
-// 01. Variables for buttons
-// const deleteBtn = document.getElementById('delete');
 
-// 02. Variables to display user in
+// 01. Variables to display user in
 var table = document.getElementById("table"); // en variabel for tabellen
 var info = document.getElementById("description"); // en variabel for beskrivelses divv
 var pref = document.getElementById("info"); // en variabel for info div
 var interest = document.getElementById("match");
 var bye = document.getElementById("bye");
 
-// 03. Get users information and display
+// 02. Get users information and display
 function showUser(){
     let email = localStorage.getItem('email');
     let password = localStorage.getItem('password');
@@ -18,39 +16,15 @@ function showUser(){
     .then((resp) => resp.json()).then(function(data) {
 
         // fixing dataflow from API, sent as a class
-
-        document.getElementById('email').innerHTML = data.email
-        document.getElementById('firstname').innerHTML =  data.firstName 
-        document.getElementById('lastname').innerHTML =  data.lastName
-        document.getElementById('age').innerHTML = data.age
-        document.getElementById('gender').innerHTML = data.genderWritten
-        document.getElementById('desc').innerHTML = data.description
-
-
-        document.getElementById('ageMin').innerHTML = data.ageMin
-        document.getElementById('ageMax').innerHTML =  data.ageMax
-        document.getElementById('genderPref').innerHTML = data.prefWritten
-
-
-
-        // table.innerHTML += 
-        // "<tr><td>" + data.email + 
-        // "</td><td>" + data.firstName +
-        // "</td><td>" + data.lastName + 
-        // "</td><td>" + data.age+
-        // "</td><td>" + data.genderWritten +
-        // "</td></tr>";
-       
-        // info.innerHTML += data.description;
-    
-        // pref.innerHTML +=
-        // "<tr><td>" + data.ageMin +
-        // "</td><td>" + data.ageMax +
-        // "</td><td>" + data.prefWritten +
-        // "</td></tr>";
-        
-        // Invoke show users interest function
-        
+        document.getElementById('email').innerHTML = data.email;
+        document.getElementById('firstname').innerHTML =  data.firstName;
+        document.getElementById('lastname').innerHTML =  data.lastName;
+        document.getElementById('age').innerHTML = data.age;
+        document.getElementById('gender').innerHTML = data.genderWritten;
+        document.getElementById('desc').innerHTML = data.description;
+        document.getElementById('ageMin').innerHTML = data.ageMin;
+        document.getElementById('ageMax').innerHTML =  data.ageMax;
+        document.getElementById('genderPref').innerHTML = data.prefWritten;
     
        return showInterest();
         
@@ -58,10 +32,9 @@ function showUser(){
         // If it doesnt work
         console.log("error");
     }); 
-
 }
 
-// 04. Get users Interests
+// 03. Get users Interests
 function showInterest(){
     let email = localStorage.getItem('email');
     fetch(`http://localhost:7071/api/interest?email=${email}`)
@@ -80,7 +53,7 @@ function showInterest(){
     }); 
 }
 
-// 05. Display interests
+// 04. Display interests
 function displayInt(arr){
     let interests = ''
     for (i in arr){
@@ -90,32 +63,6 @@ function displayInt(arr){
     message();
 }
 
-        
-// // 08. Function to delete user
-// function deleteUser(){
-//     // Retrieving user email
-//     let email = localStorage.getItem('email');
-    
-//         const option = {
-//             method: 'DELETE',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         };    
-           
-        
-//         fetch(`http://localhost:7071/api/user?email=${email}`, option)
-//         .then(function() {
-//             console.log("ok"); 
-//             // Clear localStorage
-//             localStorage.clear();
-            
-//             // return to main page
-//             window.location.href = "./0frontpage.html"; 
-//         }).catch(function() {
-//             console.log("error"); 
-//         });
-// };
 
 // // 09. checkIfmatch
 // function checkIfMatch(){

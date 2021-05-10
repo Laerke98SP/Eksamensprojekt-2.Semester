@@ -1,6 +1,4 @@
 // -----------  DEFINING VARIABLES ------------- //
-
-
 // 01. Variables for buttons
 const edit = document.getElementById('edit');
 
@@ -9,17 +7,14 @@ var table = document.getElementById("table");
 var info = document.getElementById("description"); 
 var pref = document.getElementById("info"); 
 
-
- 
 function showEdit(){
-    // henter email og password fra storage, så vi kan få brugeren via et fetch request 
+    // get email from localstorage to use with in a fetch 
     let email = localStorage.getItem('email');
-
     fetch(`http://localhost:7071/api/admEditUser?email=${email}`)
     .then((resp) => resp.json()).then(function(data){
-        console.log(data.genderWritten)
 
-        // data is inserted on the predefined spots
+        // data is inserted in the predefined spots
+        document.getElementById('email').defaultValue = data.email;
         document.getElementById('password').defaultValue = data.password;
         document.getElementById('firstname').defaultValue = data.firstName;
         document.getElementById('lastname').defaultValue = data.lastName;
@@ -32,21 +27,13 @@ function showEdit(){
     });
 };
 
-
-
-
-
-
 edit.addEventListener('click', function(){
     editUser();
 })
 
-
-
-    //--------------------- 03. Funktionen edit(user) -------------------------
+    //--------------------- 03. Function edit(user) -------------------------
 function editUser(){
     let email = localStorage.getItem('email');
-
     let password = document.getElementById('password').value
     let firstName = document.getElementById('firstname').value
     let lastName = document.getElementById('lastname').value
@@ -58,27 +45,21 @@ function editUser(){
     let genderPref = document.getElementById('pref').value;
 
     let editedUser = { email, password, firstName, lastName, dob, gender, description, ageMin, ageMax, genderPref }
-
-    // console.log(editUser)
     
     const option = {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify(editedUser),// Konvertere klassen til en json string
+        body: JSON.stringify(editedUser),// Convert object to JSON string
     };    
         
-    // --------- Her benyttes fetch til at kontakte API og dermed indsætte bruger i DB
+    // ---------  Sending updated info with PATCH request
      fetch(`http://localhost:7071/api/display`, option).then(function() {
         console.log("ok");
-        // alert("Succes!")
-        // alert("You will be directed back to your profile");
-        // Naviger til brugerens profil hvis alt ovenstående lykkes
         window.location.href = "../Admin/2admUpd.html"; 
     }).catch(function() {            
-        // lykkedes det ikke 
         console.log("error");
-    }); // Kunne indsætte window.location.href her - efter en finally blok
+    }); 
 }   
 

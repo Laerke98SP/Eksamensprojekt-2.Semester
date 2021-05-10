@@ -53,8 +53,6 @@ function matchStats(){
             } else {  
                 response.json().then(function (data) {
                 console.log('succes!')
-                // alert(data)
-                // countM.innerHTML = data[0].value
                 countM.innerHTML = data
                 })
                 .catch(function(err){

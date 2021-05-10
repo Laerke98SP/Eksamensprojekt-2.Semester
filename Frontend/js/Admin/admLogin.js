@@ -24,7 +24,7 @@ function login(email, password){
     .then(
         function(response){
             
-            // ------------  403 RESPONSE FOR KLIENT TYPING SOMETHING WRONG---------//
+            // ------------  404 RESPONSE FOR KLIENT TYPING SOMETHING WRONG---------//
             if( response.status == 404) {
                 alert( "Kodeord eller brugernavn er forkert - har du ikke en bruger opret gerne en");
             }

@@ -1,9 +1,6 @@
 
-
-
-// Lærkes kode!!
 function getUsers(){
-    // Getting the matches inked to the user email
+    // Getting the uses linked to the user email
     fetch(`http://localhost:7071/api/display`)
     .then(function(response) {
         return response.json();
@@ -15,9 +12,6 @@ function getUsers(){
            
             showUsers(email, email)
             }
-            // Calling matches function
-            // Saving the matched profiles email and saving the match id
-            
     });
 };
 
@@ -30,13 +24,11 @@ function showUsers(name, mail){
 
     // Inserting values in html elements
     const nameTxt = document.createTextNode(name);
-   
-    const buttonTxt = document.createTextNode('Slet bruger');
+    const buttonTxt = document.createTextNode('Delete user');
 
     // Defining id's
     holder.className = 'Holder';
     username.className = 'Name';
-    // matchAge.className = 'matchAge';
     deleteMatch.className = 'deleteMatch';
 
     // Defining button id as match className
@@ -54,7 +46,7 @@ function showUsers(name, mail){
                 'Content-type': 'application/json'
             }
         };
-        // Contacting match api with id
+        // Contacting api with email
         fetch(`http://localhost:7071/api/display?email=${email}`, options)
         .then(function() {
             console.log("User deleted"); 
@@ -71,9 +63,8 @@ function showUsers(name, mail){
 
     // Inserting elements into div
     holder.appendChild(username);
-    // holder.appendChild(matchAge);
     holder.appendChild(deleteMatch);
 
-    // Insert the final match display
+    // Insert the final to display
     document.body.appendChild(holder);
 };

@@ -85,6 +85,7 @@ function getMatches(email){
         //A row resulting from execution of the SQL statement.
         //Column consist of meta data and value
         request.on('doneInProc', function (rowCount, more, rows) { 
+            console.log(rows)
             resolve(rows)
         });
         connection.execSql(request)

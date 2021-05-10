@@ -19,9 +19,11 @@ function checkIfMatch(){
     // MISSING SOME IF ELSE STATEMENT TO CHECK FOR DIFFERENT ERRORS //
         console.log("Process succeeded")
         console.log(data)
+
+       // return message();
         if( data.status == 'Success' ){
            
-            message();
+          return  message();
         };
     }).catch((err) =>{
         console.log(err)
@@ -42,7 +44,7 @@ function message(){
         }).then(function(matches) {
             if(localStorage.getItem("counter") !== null){
                 var counter = localStorage.getItem("counter");
-                console.log(counter);
+                console.log(counter + " + " + result );
             } else var counter = 0;
             // console.log(matches);
             //Creating a forloop that iterates through matches

@@ -2,20 +2,15 @@
 // 01. Variables for buttons
 const deleteBtn = document.getElementById('delete');
 const edit = document.getElementById('edit');
-
-// 02. Variables to display user in
-
-
    
 // -------- SHOW USER AND EDIT INPUT ---------//
 function showEdit(){
-    // henter email og password fra storage, så vi kan få brugeren via et fetch request 
+    // Get mail from local storage 
     let email = localStorage.getItem('email');
-    //let password = localStorage.getItem('password');
 
     fetch(`http://localhost:7071/api/admEditUser?email=${email}`)
     .then((resp) => resp.json()).then(function(data){
-        // Dataen bliver direkte indsadt som defailt values 
+        // INput data
         document.getElementById('email').defaultValue = data.email;
         document.getElementById('password').defaultValue = data.password;
         document.getElementById('firstname').defaultValue = data.firstName;
@@ -30,9 +25,7 @@ function showEdit(){
 };
 
 
-
 // ------------- DELETE USER ---------------//
-
     // 01. Action for click on delete button
 deleteBtn.addEventListener('click', function(){ 
     alert("Warning - Your profile will be deleted"); 
@@ -81,19 +74,17 @@ function editUser(){
         headers: {
             'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify(editedUser)// Konvertere klassen til en json string
+        body: JSON.stringify(editedUser)//Convert Object 
     };    
         
-    // --------- Her benyttes fetch til at kontakte API og dermed indsætte bruger i DB
+    // --------- Insert updated user informationer
      fetch(`http://localhost:7071/api/user`, option).then(function() {
         console.log("ok");
         alert("Succes!")
         alert("You will be directed back to your profile");
-        // Naviger til brugerens profil hvis alt ovenstående lykkes
         window.location.href = "./1user.html"; 
     }).catch(function() {            
-        // lykkedes det ikke 
         console.log("error");
-    }); // Kunne indsætte window.location.href her - efter en finally blok
+    }); 
 }   
 

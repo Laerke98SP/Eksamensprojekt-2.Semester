@@ -21,7 +21,6 @@ function calculateAge(dob) {
         return dob = Math.abs(ageDate.getUTCFullYear() - 1970); // getUTCFullYear = omregner til et helt år minus 1970
 }; //ovenstående metode udregner objekternes alder ud fra attributterne 'birthYear', 'birthMonth' og birthDate.
 
-
 // ----------------- The logged in users mail -----------//
 let userEmail = localStorage.getItem('email');
 
@@ -53,7 +52,6 @@ function checkIfMatch(){
         console.log("Something went wroooong")
     });
 };
-
 
 function getMatches(){
     // Getting the matches inked to the user email
@@ -135,4 +133,3 @@ function showMatches(name, age, userEmail){
     // Insert the final match display
     document.body.appendChild(holder);
 };
-

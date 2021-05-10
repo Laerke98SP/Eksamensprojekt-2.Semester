@@ -23,12 +23,12 @@
     <div class="InfoDiv">
         <table id="table">
             <tr>
-                <th>Username:</th>
-                <th>Password</th>
-                <th>Firstname:</th>
-                <th>Lastname:</th>
+                <th>Email:</th>
+                <th>Password:</th>
+                <th>First name:</th>
+                <th>Last name:</th>
                 <th>Age:</th>
-                <th>gender:</th>
+                <th>Gender:</th>
             </tr>
             <tr>
                 <td id="email"></td>
@@ -40,19 +40,17 @@
                 
             </tr>
         </table>
-        <br>
+        <br> <p> Description:</p>
         <div id="description">
-
-            <p> Description:</p>
-            <input type="text" id="desc"> 
+            <textarea id="desc" rows="4" cols="30"></textarea><br><br>
         </div>
         <br>
         <table id="info">
-            <p>Preference in partner:</p>
+            <p>Preferences in partner:</p>
              <tr>
-                 <th>Min age:</th>
-                 <th>Max age:</th>
-                 <th>Gender preference</th>
+                 <th>Minimum age:</th>
+                 <th>Maximum age:</th>
+                 <th>Gender:</th>
              </tr>
              <tr>
                 <td><input type="text" id="min"></td>
@@ -64,7 +62,7 @@
   
         <!-- Buttons for logout or delete user -->
         <div class="changes">
-            <input id="edit" type="button" value="Edit user">
+            <input id="edit" type="button" value="Save changes">
         </div>
 
 

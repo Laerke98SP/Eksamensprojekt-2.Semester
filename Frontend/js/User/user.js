@@ -6,7 +6,7 @@ var table = document.getElementById("table"); // en variabel for tabellen
 var info = document.getElementById("description"); // en variabel for beskrivelses divv
 var pref = document.getElementById("info"); // en variabel for info div
 var interest = document.getElementById("match");
-
+var bye = document.getElementById("bye");
 
 // 03. Get users information and display
 function showUser(){
@@ -24,7 +24,7 @@ function showUser(){
         document.getElementById('lastname').innerHTML =  data.lastName
         document.getElementById('age').innerHTML = data.age
         document.getElementById('gender').innerHTML = data.genderWritten
-        document.getElementById('description').innerHTML = data.description
+        document.getElementById('desc').innerHTML = data.description
 
 
         document.getElementById('ageMin').innerHTML = data.ageMin
@@ -52,7 +52,7 @@ function showUser(){
         // Invoke show users interest function
         
     
-       showInterest();
+       return showInterest();
         
     }).catch(function() {            
         // If it doesnt work
@@ -86,7 +86,7 @@ function displayInt(arr){
     for (i in arr){
         interests += ' ' + arr[i]
     }
-    document.getElementById('interests').innerHTML = interests;
+    document.getElementById('match').innerHTML = interests;
     message();
 }
 

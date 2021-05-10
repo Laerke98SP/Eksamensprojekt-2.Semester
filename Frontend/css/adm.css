@@ -9,9 +9,9 @@ body {
 }
   
 form {
-  border: 3px solid #f1f1f1;
+  border: 3px solid white;
   /* text-align: center; */
-  background-color: #64a4ec;
+  background-color: #545fc0;
   padding: 16px;
   color: black;
   width: auto;
@@ -53,23 +53,68 @@ a:hover:not(.active) {
 }
   
 /* Buttons */
-#logout {
-  background-color: red;
+
+#delete, #logout, #edit, #dislike, #like  {
+  background-color: #545fc0;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
-  border: none;
+  border: solid;
+  border-color: white;
   cursor: pointer;
-  width: 250px;
+  width: 155px;
 }
 
+.updUser, .deleteMatch{
+  background-color: #545fc0;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: solid;
+  border-color: white;
+  cursor: pointer;
+  width: 155px;
+}
 
+#interests, #description {
+  padding-top: 5px;
+  margin-top: 10px;
+  color: black;
+  border: 3px solid;
+  padding-bottom: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  border-color: white;
+}
+
+<<<<<<< HEAD
 
 #table, #info{
   margin: auto;
   width: 50%;
+=======
+table {
+  border: 3px solid white;
+  /* text-align: center; */
+  background-color: #939ce9;
+  padding: 16px;
+  color: black;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto; 
+>>>>>>> e28e437685a8b46e33e7cfcc5ef65dc2b49beadd
 }
 
+.Holder {
+  padding-top: 5px;
+  margin-top: 10px;
+  color: black;
+  border: 3px solid;
+  padding-bottom: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  border-color: white;
+}
 
 /* Divs for statistics */
 #countUsers, #countMatches {

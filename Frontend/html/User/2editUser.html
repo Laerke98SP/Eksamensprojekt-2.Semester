@@ -6,9 +6,9 @@
         <title>Dating App</title>
         <link href="../../css/user.css" rel="stylesheet">
 
-        <script src="../../js/User/editUser.js"></script> 
-        <script src="../../js/User/logOut.js"></script> 
-        <script src="../../js/User/checkMatch.js"></script> 
+        <script src="../../js/User/editUser.js" defer></script> 
+        <script src="../../js/User/logOut.js" defer></script> 
+        <script src="../../js/User/checkMatch.js" defer></script> 
 
         <!-- loading multiple functions when page visited -->
         <script language="javascript">
@@ -55,10 +55,9 @@
                 <td><input type="text" id="gender"></td>                    
             </tr>
         </table>
-        <br>
+        <br> <p> Description:</p>
         <div id="description">
-            <p> Description:</p>
-            <textarea id="description" rows="4" cols="30"></textarea><br><br>
+            <textarea id="desc" rows="4" cols="30"></textarea><br><br>
         </div>
         <br>
         <table id="info">
@@ -75,12 +74,11 @@
             </tr>
         </table>
         <br><br>
-    
         <!-- Buttons for logout, delete user or edit user -->
         <div class="changes">
-            <input id="delete" type="reset" value="Delete"> 
-            <input id="logout" type="reset" value="Logout"> 
-            <button id="edit" onclick="editUser()">Edit user</button>                
+            <input id="delete" type="reset" value="Delete profile"> 
+            <!-- <input id="logout" type="reset" value="Logout"> -->
+            <button id="edit" onclick="editUser()">Save changes</button>                
         </div>
     </body>
 </html>

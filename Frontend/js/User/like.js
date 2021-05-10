@@ -50,7 +50,7 @@ function displayPotentialMatch(data){
     document.getElementById("lastName").innerHTML = data.lastName 
     document.getElementById("dob").innerHTML = data.age  
     document.getElementById("gender").innerHTML = data.genderWritten
-    document.getElementById("description").innerHTML = data.description;;
+    document.getElementById("desc").innerHTML = data.description;;
        
     localStorage.setItem('votedOn', data.email);
 

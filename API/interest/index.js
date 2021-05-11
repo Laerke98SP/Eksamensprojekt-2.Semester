@@ -31,10 +31,6 @@ async function get(context, req){
         let email = req.query.email;
         
         let rawInterestData = await db.showInterest(email)
-        // console.log(interest)
-
-        // let interest = new Interest(rawInterestData[0].value);
-        
        
         context.res = {
             body: rawInterestData

@@ -68,14 +68,14 @@ async function deleteMatches(context, req){
     try {
         let email = req.query.email;
         let match = req.query.match
-        await db.deleteMatch(email, match);
+        let row = await db.deleteMatch(email, match);
         context.res = {
             body: {
                 status: "succes"
             }
-        };
-        console.log("also send the context to client side");
+        }
     } catch(error){
+
         context.res = {
             status: 400,
             body: error.message

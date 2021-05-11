@@ -49,6 +49,7 @@ async function get(context, req){
         user.calculateAge()
         user.showGender()
         user.showGenderPref()
+        console.log(user)
         
         context.res = {
             body: user

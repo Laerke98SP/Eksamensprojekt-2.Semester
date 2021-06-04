@@ -37,7 +37,6 @@ function showPotentials(){
         // console.log(data);
         // checkIfMatch()
         return displayPotentialMatch(data);
-      
     }).catch(function(err){
         //Hvis der opstår en fejl fanges den her
         console.log(err);
@@ -148,7 +147,6 @@ function userVote(votedOn, voter, vote){
     })
     .then((data) => {            
         showPotentials();
-        location.reload();
     }).catch((err) => {
         console.log(err)
         console.log("Something went wroooong")

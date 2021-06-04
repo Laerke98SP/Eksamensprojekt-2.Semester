@@ -50,17 +50,16 @@ function saveUser(){
     var ageMin = document.getElementById("ageMin").value;
     var ageMax = document.getElementById("ageMax").value;
 
+
     localStorage.setItem('email', email);
     localStorage.setItem('password', password);
-
-  
 
     // 02. Defining gender and gender preference 0 = female , 1= male
     let gender = 0;
     if(genderF.checked ){
         gender = 0;
     } else {
-        gender1 = 1;
+        gender = 1;
     }
 
     let genderPref = 0;

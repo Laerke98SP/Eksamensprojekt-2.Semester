@@ -8,7 +8,7 @@ const chai = require('chai');
 describe("GET-request to db", function() {
     it("Shows Jacob's user details", function(done) {
         //testing GET-request on user endpoint (used for login)
-        request.get({ url: testURL + '/user?email=jacobrindsig@hotmail.com&password=1234'},
+        request.get({ url: testURL + '/user?email=jacob@test.dk&password=1234'},
             function(error, response, body) {
                 var user = JSON.parse(body); //saves body
                 var status = JSON.parse(response.statusCode) //saves response status code
@@ -19,28 +19,28 @@ describe("GET-request to db", function() {
                 expect(user.lastName).to.equal("Rindsig");
                 expect(user.description).to.equal("Jeg er høj"); 
                 expect(user.password).to.equal("1234"); 
-                expect(user.email).to.equal("jacobrindsig@hotmail.com"); 
-                expect(user.dob).to.equal(24); 
-                expect(user.gender).to.equal("Male");
+                expect(user.email).to.equal("jacob@test.dk"); 
+                expect(user.dob).to.equal("1997-03-14T00:00:00.000Z"); 
+                expect(user.gender).to.equal(1);
                 expect(user.ageMin).to.equal(22); 
                 expect(user.ageMax).to.equal(25); 
-                expect(user.genderPref).to.equal("Female"); 
+                expect(user.genderPref).to.equal(0); 
                 done();
             }
         );
     });
 });
 
-//testing DELETE-request on match endpoint
-describe("DELETE-request to db", function(){
-    it("Deletes profile", function(done){
-        request.delete({url: testURL + '/match?email=emilie@l.dk'},
-            function(error, response, body){
-                    var user = JSON.parse(body);
-                    var status = JSON.parse(response.statusCode)     
-                    expect(user).to.deep.equal( {status: 'succes'} );
-                    expect(status).to.equal(200);
-                    done();
-            });
-    });
-});
+// //testing DELETE-request on match endpoint
+// describe("DELETE-request to db", function(){
+//     it("Deletes match", function(done){
+//         request.delete({url: testURL + '/match?email=jacob@test.dk&match=laura@test.dk'},
+//             function(error, response, body){
+//                     var user = JSON.parse(body);
+//                     var status = JSON.parse(response.statusCode)     
+//                     expect(user).to.deep.equal( {status: 'succes'} );
+//                     expect(status).to.equal(200);
+//                     done();
+//             });
+//     });
+// });

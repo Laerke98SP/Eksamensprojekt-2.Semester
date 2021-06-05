@@ -147,6 +147,7 @@ function userVote(votedOn, voter, vote){
     })
     .then((data) => {            
         showPotentials();
+        location.reload();
     }).catch((err) => {
         console.log(err)
         console.log("Something went wroooong")

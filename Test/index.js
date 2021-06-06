@@ -26,16 +26,16 @@ describe("GET-request to db", function() {
 });
 
 
-//testing DELETE-request on match endpoint
-describe("DELETE-request to db", function(){
-    it("Deletes specific match", function(done){
-        request.delete({url: testURL + '/match?email=jacob@test.dk&match=laura@test.dk'},
-            function(error, response, body){
-                    var user = JSON.parse(body);
-                    var status = JSON.parse(response.statusCode)     
-                    expect(user).to.deep.equal( {status: 'succes'} );
-                    expect(status).to.equal(200);
-                    done();
-            });
-    });
-});
+// //testing DELETE-request on match endpoint
+// describe("DELETE-request to db", function(){
+//     it("Deletes specific match", function(done){
+//         request.delete({url: testURL + '/match?email=jacob@test.dk&match=laura@test.dk'},
+//             function(error, response, body){
+//                     var user = JSON.parse(body);
+//                     var status = JSON.parse(response.statusCode)     
+//                     expect(user).to.deep.equal( {status: 'succes'} );
+//                     expect(status).to.equal(200);
+//                     done();
+//             });
+//     });
+// });

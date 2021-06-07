@@ -1,4 +1,4 @@
-function showGender(gender) {
+function showGender(gender) { // benyttes ikke
     if (gender = 0) {
         return gender = "Female"
     } else if (gender = 1) {
@@ -87,7 +87,7 @@ function showMatches(name, age, userEmail){
     const ageTxt = document.createTextNode(age);
     const buttonTxt = document.createTextNode('Slet match');
 
-    // Defining id's for the div, h2 and h4 elements
+    // Defining classes for the div, h2 and h4 elements
     holder.className = 'matchHolder';
     matchName.className = 'matchName';
     matchAge.className = 'matchAge';

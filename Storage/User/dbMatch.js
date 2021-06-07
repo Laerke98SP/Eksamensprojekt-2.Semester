@@ -32,10 +32,12 @@ function insertMatch(payload){
             ON edge1.userID1 = [user].id
         WHERE [user].email = @email
           AND edge1.userID1 = edge2.userID2
+          AND edge1.vote = 1 
+          AND edge2.vote = 1
         AND NOT EXISTS (SELECT userID1, userID2
                             FROM match
                             WHERE match.userID1 = edge1.userID1
-                            OR match.userID1 = edge1.userID2);`;
+                            OR match.userID1 = edge1.userID2);`; //vote = 1 tilføjet siden aflv.!
         console.log("Sending SQL query to DB");
         const request = new Request(sql, (err) => {
             if (err){

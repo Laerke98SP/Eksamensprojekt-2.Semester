@@ -4,11 +4,11 @@ const expect = require('chai').expect; //importing expect from the chai test-lib
 const testURL = 'http://localhost:7071/api'; //API URL
 const chai = require('chai');
 
-//testing GET-request on user endpoint
+// testing GET-request on user endpoint
 describe("GET-request to db", function() {
-    it("Shows Jacob's first match", function(done) {
+    it("Shows Ella's first match", function(done) {
         //testing GET-request on user endpoint (used for login)
-        request.get({ url: testURL + '/match?email=jacob@test.dk'},
+        request.get({ url: testURL + '/match?email=ella@email.com	'},
             function(error, response, body) {
                 var user = JSON.parse(body); //saves body
                 var status = JSON.parse(response.statusCode); //saves response status code
@@ -16,9 +16,9 @@ describe("GET-request to db", function() {
                 var dob = user[0][5].value;
                 var fullName = user[0][3].value + " " + user[0][4].value;
                 expect(status).to.equal(200);
-                expect(email).to.equal("laura@test.dk"); 
-                expect(dob).to.deep.equal("1999-05-23T00:00:00.000Z");
-                expect(fullName).to.equal("Laura Bøjer"); 
+                expect(email).to.equal("luke@email.com"); 
+                expect(dob).to.deep.equal("1997-04-23T00:00:00.000Z");
+                expect(fullName).to.equal("Luke Warme"); 
                 done();
             }
         );
@@ -29,7 +29,7 @@ describe("GET-request to db", function() {
 // //testing DELETE-request on match endpoint
 // describe("DELETE-request to db", function(){
 //     it("Deletes specific match", function(done){
-//         request.delete({url: testURL + '/match?email=jacob@test.dk&match=laura@test.dk'},
+//         request.delete({url: testURL + '/match?email=ella@email.com&match=justin@email.com'},
 //             function(error, response, body){
 //                     var user = JSON.parse(body);
 //                     var status = JSON.parse(response.statusCode)     
